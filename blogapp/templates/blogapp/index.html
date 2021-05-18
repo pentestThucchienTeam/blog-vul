@@ -73,7 +73,7 @@
       </nav>
     </header>
     <!-- Hero Section-->
-    <section style="background: url(img/hero.jpg); background-size: cover; background-position: center center" class="hero">
+    <section style="background: url({% static 'blogapp/img/hero.jpg' %}); background-size: cover; background-position: center center" class="hero">
       <div class="container">
         <div class="row">
           <div class="col-lg-7">
@@ -156,12 +156,12 @@
               </div>
             </div>
           </div>
-          <div class="image col-lg-5"><img src="img/featured-pic-3.jpeg" alt="..."></div>
+          <div class="image col-lg-5"><img src="{% static 'blogapp/img/featured-pic-3.jpeg' %}" alt="..."></div>
         </div>
       </div>
     </section>
     <!-- Divider Section-->
-    <section style="background: url(img/divider-bg.jpg); background-size: cover; background-position: center bottom" class="divider">
+    <section style="background: url({% static 'blogapp/img/divider-bg.jpg' %}); background-size: cover; background-position: center bottom" class="divider">
       <div class="container">
         <div class="row">
           <div class="col-md-7">
@@ -179,7 +179,7 @@
         </header>
         <div class="row">
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="post.html"><img src="img/blog-1.jpg" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{% static 'blogapp/img/blog-1.jpg' %}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">20 May | 2016</div>
@@ -190,23 +190,23 @@
             </div>
           </div>
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="post.html"><img src="img/blog-2.jpg" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{% static 'blogapp/img/blog-2.jpg' %}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">20 May | 2016</div>
                 <div class="category"><a href="#">Technology</a></div>
-              </div><a href="post.html">
+              </div><a href="{% url 'post' %}">
                 <h3 class="h4">Diversity in Engineering: Effect on Questions</h3></a>
               <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
             </div>
           </div>
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="post.html"><img src="img/blog-3.jpg" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{% static 'blogapp/img/blog-3.jpg' %}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">20 May | 2016</div>
                 <div class="category"><a href="#">Financial</a></div>
-              </div><a href="post.html">
+              </div><a href="{% url 'post' %}">
                 <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3></a>
               <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
             </div>
