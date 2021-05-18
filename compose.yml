@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ../example_data/db:/var/lib/postgres/data
+    env_file: .env
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "80:8000"
+    depends_on:
+      - db
+
