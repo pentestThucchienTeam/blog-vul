@@ -101,7 +101,7 @@
             <div class="text-inner d-flex align-items-center">
               <div class="content">
                 <header class="post-header">
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
                     <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
                 </header>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
@@ -326,11 +326,11 @@
       </div>
     </footer>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"> </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
-    <script src="js/front.js"></script>
+    <script src="{% static 'blogapp/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'blogapp/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'blogapp/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blogapp/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'blogapp/vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'blogapp/js/front.js' %}"></script>
   </body>
 </html>

@@ -50,7 +50,7 @@
         <div class="container">
           <!-- Navbar Brand -->
           <div class="navbar-header d-flex align-items-center justify-content-between">
-            <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+            <!-- Navbar Brand --><a href="{% url 'index' %}" class="navbar-brand">Bootstrap Blog</a>
             <!-- Toggle Button-->
             <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
           </div>
@@ -307,11 +307,11 @@
       </div>
     </footer>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"> </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
-    <script src="js/front.js"></script>
+    <script src="{% static 'blogapp/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'blogapp/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'blogapp/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blogapp/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'blogapp/vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'blogapp/js/front.js' %}"></script>
   </body>
 </html>

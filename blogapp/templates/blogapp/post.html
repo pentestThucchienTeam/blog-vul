@@ -17,13 +17,13 @@
     <!-- Google fonts - Open Sans-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
     <!-- Fancybox-->
-    <link rel="stylesheet" href="vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="{% static 'blogapp/vendor/@fancyapps/fancybox/jquery.fancybox.min.css' %}">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{% static 'blogapp/css/style.default.css' %}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="{% static 'blogapp/css/custom.css' %}">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="{% static 'blogapp/favicon.png' %}">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -50,18 +50,18 @@
         <div class="container">
           <!-- Navbar Brand -->
           <div class="navbar-header d-flex align-items-center justify-content-between">
-            <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+            <!-- Navbar Brand --><a href="{% url 'index' %}" class="navbar-brand">Bootstrap Blog</a>
             <!-- Toggle Button-->
             <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
           </div>
           <!-- Navbar Menu -->
           <div id="navbarcollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="index.html" class="nav-link ">Home</a>
+              <li class="nav-item"><a href="{% url 'index' %}" class="nav-link ">Home</a>
               </li>
-              <li class="nav-item"><a href="blog.html" class="nav-link ">Blog</a>
+              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link ">Blog</a>
               </li>
-              <li class="nav-item"><a href="post.html" class="nav-link active ">Post</a>
+              <li class="nav-item"><a href="{% url 'post' %}" class="nav-link active ">Post</a>
               </li>
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
               </li>
@@ -78,7 +78,7 @@
         <main class="post blog-post col-lg-8"> 
           <div class="container">
             <div class="post-single">
-              <div class="post-thumbnail"><img src="img/blog-post-3.jpeg" alt="..." class="img-fluid"></div>
+              <div class="post-thumbnail"><img src="{% static 'blogapp/img/blog-post-3.jpeg' %}" alt="..." class="img-fluid"></div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
                   <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
@@ -324,11 +324,11 @@
       </div>
     </footer>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"> </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
-    <script src="js/front.js"></script>
+    <script src="{% static 'blogapp/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'blogapp/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'blogapp/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blogapp/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'blogapp/vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'blogapp/js/front.js' %}"></script>
   </body>
 </html>
