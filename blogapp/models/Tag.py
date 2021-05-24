@@ -14,7 +14,7 @@ class Tags(models.Model):
         return self.title
 
 
-class catalogies(models.Model):
+class Catalogies(models.Model):
     title = CharField(max_length=50)
     def __str__(self):
         return self.title
