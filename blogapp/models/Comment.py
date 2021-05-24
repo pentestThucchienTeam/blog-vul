@@ -13,4 +13,4 @@ class Comment(models.Model):
     email = models.OneToOneField(User, on_delete=models.CASCADE, related_name='emails')
 
     def __str__(self):
-        return self.content, self.author_id
+        return self.content 

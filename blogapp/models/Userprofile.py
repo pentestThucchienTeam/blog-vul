@@ -15,4 +15,4 @@ class Userprofile(models.Model):
     twitter = models.CharField(max_length=200, default='', blank=True)
 
     def __str__(self):
-        return self.lastName+''+self.firtName
+        return self.lastName+' '+self.firtName

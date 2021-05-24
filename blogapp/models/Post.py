@@ -15,4 +15,4 @@ class Post(models.Model):
     author_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name='authors_id')
     
     def __str__(self):
-        return self.title, self.author_id
+        return self.title
