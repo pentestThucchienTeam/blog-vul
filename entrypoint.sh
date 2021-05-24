@@ -6,6 +6,9 @@ while ! python manage.py flush --no-input 2>&1; do
   echo "Flusing django manage command"
   sleep 3
 done
+echo "collect static"
+
+python manage.py collectstatic --noinput
 
 echo "Migrate the Database at startup of project"
 
@@ -17,6 +20,8 @@ done
 
 echo "Django docker is fully configured successfully."
 
-exec "$@"
+echo "Start server"
+
 python3 manage.py runserver 0.0.0.0:8000
-python manage.py collectstatic --noinput
+
+exec "$@"
