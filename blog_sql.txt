@@ -1,9 +1,10 @@
 
 create table users(
-id serial NOT NULL primary key,
+id serial NOT NULL,
 username varchar(50) not null,
 password varchar(50) not null,
-email varchar(50) null
+email varchar(50) null,
+primary key(id,username)
 );
 
 
@@ -16,8 +17,8 @@ createDate DATE not null default current_date,
 updateDate DATE null default null,
 content varchar(300) default null,
 constraint fk_author
-foreign key(authorId)
-references users(id)
+foreign key(author,authorId)
+references users(username,id)
 );
 
 create table comments(
