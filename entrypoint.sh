@@ -18,4 +18,5 @@ done
 echo "Django docker is fully configured successfully."
 
 exec "$@"
-
+python3 manage.py runserver 0.0.0.0:8000
+python manage.py collectstatic --noinput
