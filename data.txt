@@ -1,26 +1,18 @@
-
-user table
 insert into users (username, password, email) values ('abc1','123','abc1@cde.com');
 insert into users (username, password, email) values ('abc2','123','abc2@cde.com');
 insert into users (username, password, email) values ('abc3','123','abc3@cde.com');
 insert into users (username, password, email) values ('abc4','123','abc4@cde.com');
 insert into users (username, password, email) values ('abc5','123','abc5@cde.com');
-
-post table
 insert into posts (author, authorid, title, content) values ('abc1','1','abc1 title', 'abc1 content');
 insert into posts (author, authorid, title, content) values ('abc2','2','abc2 title', 'abc2 content');
 insert into posts (author, authorid, title, content) values ('abc3','3','abc3 title', 'abc3 content');
 insert into posts (author, authorid, title, content) values ('abc4','4','abc4 title', 'abc4 content');
 insert into posts (author, authorid, title, content) values ('abc5','5','abc5 title', 'abc5 content');
-
-categories table
 insert into categories (title) values ('cat title 1');
 insert into categories (title) values ('cat title 2');
 insert into categories (title) values ('cat title 3');
 insert into categories (title) values ('cat title 4');
 insert into categories (title) values ('cat title 5');
-
-Tag table
 insert into tag (title) values ('tag title 1');
 insert into tag (title) values ('tag title 2');
 insert into tag (title) values ('tag title 3');

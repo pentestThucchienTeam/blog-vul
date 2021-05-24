@@ -20,8 +20,24 @@ done
 
 echo "Django docker is fully configured successfully."
 
+echo "create table"
+
+while ! python create.py 2>&1; do
+    echo "Creating table"
+    sleep 3
+done
+
+echo "Insert record"
+
+while ! python insert.py 2>&1; do
+    echo "Insert is in progress status"
+    sleep 3
+done
+
 echo "Start server"
 
 python3 manage.py runserver 0.0.0.0:8000
+sleep 3
+
 
 exec "$@"
