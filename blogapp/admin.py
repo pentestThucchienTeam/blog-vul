@@ -1,13 +1,13 @@
-from tags.models import Tags
-from gprofile.models import gprofile
-from comment.models import Comment
-from post.models import Post
-from guser.models import guestuser
+from blogapp.models.tag import Tags
+from blogapp.models.Comment import Comment
+from blogapp.models.Post import Post
+from blogapp.models.User import user
+from blogapp.models.UserProfile import userprofile
 from django.contrib import admin
 
 
 admin.site.register(Tags)
-admin.site.register(gprofile)
 admin.site.register(Comment)
 admin.site.register(Post)
-admin.site.register(guestuser)
+admin.site.register(userprofile)
+admin.site.register(user)

@@ -1,10 +1,10 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from guser.models import guestuser
+from blogapp.models.User import user
 # Create your models here.
-class gprofile(models.Model):
-    email = models.OneToOneField(guestuser, on_delete=models.CASCADE, related_name='g_emails')
-    username= models.OneToOneField(guestuser, on_delete=models.CASCADE, related_name='g_usernames')
+class userprofile(models.Model):
+    email = models.OneToOneField(user, on_delete=models.CASCADE, related_name='g_emails')
+    username= models.OneToOneField(user, on_delete=models.CASCADE, related_name='g_usernames')
     phoneNumber = models.CharField(max_length=10, default='')
     firtName = models.CharField(max_length=10, default='')
     lastName = models.CharField(max_length=10, default='')
