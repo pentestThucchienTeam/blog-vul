@@ -33,6 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'comment',
+    'post',
+    'tags',
+    'guser',
+    'gprofile',
     'blogapp',  # Enable the inner app
 ]
 
