@@ -1,13 +1,14 @@
 from django.db import models
 from django.db.models.base import Model
 from django.db.models.fields import BigAutoField, CharField
-from blogapp.models.Tag import Catalogies, Tags
+from blogapp.models.Tag import  Tags
+from blogapp.models.Catalogie import Catalogies
 from django.contrib.auth.models import User
 
 class Post(models.Model):
     title = models.CharField(max_length=50, default='')
     tags = models.ManyToManyField(Tags)
-    catalogies = models.OneToOneField(Catalogies, on_delete=models.CASCADE)
+    catalogies = models.ManyToManyField(Catalogies)
     status = models.BooleanField(default=False)
     content = models.TextField(default='')
     creat_time = models.DateTimeField(auto_now_add=True)
