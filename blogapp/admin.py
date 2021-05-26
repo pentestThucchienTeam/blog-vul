@@ -8,12 +8,15 @@ from django.contrib import admin
 
 admin.site.register(Tags)
 admin.site.register(Role)
-class Cmtadmin(admin.ModelAdmin):
-    list_display=['content ','Post_id']  
-admin.site.register(Comment)
 
+class Commentadmin(admin.ModelAdmin):
+    list_display = ['content', 'admin_photo']
+    readonly_fields = ('admin_photo',)
+admin.site.register(Comment, Commentadmin)    
 class Postadmin(admin.ModelAdmin):
-    list_display=['title','creat_time', 'content', 'images']    
+    list_display=['title','creat_time', 'content', 'admin_photo']    
+    list_filter = ['creat_time']
+    readonly_fields = ('admin_photo',)
 admin.site.register(Post, Postadmin)
 
 admin.site.register(Userprofile)

@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from blogapp.models.Role import Role
 from django.utils.translation import gettext as _
+from django.conf import settings
 
 
 
 class Userprofile(models.Model):
-    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
-    email = models.OneToOneField(User, related_name='emails', on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="profile", on_delete=models.CASCADE)
+    email = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='emails', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=15, default=None, null=True)
     last_name = models.CharField(max_length=10, default=None, null=True)
     phone = models.CharField(max_length=32, null=True, blank=True)
