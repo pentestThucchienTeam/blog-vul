@@ -8,6 +8,12 @@ from django.contrib import admin
 
 admin.site.register(Tags)
 admin.site.register(Catalogies)
+class Cmtadmin(admin.ModelAdmin):
+    list_display=['content ','Post_id']  
 admin.site.register(Comment)
-admin.site.register(Post)
+
+class Postadmin(admin.ModelAdmin):
+    list_display=['title','creat_time']    
+admin.site.register(Post, Postadmin)
+
 admin.site.register(Userprofile)

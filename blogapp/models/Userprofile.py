@@ -13,7 +13,7 @@ class Userprofile(models.Model):
     ]
 
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
-    email = models.OneToOneField(User, related_name='pemail', on_delete=models.CASCADE)
+    email = models.OneToOneField(User, related_name='emails', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=15, default=None, null=True)
     last_name = models.CharField(max_length=10, default=None, null=True)
     avatar = models.ImageField(upload_to=None, null=True, blank=True)
