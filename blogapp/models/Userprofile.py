@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
-from django.templatetags.static import static
+
 
 
 class Userprofile(models.Model):
@@ -31,10 +31,12 @@ class Userprofile(models.Model):
         verbose_name_plural = _('Profiles')
 
    
-    @property
-    def get_avatar(self):
-        return self.avatar.url if self.avatar else static('assets/img/team/default-profile-picture.png')
-
+    
+    def set_avatar(self):
+        avatar = self.avatar
+        if not avatar:
+            self.avatar='/static/assets/img/avatar.png'
+    
 
     def __str__(self):
         return f'{self.user.username}  profile'
