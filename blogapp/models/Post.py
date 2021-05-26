@@ -1,14 +1,15 @@
 from django.db import models
 from django.db.models.base import Model
-from django.db.models.fields import BigAutoField, CharField
+from django.db.models.fields import CharField
 from blogapp.models.Tag import  Tags
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 class Post(models.Model):
     title = models.CharField(max_length=30, default='')
     tags = models.ManyToManyField(Tags)
     status = models.CharField(max_length=50, default='')
-    content = models.TextField(default='')
+    content = RichTextField(default='')
     creat_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     author_id = models.ManyToManyField(User)

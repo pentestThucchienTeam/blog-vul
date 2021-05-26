@@ -1,12 +1,12 @@
 from django.db import models
 from blogapp.models.Post import Post
 from django.contrib.auth.models import User
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 class Comment(models.Model):
     Post_id = models.ManyToManyField(Post)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user_id')
-    content = models.TextField(default='')
+    content = RichTextField(default='')
     status = models.BooleanField(default=True)
     create_time = models.DateTimeField(auto_now_add=True)
     email = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_id')
