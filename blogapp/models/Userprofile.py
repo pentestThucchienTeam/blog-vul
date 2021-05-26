@@ -13,6 +13,7 @@ class Userprofile(models.Model):
     ]
 
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
+    email = models.OneToOneField(User, related_name='pemail', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=15, default=None, null=True)
     last_name = models.CharField(max_length=10, default=None, null=True)
     avatar = models.ImageField(upload_to=None, null=True, blank=True)
@@ -20,7 +21,9 @@ class Userprofile(models.Model):
     gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, null=True, blank=True)
     phone = models.CharField(max_length=32, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
-    
+    facebooke = models.URLField(blank=True)
+    github = models.URLField(blank=True)
+    twitter = models.URLField(blank=True)
 
 
     created_at = models.DateTimeField(auto_now_add=True)
