@@ -1,6 +1,6 @@
 from django.db import models
 from blogapp.models.Post import Post
-from blogapp.models.User import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Comment(models.Model):
