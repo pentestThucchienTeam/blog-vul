@@ -12,12 +12,15 @@ class Comment(models.Model):
     status = models.BooleanField(default=True)
     create_time = models.DateTimeField(auto_now_add=True)
     email = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_id')
-    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, blank=True )
+    image = models.ImageField(upload_to='uploads/%Y/%m/%d', height_field=None, width_field=None, max_length=100, blank=True )
     
     def __str__(self):
         return self.content 
 
-    def admin_photo(self):
-        return mark_safe('<img src="{}" with="50px" height="50px" />' .format(self.image.url))
-    admin_photo.short_description = 'Image'
-    admin_photo.allow_tags = True    
+    def admin_content(self):
+            return mark_safe(self.content)
+    @property
+    def cmt_image(self):
+        if self.image:
+            return mark_safe('<img src="{}" width="100" height="100" />'.format(self.image.url))
+        return ""
