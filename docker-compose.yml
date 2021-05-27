@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ../example_data/db:/var/lib/postgres/data
+      - ../example_data/db:/var/lib/postgresql/data
     env_file: .env
 
   web:
