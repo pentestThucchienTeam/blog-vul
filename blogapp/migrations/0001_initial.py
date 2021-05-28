@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
                 ('status', models.BooleanField(default=True)),
                 ('create_time', models.DateTimeField(auto_now_add=True)),
                 ('image', models.ImageField(blank=True, upload_to='uploads/%Y/%m/%d')),
-                ('Post_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comment', to='blogapp.post')),
+                ('post_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comment', to='blogapp.post')),
                 ('author_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_id', to=settings.AUTH_USER_MODEL)),
                 ('email', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='email_id', to=settings.AUTH_USER_MODEL)),
             ],

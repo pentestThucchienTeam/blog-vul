@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.conf import settings
 # Create your models here.
 class Comment(models.Model):
-    Post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
     author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='user_id')
     content = RichTextField(default='')
     status = models.BooleanField(default=True)
