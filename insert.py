@@ -1,9 +1,14 @@
 import psycopg2
+from decouple import config
 
+database=config('DATABASE_NAME')
+user=config('DATABASE_USER')
+password=config('DATABASE_PASSWORD')
+host=config('DATABASE_HOST')
+port=config('DATABASE_PORT')
 #Establishing the connection
 conn = psycopg2.connect(
-   database="blog", user='admin', password='1234', host='db', port= '5432'
-)
+   database=database, user=user, password=password, host=host, port=port)
 #Setting auto commit false
 conn.autocommit = True
 
