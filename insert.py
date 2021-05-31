@@ -20,6 +20,10 @@ with open('./data.txt','r') as file:
     for i in file.readlines():
         cursor.execute(i.rstrip())
 
+#Preparing SQL queries to INSERT a record into the database.
+with open('./post.txt','r') as file:
+    for i in file.readlines():
+        cursor.execute(i.rstrip())
 
 
 # Commit your changes in the database
