@@ -84,7 +84,7 @@
                 <div class="post-thumbnail"><a href="/post/{{item.id}}"><img src="{{item.images.url}}" alt="..." class="img-fluid"></a></div>
                 <div class="post-details">
                   <div class="post-meta d-flex justify-content-between">
-                    <div class="date meta-last">20 May | 2016</div>
+                    <div class="date meta-last">{{item.creat_time}}</div>
                     <div class="category"><a href="#">Web security</a></div>
                   </div><a href="/post/{{item.id}}">
                     <h3 class="h4">{{item.title}}</h3></a>
@@ -92,7 +92,7 @@
                   <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                       <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
                       <div class="title"><span>John Doe</span></div></a>
-                    <div class="date"><i class="icon-clock"></i> {{item.creat_time}}</div>
+                    <div class="views"><i class="icon-eye"></i>100.000.000</div>
                     <div class="comments meta-last"><i class="icon-comment"></i>12</div>
                   </footer>
                 </div>
