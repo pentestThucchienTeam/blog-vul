@@ -61,7 +61,8 @@
               </li>
               <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link ">Blog</a>
               </li>
-              <li class="nav-item"><a href="" class="nav-link ">Post</a> </li>
+              <li class="nav-item"><a href="{% url 'post' %}" class="nav-link ">Post</a>
+              </li>
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
               </li>
             </ul>
@@ -95,53 +96,68 @@
     <section class="featured-posts no-padding-top">
       <div class="container">
         <!-- Post-->
-        {% for item in object_list %}
         <div class="row d-flex align-items-stretch">
-	{% if item.id|divisibleby:2 %}
-          <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
           <div class="text col-lg-7">
             <div class="text-inner d-flex align-items-center">
               <div class="content">
                 <header class="post-header">
-<<<<<<< HEAD
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
                     <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
-=======
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
-                    <h2 class="h4">{{ item.title }}</h2></a>
->>>>>>> 57a64c2e9ef3358cd7ed69bed734e0ecdaedc4b9
                 </header>
-                {{ item.admin_content|truncatewords:50 }}
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{ item.username }}</span></div></a>
-                  <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
+                    <div class="avatar"><img src="{% static 'blogapp/img/avatar-1.jpg' %}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>John Doe</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i>12</div>
                 </footer>
               </div>
             </div>
           </div>
-        {% else %}
+          <div class="image col-lg-5"><img src="{% static 'blogapp/img/featured-pic-1.jpeg' %}" alt="..."></div>
+        </div>
+        <!-- Post        -->
+        <div class="row d-flex align-items-stretch">
+          <div class="image col-lg-5"><img src="{% static 'blogapp/img/featured-pic-2.jpeg' %}" alt="..."></div>
           <div class="text col-lg-7">
             <div class="text-inner d-flex align-items-center">
               <div class="content">
                 <header class="post-header">
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
-                    <h2 class="h4">{{ item.title }}</h2></a>
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
+                    <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
                 </header>
-                {{ item.admin_content|truncatewords:50 }}
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{ item.username }}</span></div></a>
-                  <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
+                    <div class="avatar"><img src="{% static 'blogapp/img/avatar-2.jpg' %}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>John Doe</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i>12</div>
                 </footer>
               </div>
             </div>
           </div>
-          <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
-        {% endif %}
         </div>
-        {%endfor%}
-        <!-- Post        -->
+        <!-- Post                            -->
+        <div class="row d-flex align-items-stretch">
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
+                    <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
+                </header>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="{% static 'blogapp/img/avatar-3.jpg' %}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>John Doe</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i>12</div>
+                </footer>
+              </div>
+            </div>
+          </div>
+          <div class="image col-lg-5"><img src="{% static 'blogapp/img/featured-pic-3.jpeg' %}" alt="..."></div>
+        </div>
       </div>
     </section>
     <!-- Divider Section-->
@@ -162,50 +178,39 @@
           <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </header>
         <div class="row">
-          {% for item in latest %}
           <div class="post col-md-4">
-<<<<<<< HEAD
-            <div class="post-thumbnail"><a href=""><img src="{% static 'blogapp/img/blog-1.jpg' %}" alt="..." class="img-fluid"></a></div>
-=======
-            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></a></div>
->>>>>>> 57a64c2e9ef3358cd7ed69bed734e0ecdaedc4b9
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{% static 'blogapp/img/blog-1.jpg' %}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
-                <div class="date">{{ item.creat_date }}</div>
+                <div class="date">20 May | 2016</div>
                 <div class="category"><a href="#">Business</a></div>
               </div><a href="post.html">
-<<<<<<< HEAD
                 <h3 class="h4">Ways to remember your important ideas</h3></a>
               <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
             </div>
           </div>
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href=""><img src="{% static 'blogapp/img/blog-2.jpg' %}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{% static 'blogapp/img/blog-2.jpg' %}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">20 May | 2016</div>
                 <div class="category"><a href="#">Technology</a></div>
-              </div><a href="">
+              </div><a href="{% url 'post' %}">
                 <h3 class="h4">Diversity in Engineering: Effect on Questions</h3></a>
               <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
             </div>
           </div>
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href=""><img src="{% static 'blogapp/img/blog-3.jpg' %}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{% static 'blogapp/img/blog-3.jpg' %}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">20 May | 2016</div>
                 <div class="category"><a href="#">Financial</a></div>
-              </div><a href="">
+              </div><a href="{% url 'post' %}">
                 <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3></a>
               <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-=======
-                <h3 class="h4">{{ item.title }}</h3></a>
-              <p class="text-muted">{{ item.admin_content|truncatewords:20 }}</p>
->>>>>>> 57a64c2e9ef3358cd7ed69bed734e0ecdaedc4b9
             </div>
           </div>
-          {% endfor %}
         </div>
       </div>
     </section>
