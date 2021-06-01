@@ -98,6 +98,8 @@
         <!-- Post-->
         {% for item in object_list %}
         <div class="row d-flex align-items-stretch">
+	{% if item.id|divisibleby:2 %}
+          <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
           <div class="text col-lg-7">
             <div class="text-inner d-flex align-items-center">
               <div class="content">
@@ -105,7 +107,24 @@
                   <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
                     <h2 class="h4">{{ item.title }}</h2></a>
                 </header>
-                <p></p>
+                {{ item.admin_content|truncatewords:50 }}
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ item.username }}</span></div></a>
+                  <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
+                </footer>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
+                    <h2 class="h4">{{ item.title }}</h2></a>
+                </header>
+                {{ item.admin_content|truncatewords:50 }}
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
@@ -115,6 +134,7 @@
             </div>
           </div>
           <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
+        {% endif %}
         </div>
         {%endfor%}
         <!-- Post        -->
@@ -147,7 +167,7 @@
                 <div class="category"><a href="#">Business</a></div>
               </div><a href="post.html">
                 <h3 class="h4">{{ item.title }}</h3></a>
-              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="text-muted">{{ item.admin_content|truncatewords:20 }}</p>
             </div>
           </div>
           {% endfor %}
