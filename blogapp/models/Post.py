@@ -5,6 +5,7 @@ from blogapp.models.Tag import  Tags
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
+from django.urls import reverse
 from django.conf import settings
 
 class Post(models.Model):
@@ -19,9 +20,17 @@ class Post(models.Model):
     
     def __str__(self):
         return f'{self.title}'
-    
+
+
+
     def admin_content(self):
             return mark_safe(self.content)
+    
+
+    def get_url(self):
+
+        return reverse('post', args=[self.id])
+    
     
     @property
     def post_images(self):

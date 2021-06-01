@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from blogapp.models.Post import Post
+
+
 def post(request, id):
     post_render = Post.objects.get(id= id)
     object_list = Post.objects.all()
