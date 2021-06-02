@@ -88,24 +88,14 @@
            {% if result %}
             {% for x in result %}
                   <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a> 
-                <h2>{{x.admin_content}}</h2>
-             
+                <p>{{x.admin_content|truncatewords:50}}</p>
+		<img src="{{ x.images.url }}" with="150" height="150">
                 <br><hr>
                 {% endfor %}
-                
             {% else %}
                 <p><big>No resutl of the <strong>{{query}}</strong> </big></p>
             {% endif %}
-            
-
-
     </div>
-        
-
-
-
-
-
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
