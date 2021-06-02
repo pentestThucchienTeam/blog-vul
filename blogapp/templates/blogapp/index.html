@@ -98,8 +98,6 @@
         <!-- Post-->
         {% for item in object_list %}
         <div class="row d-flex align-items-stretch">
-	{% if item.id|divisibleby:2 %}
-          <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
           <div class="text col-lg-7">
             <div class="text-inner d-flex align-items-center">
               <div class="content">
@@ -107,34 +105,16 @@
                   <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
                     <h2 class="h4">{{ item.title }}</h2></a>
                 </header>
-                {{ item.admin_content|truncatewords:50 }}
+                <p></p>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
+                    <div class="avatar"><img src="{{ item.images.url }}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
                   <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
                 </footer>
               </div>
             </div>
           </div>
-        {% else %}
-          <div class="text col-lg-7">
-            <div class="text-inner d-flex align-items-center">
-              <div class="content">
-                <header class="post-header">
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
-                    <h2 class="h4">{{ item.title }}</h2></a>
-                </header>
-                {{ item.admin_content|truncatewords:50 }}
-                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{ item.username }}</span></div></a>
-                  <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
-                </footer>
-              </div>
-            </div>
-          </div>
-          <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
-        {% endif %}
+          <div class="image col-lg-5"><img src="{{ item.images.url }}" alt="..."></div>
         </div>
         {%endfor%}
         <!-- Post        -->
@@ -158,16 +138,16 @@
           <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </header>
         <div class="row">
-          {% for item in latest %}
+          {% for item in range(3) %}
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{{ item.images.url }}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">{{ item.creat_date }}</div>
                 <div class="category"><a href="#">Business</a></div>
               </div><a href="post.html">
                 <h3 class="h4">{{ item.title }}</h3></a>
-              <p class="text-muted">{{ item.admin_content|truncatewords:20 }}</p>
+              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
             </div>
           </div>
           {% endfor %}
