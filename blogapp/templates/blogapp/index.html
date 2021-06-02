@@ -62,7 +62,7 @@
               </li>
               <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link ">Blog</a>
               </li>
-              <li class="nav-item"><a href="{% url 'post' %}" class="nav-link ">Post</a>
+              <!-- <li class="nav-item"><a href="" class="nav-link ">Post</a>-->
               </li>
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
               </li>
@@ -103,7 +103,7 @@
             <div class="text-inner d-flex align-items-center">
               <div class="content">
                 <header class="post-header">
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{% url 'post' %}">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="">
                     <h2 class="h4">{{ item.title }}</h2></a>
                 </header>
                 <p></p>
@@ -141,7 +141,7 @@
         <div class="row">
           {% for item in range(3) %}
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="{% url 'post' %}"><img src="{{ item.images.url }}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><a href=""><img src="{{ item.images.url }}" alt="..." class="img-fluid"></a></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">{{ item.creat_date }}</div>
