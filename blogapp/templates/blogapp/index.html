@@ -122,7 +122,7 @@
             <div class="text-inner d-flex align-items-center">
               <div class="content">
                 <header class="post-header">
-                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="#">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="/post/{{item.id}}">
                     <h2 class="h4">{{ item.title }}</h2></a>
                 </header>
                 {{ item.admin_content|truncatewords:50 }}
@@ -166,7 +166,7 @@
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">{{ item.creat_date }}</div>
                 <div class="category"><a href="#">Business</a></div>
-              </div><a href="post.html">
+              </div><a href="/post/{{item.id}}">
                 <h3 class="h4">{{ item.title }}</h3></a>
               <p class="text-muted">{{ item.admin_content|truncatewords:20 }}</p>
             </div>

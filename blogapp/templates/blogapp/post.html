@@ -191,7 +191,7 @@
               <h3 class="h6">Latest Posts</h3>
             </header>
             {%for item in object_list%}
-            <div class="blog-posts"><a href="#">
+            <div class="blog-posts"><a href="/post/{{item.id}}">
                 <div class="item d-flex align-items-center">
                   <div class="image"><img src="{{item.images.url}}" alt="..." class="img-fluid"></div>
                   <div class="title"><strong>{{item.title}}</strong>
