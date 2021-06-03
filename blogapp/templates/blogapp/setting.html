@@ -81,10 +81,6 @@
       </nav>
     </header>
     <div class="container">
-          {% autoescape on%}
-          {% if  query|safe%}
-            <p class="lead">search for <strong>{{query}}</strong></p>
-            {% endif %}
            {% if result %}
             {% for x in result %}
                   <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a> 
@@ -92,11 +88,30 @@
 		<img src="{{ x.images.url }}" with="150" height="150">
                 <br><hr>
                 {% endfor %}
-            {% else %}
-                <p><big>No resutl of the <strong>{{query}}</strong> </big></p>
             {% endif %}
-          {% endautoescape %}
-            
+          
+    </div>
+    <div id="vul">
+         <h2 align="center">Setting Vulnerability</h2>
+             <form action="." method="POST" align="center">
+              {{form.as_p}}
+              
+               {% csrf_token %}
+              
+                {% comment %} <label>XSS: </label>
+                <select name="XSS">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                </select>
+                    <br>
+                <label>CSRF:  </label>
+                <select name="CSRF">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                </select>  {% endcomment %}
+                <br>
+                <button type="submit" name="form-vul" value="submit" align="center">submit</button>
+        </form>
     </div>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
