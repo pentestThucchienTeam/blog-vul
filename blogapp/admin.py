@@ -34,4 +34,6 @@ class Postadmin(admin.ModelAdmin):
 admin.site.register(Post, Postadmin)
 
 admin.site.register(Userprofile)
-admin.site.register(Vul)
+class vuladmin(admin.ModelAdmin):
+    list_display = ['name','status', ]
+admin.site.register(Vul,vuladmin)

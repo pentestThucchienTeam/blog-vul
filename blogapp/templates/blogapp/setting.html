@@ -94,23 +94,22 @@
     <div id="vul">
          <h2 align="center">Setting Vulnerability</h2>
              <form action="{%url 'setting' %}" method="POST" align="center">
-              {{form.as_p}}
-              
                {% csrf_token %}
               
-                {% comment %} <label>XSS: </label>
+              <label>XSS: </label>
                 <select name="XSS">
                     <option value="1">Yes</option>
-                    <option value="2">No</option>
+                    <option value="2" selected>No</option>
                 </select>
                     <br>
                 <label>CSRF:  </label>
                 <select name="CSRF">
                     <option value="1">Yes</option>
-                    <option value="2">No</option>
-                </select>  {% endcomment %}
-                <br>
+                    <option value="2" selected>No</option>
+                </select> 
+                    <br>
                 <button type="submit" name="form-vul" value="submit" align="center">submit</button>
+              
         </form>
     </div>
     <!-- JavaScript files-->
