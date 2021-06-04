@@ -4,3 +4,4 @@ from blogapp.models.Post import Post
 from blogapp.models.Role import Role
 from blogapp.models.Comment import Comment
 from blogapp.models.Userprofile import Userprofile
+
