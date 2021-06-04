@@ -81,8 +81,9 @@
       </nav>
     </header>
     <div class="container">
-          {% autoescape on%}
-          {% if  query|safe%}
+          {% if xss %}
+          {% autoescape off %}
+          {% if  query %}
             <p class="lead">search for <strong>{{query}}</strong></p>
             {% endif %}
            {% if result %}
@@ -96,7 +97,21 @@
                 <p><big>No resutl of the <strong>{{query}}</strong> </big></p>
             {% endif %}
           {% endautoescape %}
-            
+          {% else %}
+          {% if  query %}
+            <p class="lead">search for <strong>{{query}}</strong></p>
+            {% endif %}
+           {% if result %}
+            {% for x in result %}
+                  <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a> 
+                <p>{{x.admin_content|truncatewords:50}}</p>
+		<img src="{{ x.images.url }}" with="150" height="150">
+                <br><hr>
+                {% endfor %}
+            {% else %}
+                <p><big>No resutl of the <strong>{{query}}</strong> </big></p>
+            {% endif %}
+          {% endif %}  
     </div>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
