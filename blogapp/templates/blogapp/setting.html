@@ -92,8 +92,15 @@
           
     </div>
     <div id="vul">
-         <h2 align="center">Setting Vulnerability</h2>
-             <form action="{%url 'setting' %}" method="POST" align="center">
+    <center>
+                    {% for item in ren %}
+                      {{item.name}} == {{item.status}}
+                      <br>
+                      <hr>
+                    {% endfor %}
+
+         <h2 >Setting Vulnerability</h2>
+             <form action="{%url 'setting' %}" method="POST" >
                {% csrf_token %}
               
               <label>XSS: </label>
@@ -108,8 +115,8 @@
                     <option value="2" selected>No</option>
                 </select> 
                     <br>
-                <button type="submit" name="form-vul" value="submit" align="center">submit</button>
-              
+                <button type="submit" name="form-vul" value="submit" >submit</button>
+        </center>    
         </form>
     </div>
     <!-- JavaScript files-->

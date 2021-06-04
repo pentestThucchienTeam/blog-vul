@@ -7,7 +7,7 @@ from blogapp.models.Setting import Vul
 
 
 def setting (request):
-
+    ren = Vul.objects.all()
     query1=""
     query2=""
     xss=[]
@@ -29,4 +29,8 @@ def setting (request):
 
         return HttpResponseRedirect('/')
 
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf})
+    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren})
+
+
+
+
