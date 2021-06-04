@@ -8,7 +8,5 @@ def search(request):
     if request.method=="GET":
         query=request.GET.get("search", None)
         result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
-        print(type(result))
         xss = Vul.objects.filter(name="XSS").values()[0]['status']
-        print(type(xss))
         return render(request, 'blogapp/search.html', {'query':query, "result":result, "xss": xss})
