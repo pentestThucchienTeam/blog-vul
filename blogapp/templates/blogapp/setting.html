@@ -93,25 +93,34 @@
     </div>
     <div id="vul">
          <h2 align="center">Setting Vulnerability</h2>
-             <form action="." method="POST" align="center">
-              {{form.as_p}}
+             <form action="" method="POST" align="center">
               
                {% csrf_token %}
               
-                {% comment %} <label>XSS: </label>
-                <select name="XSS">
-                    <option value="1">Yes</option>
-                    <option value="2">No</option>
-                </select>
-                    <br>
-                <label>CSRF:  </label>
-                <select name="CSRF">
-                    <option value="1">Yes</option>
-                    <option value="2">No</option>
-                </select>  {% endcomment %}
-                <br>
-                <button type="submit" name="form-vul" value="submit" align="center">submit</button>
-        </form>
+                <div class="form-group">
+			<div class="custom-control custom-switch">
+  				<input type="checkbox" class="custom-control-input" id="XSS" value="XSS" name="vuls">
+  				<label class="custom-control-label" for="XSS">XSS</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="custom-control custom-switch">
+  			<input type="checkbox" class="custom-control-input" id="CSRF" value="CSRF" name="vuls">
+ 			<label for="CSRF" class="custom-control-label">CSRF</label>
+			</div>
+		</div>
+               	<button type="submit" name="form-vul" value="submit" align="center">submit</button> 
+		
+              </form>
+    </div>
+    <div>
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
     </div>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
