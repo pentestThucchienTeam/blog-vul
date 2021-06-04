@@ -3,6 +3,7 @@ from blogapp.models.Role import Role
 from blogapp.models.Comment import Comment
 from blogapp.models.Post import Post
 from blogapp.models.Userprofile import Userprofile
+from blogapp.models.Setting import Vul
 from django.contrib import admin
 
 
@@ -33,3 +34,4 @@ class Postadmin(admin.ModelAdmin):
 admin.site.register(Post, Postadmin)
 
 admin.site.register(Userprofile)
+admin.site.register(Vul)

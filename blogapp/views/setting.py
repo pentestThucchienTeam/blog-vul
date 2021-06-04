@@ -1,5 +1,6 @@
+from django.http.request import HttpRequest
 from blogapp.form import Vul
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 import os
 from decouple import config
@@ -20,6 +21,6 @@ def setting(request):
     if request.method == 'POST':
         form = Vul(request.POST)
         if form.is_valid():
-            # form.save()
-            return HttpResponse('Luu Thanh Cong')
+             form.save()
+        return HttpResponseRedirect('/')
     return render(request,"blogapp/setting.html", {'form':form})

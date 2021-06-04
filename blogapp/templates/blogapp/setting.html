@@ -93,7 +93,7 @@
     </div>
     <div id="vul">
          <h2 align="center">Setting Vulnerability</h2>
-             <form action="." method="POST" align="center">
+             <form action="{%url 'setting' %}" method="POST" align="center">
               {{form.as_p}}
               
                {% csrf_token %}
