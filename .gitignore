@@ -24,4 +24,4 @@ package-lock.json
 staticfiles/*
 !staticfiles/.gitkeep 
 .vscode/symbols.json
-example_data/
+example_data/*
