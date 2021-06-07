@@ -80,12 +80,7 @@
         </div>
       </nav>
     </header>
-     <div class="container">
-          {% if xss %}
-          {% autoescape off %}
-          {% if  query %}
-            <p class="lead">search for <strong>{{query}}</strong></p>
-            {% endif %}
+    <div class="container">
            {% if result %}
             {% for x in result %}
                   <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a> 
@@ -93,25 +88,36 @@
 		<img src="{{ x.images.url }}" with="150" height="150">
                 <br><hr>
                 {% endfor %}
-            {% else %}
-                <p><big>No resutl of the <strong>{{query}}</strong> </big></p>
             {% endif %}
-          {% endautoescape %}
-          {% else %}
-          {% if  query %}
-            <p class="lead">search for <strong>{{query}}</strong></p>
-            {% endif %}
-           {% if result %}
-            {% for x in result %}
-                  <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a> 
-                <p>{{x.admin_content|truncatewords:50}}</p>
-		<img src="{{ x.images.url }}" with="150" height="150">
-                <br><hr>
-                {% endfor %}
-            {% else %}
-                <p><big>No resutl of the <strong>{{query}}</strong> </big></p>
-            {% endif %}
-          {% endif %}  
+          
+    </div>
+    <div id="vul">
+    <center>
+                    {% for item in ren %}
+                      {{item.name}} == {{item.status}}
+                      <br>
+                      <hr>
+                    {% endfor %}
+
+         <h2 >Setting Vulnerability</h2>
+             <form action="{%url 'setting' %}" method="POST" >
+               {% csrf_token %}
+              
+              <label>XSS: </label>
+                <select name="XSS">
+                    <option value="1">Yes</option>
+                    <option value="2" selected>No</option>
+                </select>
+                    <br>
+                <label>CSRF:  </label>
+                <select name="CSRF">
+                    <option value="1">Yes</option>
+                    <option value="2" selected>No</option>
+                </select> 
+                    <br>
+                <button type="submit" name="form-vul" value="submit" >submit</button>
+        </center>    
+        </form>
     </div>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
