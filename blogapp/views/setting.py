@@ -27,7 +27,7 @@ def setting (request):
         else:
             csrf = Vul.objects.filter(name="CSRF").update(status="False")
 
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(request.path)
 
     return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren})
 

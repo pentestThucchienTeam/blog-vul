@@ -130,6 +130,7 @@
                     </div>
                   </div>
                 {%endfor%}
+                {%if user.username%}
                 <div class="add-comment">
                   <header>
                     <h3 class="h6">Leave a reply</h3>
@@ -143,7 +144,9 @@
                       </div>
                     </div>
                   </form>
-                  
+                {%else%} 
+                <p><strong>Log in to comment now</strong></p> 
+                {%endif%}
                 </div>
               </div>
             </div>
