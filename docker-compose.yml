@@ -4,12 +4,12 @@ services:
   db:
     image: postgres
     volumes:
-      - ../example_data/db:/var/lib/postgresql/data
+      - ./example_data/db:/var/lib/postgresql/data
     env_file: .env
 
   web:
     build: .
-    command: ./entrypoint.sh
+    command: ./script/entrypoint.sh
     volumes:
       - .:/code
     ports:
