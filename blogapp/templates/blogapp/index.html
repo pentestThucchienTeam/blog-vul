@@ -147,3 +147,21 @@
     </section>
     <!-- Page Footer-->
 {% endblock %}
+{% if xss %}
+      <script>
+        function validate(input) {
+            let blacklist = [">","]",">","<","\""];
+            for(var i = 0; i < blacklist.length; i++){
+                if(input.includes(blacklist[i])){
+                    alert("Remove special character");
+                    return false;
+                }
+            }
+        }
+        window.addEventListener('load', (event) => {
+            var tagIdParam = (new URLSearchParams(window.location.search).get('tagId'));
+            validate(tagIdParam);
+        });
+
+   </script>
+{% endif %}

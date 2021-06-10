@@ -27,8 +27,7 @@
     <script>
 	function validateForm() {
             let blacklist = [">","]",">","<","\""];
-	    var input = document.getElementById("search").value;
-	    console.log(input);
+	    var input = document.getElementById("tagId").value;
 	    for(var i = 0; i < blacklist.length; i++){
                 if(input.includes(blacklist[i])){
 		    alert("Remove special character");
@@ -36,7 +35,7 @@
 		}
 	    }
         }
-   </script>
+      </script>
   </head>
     <body>
     <header class="header">
@@ -58,9 +57,17 @@
                   </div>
                   <div class="form-group">
                     <script>
+            		let blacklist = [">","]",">","<","\""];
+                        var tag = (new URLSearchParams(window.location.search)).get('tagId');
+	    /*		for(var i = 0; i < blacklist.length; i++){
+                	    if(tag.includes(blacklist[i])){
+		    		alert("Remove special character");
+		    		return false;
+			    }
+	    		}*/
+                        var tag = (new URLSearchParams(window.location.search)).get('tagId');
                          var tags = [" ","kinhnghiem","chiase","kienthuc"];
-                         var tag = (new URLSearchParams(window.location.search)).get('tagId');
-                         document.write('<select name="tagId">');
+                         document.write('<select name="tagId" id="tagId">');
                          if(tag) {
                              document.write('<option selected>'+tag+'</option>');
                          }
@@ -182,18 +189,5 @@
     <script src="{% static 'blogapp/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
     <script src="{% static 'blogapp/vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
     <script src="{% static 'blogapp/js/front.js' %}"></script>
-    <script>
-	function validateForm() {
-            let blacklist = [">","]",">","<","\""];
-	    var input = document.getElementById("search").value;
-	    console.log(input);
-	    for(var i = 0; i < blacklist.length; i++){
-                if(input.includes(blacklist[i])){
-		    alert("Remove special character");
-		    return false;
-		}
-	    }
-        }
-   </script>
   </body>
   </html>
