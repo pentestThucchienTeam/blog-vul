@@ -27,13 +27,29 @@
     <script>
 	function validateForm() {
             let blacklist = [">","]",">","<","\""];
-	    var input = document.getElementById("tagId").value;
+	    var input = document.getElementById("search").value;
+            //var input = (new URLSearchParams(window.location.search)).get('tagId');
 	    for(var i = 0; i < blacklist.length; i++){
                 if(input.includes(blacklist[i])){
 		    alert("Remove special character");
 		    return false;
 		}
 	    }
+	    return true;
+        }
+      </script>
+    <script>
+	function validate(input) {
+            let blacklist = [">","]",">","<","\""];
+	    console.log(input);
+            //var input = (new URLSearchParams(window.location.search)).get('tagId');
+	    for(var i = 0; i < blacklist.length; i++){
+                if(input.includes(blacklist[i])){
+		    alert("Remove special character");
+		    return false;
+		}
+	    }
+	    return true;
         }
       </script>
   </head>
@@ -59,17 +75,16 @@
                     <script>
             		let blacklist = [">","]",">","<","\""];
                         var tag = (new URLSearchParams(window.location.search)).get('tagId');
-	    /*		for(var i = 0; i < blacklist.length; i++){
-                	    if(tag.includes(blacklist[i])){
-		    		alert("Remove special character");
-		    		return false;
-			    }
-	    		}*/
-                        var tag = (new URLSearchParams(window.location.search)).get('tagId');
                          var tags = [" ","kinhnghiem","chiase","kienthuc"];
                          document.write('<select name="tagId" id="tagId">');
                          if(tag) {
+				{% if not xss %}
+                            if(validate(tag)){
                              document.write('<option selected>'+tag+'</option>');
+			    }
+				{% else %}
+			    document.write('<option selected>'+tag+'</option>');
+				{% endif %}
                          }
                          for(var i=0;i<tags.length;i++) {
                              if(tags[i] === tag) {
@@ -78,7 +93,6 @@
                              document.write('<option>'+tags[i]+'</option>');
                          }
                          document.write('</select>');
-
                     </script>
                   </div>
                 </form>
