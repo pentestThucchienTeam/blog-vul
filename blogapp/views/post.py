@@ -5,10 +5,16 @@ from blogapp.models.Post import Post
 from blogapp.models.Comment import  Comment
 from blogapp.models.Setting import Vul
 
-def post(request, id):
+def post(request , id):
     object_list = Post.objects.all()
     xss = Vul.objects.filter(name="XSS").values()[0]['status']
-    post_render = get_object_or_404(Post, id=id)
+    sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+    if sql:
+        post_render = Post.objects.raw('SELECT * FROM blogapp_post WHERE id = %d' % id)
+       
+    else:
+        queryset = Post.objects.filter(id=id)
+        post_render= get_object_or_404(queryset)
     form = CommentForm()
     if request.method =="POST":
         form =CommentForm(data = request.POST,author_id=request.user, post_id=post_render, email=request.user)
@@ -18,6 +24,4 @@ def post(request, id):
     
     
     return render(request,'blogapp/post.html',{'object_list':object_list,'post_render':post_render,'form':form,'xss':xss})
-    '''post_next':post_next,
-    'post_previous':post_previous'''
-    
+

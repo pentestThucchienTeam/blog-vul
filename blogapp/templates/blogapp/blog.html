@@ -82,7 +82,7 @@
               <!-- post -->
               {%for item in object_list %}
               <div class="post col-xl-6">
-                <div class="post-thumbnail"><a href="/post/{{item.id}}"><img src="{{item.images.url}}" alt="..." class="img-fluid"></a></div>
+                <div class="post-thumbnail"><a href="/post/{{item.id}}" method="GET"><img src="{{item.images.url}}" alt="..." class="img-fluid"></a></div>
                 <div class="post-details">
                   <div class="post-meta d-flex justify-content-between">
                     <div class="date meta-last">{{item.creat_time}}</div>

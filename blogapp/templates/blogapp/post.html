@@ -135,7 +135,7 @@
                   <header>
                     <h3 class="h6">Leave a reply</h3>
                   </header>
-                  <form action="{% url 'post' post_render.id%}" method ="POST" class="commenting-form">
+                  <form action="" method ="POST" class="commenting-form">
                     {% csrf_token %}
                     <div class="row">
                       {{form.content}}
