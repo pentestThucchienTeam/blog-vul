@@ -15,7 +15,7 @@ def search(request):
     if request.method=="GET":
         query=request.GET.get("search", None)
         if sql:
-          sqli=   "SELECT * FROM blogapp_post WHERE title ILIKE '%s'"%query
+          sqli=   "SELECT * FROM blogapp_post WHERE title ILIKE '%%" + str(query) + "%%'"
           result=Post.objects.raw(sqli)
         else:
           result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
