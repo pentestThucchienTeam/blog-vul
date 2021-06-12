@@ -1,3 +1,4 @@
+from django.db.models import query
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponseRedirect
 from .form import CommentForm
@@ -10,7 +11,8 @@ def post(request , id):
     xss = Vul.objects.filter(name="XSS").values()[0]['status']
     sql = Vul.objects.filter(name="SQLI").values()[0]['status']
     if sql:
-        post_render = Post.objects.raw('SELECT * FROM blogapp_post WHERE id = %d' % id)
+        post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % str(id))
+        
        
     else:
         queryset = Post.objects.filter(id=id)
@@ -23,5 +25,5 @@ def post(request , id):
             return HttpResponseRedirect(request.path)
     
     
-    return render(request,'blogapp/post.html',{'object_list':object_list,'post_render':post_render,'form':form,'xss':xss})
+    return render(request,'blogapp/post.html',{'object_list':object_list,'post_render':post_render,'form':form,'xss':xss,'sql':sql})
 

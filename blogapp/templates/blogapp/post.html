@@ -73,11 +73,89 @@
         </div>
       </nav>
     </header>
+    
     <div class="container">
       <div class="row">
         <!-- Latest Posts -->
+        
         <main class="post blog-post col-lg-8"> 
           <div class="container">
+            <div class="post-single">
+            {%if sql%}
+              {%for x in post_render%}
+                <div class="post-thumbnail"><img src="{{x.images.url}}" alt="..." class="img-fluid"></div>
+                <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                <div class="category"><a href="#">Web</a><a href="#">Vulnerability</a></div>
+              </div>
+              <h1>{{x.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{x.id}}</span></div></a>
+                    <div class="d-flex align-items-center flex-wrap">       
+                    <div class="date"><i class="icon-clock"></i> {{x.creat_time}}</div>
+                    <div class="views"><i class="icon-eye"></i> 500</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                  </div>
+                </div>
+                <div class="post-body">
+                <p class="lead">{{x.admin_content}}</p>
+              </div>
+                <div class="post-tags"><a href="#" class="tag">#Business</a><a href="#" class="tag">#Tricks</a><a href="#" class="tag">#Financial</a><a href="#" class="tag">#Economy</a></div>
+                <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="#" class="prev-post text-left d-flex align-items-center">
+                  <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                    <div class="text" ><strong class="text-primary">Previous Post </strong>
+                    <h6></h6>
+                    </div></a><a href="#" class="next-post text-right d-flex align-items-center justify-content-end">
+                    <div class="text" href=""><strong class="text-primary">Next Post </strong> 
+                    <h6>.</h6>
+                    </div>
+                    <div class="icon next"><i class="fa fa-angle-right">   </i></div></a></div>
+                <div class="post-comments">
+                  <header>
+                    <h3 class="h6">Post Comments<span class="no-of-comments"><h5>({{x.comment.count}})</h5></span></h3>
+                  </header>
+        
+                  {% for comment in x.comment.all %}
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>{{comment.author_id}}</strong><span class="date">{{comment.create_time}}</span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body" >
+                    {%if xss %}
+                      {{comment.content|safe|linebreaks}}
+                    {%else%}
+                      {{comment.content|linebreaks}}
+                    {%endif%}
+                    </div>
+                  </div>
+                {%endfor%}
+                {%if user.username%}
+                <div class="add-comment">
+                  <header>
+                    <h3 class="h6">Leave a reply</h3>
+                  </header>
+                  <form action="" method ="POST" class="commenting-form">
+                    {% csrf_token %}
+                    <div class="row">
+                      {{form.content}}
+                      <div >
+                        <button type="submit" class="btn btn-secondary" >Submit Comment</button>
+                      </div>
+                    </div>
+                  </form>
+                {%else%} 
+                <p><strong>Log in to comment now</strong></p> 
+                {%endif%}
+                </div>
+              </div>
+              {%endfor%}
+            {%else%}
+            <main class="post blog-post col-lg-8"> 
+            <div class="container">
             <div class="post-single">
               <div class="post-thumbnail"><img src="{{post_render.images.url}}" alt="..." class="img-fluid"></div>
               <div class="post-details">
@@ -95,17 +173,16 @@
                   </div>
                 </div>
                 <div class="post-body">
-          <p class="lead">{{post_render.admin_content}}</p>
-                  
+                  <p class="lead">{{post_render.admin_content}}</p> 
                 </div>
                 <div class="post-tags"><a href="#" class="tag">#Business</a><a href="#" class="tag">#Tricks</a><a href="#" class="tag">#Financial</a><a href="#" class="tag">#Economy</a></div>
                 <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="#" class="prev-post text-left d-flex align-items-center">
                     <div class="icon prev"><i class="fa fa-angle-left"></i></div>
                     <div class="text" ><strong class="text-primary">Previous Post </strong>
-                      <h6>{{post_previous.title}}.</h6>
+                      <h6></h6>
                     </div></a><a href="#" class="next-post text-right d-flex align-items-center justify-content-end">
-                    <div class="text" href="/post/{{post_next.id}}"><strong class="text-primary">Next Post </strong> 
-                    <h6>{{post_next.title}}.</h6>
+                    <div class="text" href=""><strong class="text-primary">Next Post </strong> 
+                    <h6>.</h6>
                     </div>
                     <div class="icon next"><i class="fa fa-angle-right">   </i></div></a></div>
                 <div class="post-comments">
@@ -149,9 +226,11 @@
                 {%endif%}
                 </div>
               </div>
+              {%endif%}
             </div>
           </div>
         </main>
+        
         <aside class="col-lg-4">
           <!-- Widget [Search Bar Widget]-->
           <div class="widget search">
@@ -290,3 +369,4 @@
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
   </body>
 </html>
+}}
