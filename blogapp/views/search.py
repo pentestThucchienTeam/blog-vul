@@ -10,26 +10,18 @@ from django.db import connection
 def search(request):
     query=""
     result=[]
+    xss = Vul.objects.filter(name="XSS").values()[0]['status']
+    sql = Vul.objects.filter(name="SQLI").values()[0]['status']
     if request.method=="GET":
         query=request.GET.get("search", None)
-        # ORM
-        # result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
+        if sql:
+          sqli=   "SELECT * FROM blogapp_post WHERE title ILIKE '%s'"%query
+          result=Post.objects.raw(sqli)
+        else:
+          result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
 
-        #raw:
-        sql=   "SELECT * FROM blogapp_post WHERE title ILIKE '%s'"%query
-        result=Post.objects.raw(sql)
 
-      # cursor false:  
-        # sql= "SELECT * FROM blogapp_post WHERE title ILIKE '%{query}%';"
-        
-        # cursor = connection.cursor()
-        # cursor.execute(sql)
-        
+    html = render_to_string('blogapp/search.html',
+    {'query':query, "result":result, "xss": xss, 'sql':sql})
 
-        # result = cursor.fetchall()
-
-        xss = Vul.objects.filter(name="XSS").values()[0]['status']
-        html = render_to_string('blogapp/search.html',
-        {'query':query, "result":result, "xss": xss})
-
-        return HttpResponse(html)
+    return HttpResponse(html)

@@ -12,6 +12,7 @@ def setting (request):
     query2=""
     xss=[]
     csrf=[]
+    sql=[]
 
     if request.method =="POST":
         query1 = request.POST.get('XSS',None)
@@ -27,9 +28,15 @@ def setting (request):
         else:
             csrf = Vul.objects.filter(name="CSRF").update(status="False")
 
-        return HttpResponseRedirect('/')
+        query3 = request.POST.get('SQL',None)
+        if query3=="1":
+                sql = Vul.objects.filter(name="SQLI").update(status="True")
+        else:
+            sql = Vul.objects.filter(name="SQLI").update(status="False")
 
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren})
+       
+
+    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sql':sql})
 
 
 
