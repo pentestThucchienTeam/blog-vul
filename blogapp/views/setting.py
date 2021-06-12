@@ -10,8 +10,10 @@ def setting (request):
     ren = Vul.objects.all()
     query1=""
     query2=""
+    query3=""
     xss=[]
     csrf=[]
+    sqli=[]
 
     if request.method =="POST":
         query1 = request.POST.get('XSS',None)
@@ -26,10 +28,16 @@ def setting (request):
                 csrf = Vul.objects.filter(name="CSRF").update(status="True")
         else:
             csrf = Vul.objects.filter(name="CSRF").update(status="False")
+        query3 = request.POST.get('SQLI',None)
+        if query3=="1":
+                sqli = Vul.objects.filter(name="SQLI").update(status="True")
+        else:
+            sqli = Vul.objects.filter(name="SQLI").update(status="False")
+
 
         return HttpResponseRedirect(request.path)
 
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren})
+    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'sqli':sqli,'query3':query3,'ren':ren})
 
 
 
