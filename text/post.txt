@@ -15,6 +15,10 @@ insert into blogapp_comment (id,content,status,create_time,image,post_id_id,auth
 insert into blogapp_comment (id,content,status,create_time,image,post_id_id,author_id_id,email_id) values (3,'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',TRUE,'2017-06-22 19:10:25-07','blog-post-4.jpeg','3','1','1') ON CONFLICT DO NOTHING;
 insert into blogapp_comment (id,content,status,create_time,image,post_id_id,author_id_id,email_id) values (3,'Comment cho vui thoi. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',TRUE,'2017-06-24 19:10:25-07','image comment','4','1','1') ON CONFLICT DO NOTHING;
 insert into blogapp_comment (id,content,status,create_time,image,post_id_id,author_id_id,email_id) values (4,'Van la comment. ',TRUE,'2017-06-25 19:10:25-07','image comment','4','1','1') ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (1,'XSS',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (2,'CSRF',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (3,'SSRF',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (4,'SQLI',False) ON CONFLICT DO NOTHING;
 SELECT pg_catalog.setval(pg_get_serial_sequence('auth_user', 'id'), (SELECT MAX(id) FROM auth_user));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_role', 'id'), (SELECT MAX(id) FROM blogapp_role));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_tags', 'id'), (SELECT MAX(id) FROM blogapp_tags));
@@ -23,3 +27,4 @@ SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_post', 'id'), (SELECT M
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_post_author_id', 'id'), (SELECT MAX(id) FROM blogapp_post_author_id));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_post_tags', 'id'), (SELECT MAX(id) FROM blogapp_post_tags));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_comment', 'id'), (SELECT MAX(id) FROM blogapp_comment));
+SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_vul', 'id'), (SELECT MAX(id) FROM blogapp_vul));
