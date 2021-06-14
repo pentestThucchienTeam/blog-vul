@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="{% static 'blogapp/favicon.png' %}">
     <script>
 	function validateForm() {
-            let blacklist = [">","]",">","<","\""];
+            let blacklist = [">","<","{","}","\"","[","]","'","?","/",";","%","@","!","#","\\"];
 	    var input = document.getElementById("search").value;
             //var input = (new URLSearchParams(window.location.search)).get('tagId');
 	    for(var i = 0; i < blacklist.length; i++){
@@ -40,7 +40,7 @@
       </script>
     <script>
 	function validate(input) {
-            let blacklist = [">","]",">","<","\""];
+            let blacklist = [">","<","{","}","\"","\[","\]","'","?","/",";","%","@","!","#","\\"];
 	    console.log(input);
             //var input = (new URLSearchParams(window.location.search)).get('tagId');
 	    for(var i = 0; i < blacklist.length; i++){
