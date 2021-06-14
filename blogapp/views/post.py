@@ -11,7 +11,7 @@ def post(request , id):
     xss = Vul.objects.filter(name="XSS").values()[0]['status']
     sql = Vul.objects.filter(name="SQLI").values()[0]['status']
     if sql:
-        post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % str(id))
+        post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
         
        
     else:
