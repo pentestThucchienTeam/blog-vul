@@ -1,14 +1,14 @@
 from django.db import models
 from blogapp.models.Post import Post
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
 from django.conf import settings
 # Create your models here.
 class Comment(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
     author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='user_id')
-    content = RichTextField(default='')
+    content = RichTextUploadingField(default="")
     status = models.BooleanField(default=True)
     create_time = models.DateTimeField(auto_now_add=True)
     email = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_id')
