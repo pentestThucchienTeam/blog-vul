@@ -11,12 +11,9 @@ def post(request , id):
     xss = Vul.objects.filter(name="XSS").values()[0]['status']
     sql = Vul.objects.filter(name="SQLI").values()[0]['status']
     if sql:
-        post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
-        
-       
+        post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id) 
     else:
-        queryset = Post.objects.filter(id=id)
-        post_render= get_object_or_404(queryset)
+        post_render= get_object_or_404(Post,id=id)
     form = CommentForm()
     if request.method =="POST":
         form =CommentForm(data = request.POST,author_id=request.user, post_id=post_render, email=request.user)
