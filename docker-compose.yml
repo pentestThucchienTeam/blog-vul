@@ -9,7 +9,7 @@ services:
 
   web:
     build: .
-    command: ./entrypoint.sh
+    command: ./script/entrypoint.sh
     volumes:
       - .:/code
     ports:

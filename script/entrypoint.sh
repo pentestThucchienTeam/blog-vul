@@ -1,4 +1,11 @@
 #!/bin/bash
+#echo "Makemigrations"
+#
+#while ! python manage.py makemigrations 2>&1; do
+#   echo "Makemigrations"
+#   sleep 3
+#done
+
 
 echo "Migrate the Database at startup of project"
 
@@ -12,7 +19,7 @@ echo "Django docker is fully configured successfully."
 
 echo "Insert record"
 
-while ! python insert.py 2>&1; do
+while ! python script/insert.py 2>&1; do
     echo "Insert is in progress status"
     sleep 3
 done
