@@ -18,7 +18,9 @@ def search(request):
           sqli=   "SELECT * FROM blogapp_post WHERE title ILIKE '%%" + str(query) + "%%'"
           result=Post.objects.raw(sqli)
         else:
-          result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
+          # ORM
+          # result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
+          result=Post.objects.raw('SELECT * FROM blogapp_post WHERE title ILIKE  %s',  ['%%' + query + '%%'] )
 
 
     html = render_to_string('blogapp/search.html',
