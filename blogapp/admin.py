@@ -20,11 +20,16 @@ class Commentadmin(admin.ModelAdmin):
     cmt_image.short_description = 'images'
     cmt_image.allow_tags = True
 
-admin.site.register(Comment, Commentadmin)    
+admin.site.register(Comment, Commentadmin)  
+
+class CommentInline(admin.StackedInline):
+    model = Comment
+    fields=["author_id","content"]
 class Postadmin(admin.ModelAdmin):
     list_display = ['title','creat_time', 'admin_content','post_images',]
     list_filter = ['creat_time']
     readonly_fields = ('post_images',)
+    inlines = [CommentInline]
     def post_images(self, obj):
             return obj.post_images
 

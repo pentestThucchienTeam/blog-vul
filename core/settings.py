@@ -39,6 +39,17 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 250,
+        'width': 750,
+        'config.entities' :False,
+        'config.htmlEncodeOutput' :False,
+        'config.basicEntities' :False,
+    },
+    
+    
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
