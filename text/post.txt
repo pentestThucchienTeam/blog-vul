@@ -27,3 +27,4 @@ SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_post', 'id'), (SELECT M
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_post_author_id', 'id'), (SELECT MAX(id) FROM blogapp_post_author_id));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_post_tags', 'id'), (SELECT MAX(id) FROM blogapp_post_tags));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_comment', 'id'), (SELECT MAX(id) FROM blogapp_comment));
+SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_vul', 'id'), (SELECT MAX(id) FROM blogapp_vul));

@@ -18,9 +18,9 @@ def setting (request):
     if request.method =="POST":
         query1 = request.POST.get('XSS',None)
         if query1 == "1":
-                xss=Vul.objects.filter(name="XSS").update(status="True")
+                xss=Vul.objects.filter(name="XSS").update(status=True)
         else :
-                xss=Vul.objects.filter(name='XSS').update(status="False")
+                xss=Vul.objects.filter(name='XSS').update(status=False)
 
 
         query2 = request.POST.get('CSRF',None)
