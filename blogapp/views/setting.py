@@ -29,7 +29,7 @@ def setting (request):
                 csrf = Vul.objects.filter(name="CSRF").update(status="True")
         else:
             csrf = Vul.objects.filter(name="CSRF").update(status="False")
-        query3 = request.POST.get('SQLI',None)
+        query3 = request.POST.get('SQL',None)
         if query3=="1":
                 sqli = Vul.objects.filter(name="SQLI").update(status="True")
         else:
@@ -37,7 +37,7 @@ def setting (request):
 
 
 
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sql':sql})
+    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sqli':sqli})
 
 
 
