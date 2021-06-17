@@ -13,7 +13,7 @@ def setting (request):
     query3=""
     xss=[]
     csrf=[]
-    sql=[]
+    sqli=[]
 
 
     if request.method =="POST":
@@ -29,6 +29,8 @@ def setting (request):
                 csrf = Vul.objects.filter(name="CSRF").update(status="True")
         else:
             csrf = Vul.objects.filter(name="CSRF").update(status="False")
+
+
         query3 = request.POST.get('SQL',None)
         if query3=="1":
                 sqli = Vul.objects.filter(name="SQLI").update(status="True")
