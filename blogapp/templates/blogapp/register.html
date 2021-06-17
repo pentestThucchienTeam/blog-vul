@@ -1,0 +1,49 @@
+{% extends "blogapp/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+		<div class="container-sm border">	
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					
+						<legend class="border-bottom mb-4"  align="center"><big>Register Account</big></legend>
+						{{ form|crispy}}
+						<div align="center">
+							<div class="spinner-grow text-primary"></div>
+							<div class="spinner-grow text-secondary"></div>
+							<div class="spinner-grow text-success"></div>
+							<div class="spinner-grow text-danger"></div>
+							<div class="spinner-grow text-warning"></div>
+							<div class="spinner-grow text-info"></div>
+							<div class="spinner-grow text-dark"></div>
+							<button class="btn btn-outline-info" type="submit" >
+								<span class="spinner-border spinner-border-sm"></span>
+								<span>Sign Up</span>
+							 </button>
+							<div class="spinner-grow text-primary"></div>
+							<div class="spinner-grow text-secondary"></div>
+							<div class="spinner-grow text-success"></div>
+							<div class="spinner-grow text-danger"></div>
+							<div class="spinner-grow text-warning"></div>
+							<div class="spinner-grow text-info"></div>
+							<div class="spinner-grow text-dark"></div>
+						</div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</div>
+			
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="#">Sign In</a>
+            </small>
+        </div>
+    </div>
+
+{% endblock content %}
