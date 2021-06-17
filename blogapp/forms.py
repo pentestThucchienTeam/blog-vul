@@ -3,10 +3,10 @@ import re
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 class RegistrationForm(forms.Form):
-    username = forms.CharField(label='Tai khoan', max_length=30,  widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    email = forms.EmailField(label='email',widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    password1 = forms.CharField(label='Mat khau', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
-    password2 = forms.CharField(label='Nhap lai mat khau', widget=forms.PasswordInput(attrs={'placeholder': 'Re-password'}))
+    username = forms.CharField(label='Username', max_length=30,  widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    email = forms.EmailField(label='Email',widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2 = forms.CharField(label='Re-password', widget=forms.PasswordInput(attrs={'placeholder': 'Re-password'}))
 
 
     def clean_password2(self):
@@ -20,7 +20,7 @@ class RegistrationForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        if not re.search(r'^\w+$', username):
+        if not re.search(r'^\w+$*-', username):
             raise forms.ValidationError("Tên tài khoản có kí tự đặc biệt")
         try:
             User.objects.get(username=username)
