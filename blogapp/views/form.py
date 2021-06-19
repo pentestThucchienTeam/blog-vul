@@ -19,3 +19,24 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model=Comment
         fields=["content"]
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label = ("Username"),
+        widget = forms.TextInput(
+            attrs = {
+                'placeholder': 'Input username',
+                'class': 'form-field'
+            }
+        )
+    )
+
+    password = forms.CharField(
+        label = ("Password"),
+        widget = forms.PasswordInput(
+            attrs = {
+                'placeholder': 'Input password',
+                'class': 'form-field',
+            }
+        )
+    )

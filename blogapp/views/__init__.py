@@ -4,3 +4,4 @@ from blogapp.views.post import post
 from blogapp.views.search import search
 from blogapp.views.setting import  setting
 from blogapp.views.register import register
+from blogapp.views.login import login_view
