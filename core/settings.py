@@ -68,7 +68,7 @@ CACHES = {
 }
 
 ROOT_URLCONF = 'core.urls'
-LOGOUT_REDIRECT_URL = "login/"  # Route defined in app/urls.py
+LOGOUT_REDIRECT_URL = "index"  # Route defined in app/urls.py
 TEMPLATE_DIR = os.path.join(CORE_DIR, "core/templates")  # ROOT dir for templates
 
 

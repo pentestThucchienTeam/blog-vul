@@ -25,7 +25,7 @@ class LoginForm(forms.Form):
         label = ("Username"),
         widget = forms.TextInput(
             attrs = {
-                'placeholder': 'Input username',
+                'placeholder': 'username',
                 'class': 'form-field'
             }
         )
@@ -35,7 +35,7 @@ class LoginForm(forms.Form):
         label = ("Password"),
         widget = forms.PasswordInput(
             attrs = {
-                'placeholder': 'Input password',
+                'placeholder': 'password',
                 'class': 'form-field',
             }
         )

@@ -4,7 +4,7 @@ from django.forms.fields import BooleanField
 
 
 class Vul (models.Model):
-        name = models.CharField(max_length=10, )
+        name = models.CharField(max_length=20, )
         status = models.BooleanField(default=False)
 
         def __str__(self):

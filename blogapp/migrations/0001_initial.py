@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
             name='Vul',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=10)),
+                ('name', models.CharField(max_length=20)),
                 ('status', models.BooleanField(default=False)),
             ],
         ),

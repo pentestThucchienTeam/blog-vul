@@ -18,34 +18,26 @@
                 <div class="form-group">
                 {%csrf_token %}
                     {% for item in ren %}
-                        {% if item.id|divisibleby:4 %}
-                            <label>{{item.id}}</label>
-                            <select name={{item.name}}>
-                                {% if item.status %}
-                                    <option value="1" selected>Yes</option>
-                                    <option value="2">No</option>
-                                {% else %}
-                                    <option value="1">Yes</option>
-                                    <option value="2" selected>No</option>
-                                {% endif %}
-                            </select>
-                            <br>
-                        {% else %}
-                            <label>{{item.id}}</label>
-                            <select name={{item.name}}>
-                                {% if item.status %}
-                                    <option value="1" selected>Yes</option>
-                                    <option value="2">No</option>
-                                {% else %}
-                                    <option value="1">Yes</option>
-                                    <option value="2" selected>No</option>
-                                {% endif %}
-                            </select>
-                        {% endif %}
+                    <div class="input-group mb-3">
+                         <div class="input-group-prepend">
+                         <label class="input-group-text" for="inputGroupSelect01">{{ item.name }}</label>
+                         </div>
+                        <!-- <label>{{item.name}}</label> 
+                        <span class="badge badge-pill badge-info">{{ item.name }}</span>-->
+                        <select name={{item.name}} class="custom-select">
+                            {% if item.status %}
+                                <option value="1" selected>Yes</option>
+                                <option value="2">No</option>
+                            {% else %}
+                                <option value="1">Yes</option>
+                                <option value="2" selected>No</option>
+                            {% endif %}
+                        </select>
+                    </div>
                     {% endfor %}
                 </div>
                 <div class="form-group">
-                    <button type="submit" name="form-vul" value="submit" >submit</button>
+                    <input class="btn btn-outline-primary" type="submit" name="form-vul" value="Submit">
                 </div>
             </div>
             </form>
