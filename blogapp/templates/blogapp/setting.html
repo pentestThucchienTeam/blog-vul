@@ -11,9 +11,11 @@
                 <br><hr>
                 {% endfor %}
             {% endif %}
-        <div class="p-2"><h2 >Setting Vulnerability</h2><br></div>
-        <div class="p-2">
         <div class="d-flex justify-content-center">
+            <div class="p-2"><h2 >Setting Vulnerability</h2><br></div>
+        </div>
+        <div class="p-2">
+            <div class="d-flex justify-content-center">
              <form action="{%url 'setting' %}" method="POST" >
                 <div class="form-group">
                 {%csrf_token %}
@@ -40,8 +42,8 @@
                     <input class="btn btn-outline-primary" type="submit" name="form-vul" value="Submit">
                 </div>
 
-            </form>
-        </div>
+             </form>
+            </div>
         </div>
     </div>
 </div>
