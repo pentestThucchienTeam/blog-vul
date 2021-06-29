@@ -15,8 +15,12 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             
             if user is not None:
-               login(request,user)
-               return redirect("/") 
+                login(request,user)
+                try:
+                    return redirect(request.GET['redirect_url'])
+                except:
+                    return redirect("/")
+            
             else:
                msg = "Username, password meo dung"
         
