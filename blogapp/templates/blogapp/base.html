@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bootstrap Blog - B4 Template by Bootstrap Temple</title>
+    {% block title %}<title>Web Vulnerabilities Blog</title>{% endblock %}
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -207,5 +207,7 @@
     <script src="{% static 'blogapp/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
     <script src="{% static 'blogapp/vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
     <script src="{% static 'blogapp/js/front.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
   </body>
   </html>

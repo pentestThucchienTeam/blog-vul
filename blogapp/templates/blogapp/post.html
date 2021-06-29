@@ -1,5 +1,17 @@
 {% extends "blogapp/base.html" %}
 {% load static %}
+
+{% block title %}
+  {%if sql%}
+    {%for x in post_render%}
+    <title>{{x.title}}</title>  
+    {%endfor%}
+  {%else%}
+    <title>{{post_render.title}}</title>
+{%endif%}
+{% endblock %}
+  
+
 {% block content %}
 <div class="container">
   <div class="row">
