@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'blogapp',  # Enable the inner app
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
@@ -148,7 +149,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(CORE_DIR, 'core/media')
 MEDIA_URL = '/media/'
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'core/static'),

@@ -14,3 +14,4 @@ django-adminlte3
 django-ckeditor
 pymemcache
 pyjwt
+django-crispy-forms
