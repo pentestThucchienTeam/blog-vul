@@ -1,10 +1,13 @@
 #!/bin/bash
-#echo "Makemigrations"
-#
-#while ! python manage.py makemigrations 2>&1; do
-#   echo "Makemigrations"
-#   sleep 3
-#done
+echo "start memcached"
+/etc/init.d/memcached restart 2>&1
+
+echo "Makemigrations"
+
+while ! python manage.py makemigrations 2>&1; do
+   echo "Makemigrations"
+   sleep 3
+done
 
 
 echo "Migrate the Database at startup of project"

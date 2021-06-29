@@ -24,7 +24,6 @@ DEBUG = config('DEBUG', cast=bool)
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', config('SERVER', default='127.0.0.1')]
 ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 # Application definition
-
 INSTALLED_APPS = [
     'adminlte3',
     'adminlte3_theme',
@@ -37,7 +36,6 @@ INSTALLED_APPS = [
     'blogapp',  # Enable the inner app
     'ckeditor',
     'ckeditor_uploader',
-    'crispy_forms',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
@@ -47,25 +45,32 @@ CKEDITOR_CONFIGS = {
         'config.entities' :False,
         'config.htmlEncodeOutput' :False,
         'config.basicEntities' :False,
-    },
-    
-    
+    }, 
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'core.middleware.SessionMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+SESSION_ENGINE = "core.session_backend"
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+
+}
 
 ROOT_URLCONF = 'core.urls'
-LOGIN_REDIRECT_URL = "home"   # Route defined in app/urls.py
-LOGOUT_REDIRECT_URL = "login/"  # Route defined in app/urls.py
+LOGOUT_REDIRECT_URL = "index"  # Route defined in app/urls.py
 TEMPLATE_DIR = os.path.join(CORE_DIR, "core/templates")  # ROOT dir for templates
+
 
 
 TEMPLATES = [
@@ -142,7 +147,7 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(CORE_DIR, 'core/media')
 MEDIA_URL = '/media/'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
