@@ -10,7 +10,7 @@
           <div class="container">
             <div class="row">
               <!-- post -->
-              {%for item in object_list %}
+              {%for item in page_num_obj.object_list %}
               <div class="post col-xl-6">
                 <div class="post-thumbnail"><a href="/post/{{item.id}}" method="GET"><img src="{{item.images.url}}" alt="..." class="img-fluid"></a></div>
                 <div class="post-details">
@@ -32,11 +32,17 @@
              <!--Pagination -->
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
-                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
-                <li class="page-item"><a href="#" class="page-link active">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {% for item in paginator.page_range %}
+                    {% if item == 1 %}
+                <li class="page-item"><a href="/blog/{{ item }}/" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                <li class="page-item"><a href="/blog/{{ item }}/" class="page-link">{{ item }}</a></li>
+                    {% elif item == paginator.num_pages %}
+                <li class="page-item"><a href="/blog/{{ item }}/" class="page-link">{{ item }}</a></li>                    
+                <li class="page-item"><a href="/blog/{{ item }}/" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                    {% else %}
+                <li class="page-item"><a href="/blog/{{ item }}/" class="page-link">{{ item }}</a></li>
+                    {% endif %}
+                {% endfor %}
               </ul>
             </nav>
           </div>
@@ -61,7 +67,7 @@
               <h3 class="h6">Latest Posts</h3>
             </header>
             {%for item in object_list %}
-            <div class="blog-posts"><a href="#">
+            <div class="blog-posts"><a href="/post/{{item.id}}">
                 <div class="item d-flex align-items-center">
                   <div class="image"><img src="{{item.images.url}}" alt="..." class="img-fluid"></div>
                   <div class="title"><strong>{{item.title}}</strong>
