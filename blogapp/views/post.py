@@ -3,11 +3,13 @@ from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponseRedirect
 from .form import CommentForm
 from blogapp.models.Post import Post
+from blogapp.models.Tag import Tags
 from blogapp.models.Comment import  Comment
 from blogapp.models.Setting import Vul
 
 def post(request , id):
     object_list = Post.objects.all()
+    listtag = Tags.objects.all()
     xss = Vul.objects.filter(name="XSS").values()[0]['status']
     sql = Vul.objects.filter(name="SQLI").values()[0]['status']
     if sql:
@@ -22,5 +24,5 @@ def post(request , id):
             return HttpResponseRedirect(request.path)
     
     
-    return render(request,'blogapp/post.html',{'object_list':object_list,'post_render':post_render,'form':form,'xss':xss,'sql':sql})
+    return render(request,'blogapp/post.html',{'object_list':object_list,'listtag':listtag,'post_render':post_render,'form':form,'xss':xss,'sql':sql})
 

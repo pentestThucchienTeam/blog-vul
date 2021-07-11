@@ -1,0 +1,22 @@
+{% extends "blogapp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+      <div class="row">
+        <div class="col-12"><p class="lead"><h3> {{tag}}</h3></p><br></div>
+           <div class="col-12">
+           {% if tag_post %}
+              {% for x in tag_post %}
+               <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a>
+                <p>{{x.admin_content|truncatewords:50}}</p>
+                <img src="{{ x.images.url }}" with="150" height="150"> 
+                <br><hr>
+          {% endfor %}
+           {% else %}
+                <p class='lead'><strong>NOT FOUND TAG: {{tag}}</strong></p>
+           {% endif %}
+            
+          </div>
+      </div>
+  </div>
+{% endblock content %}
