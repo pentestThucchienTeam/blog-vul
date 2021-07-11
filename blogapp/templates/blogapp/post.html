@@ -179,6 +179,31 @@
                     <input type="search" name="search" id="search" placeholder="What are you looking for?">
                     <button type="submit" class="submit"><i class="icon-search-1"></i></button>
               </div>
+              <div class="form-group">
+                    <script>
+            		let blacklist = [">","]",">","<","\""];
+                        var tag = (new URLSearchParams(window.location.search)).get('tagId');
+                         var tags = [" ","kinhnghiem","chiase","kienthuc"];
+                         document.write('<select name="tagId" id="tagId">');
+                         if(tag) {
+			  	{% if not xss %}
+                            if(validate(tag)){
+                             document.write('<option selected>'+tag+'</option>');
+			    }
+				{% else %}
+			    document.write('<option selected>'+tag+'</option>');
+				{% endif %}
+                         }
+                         for(var i=0;i<tags.length;i++) {
+                             if(tags[i] === tag) {
+                                 continue;
+                             }
+                             document.write('<option>'+tags[i]+'</option>');
+                         }
+                         document.write('</select>');
+                    </script>
+                  </div>
+             <select name="tagId" id="tagId"><option> </option><option>kinhnghiem</option><option>chiase</option><option>kienthuc</option></select>
             </form>
           </div>
           <!-- Widget [Latest Posts Widget]        -->

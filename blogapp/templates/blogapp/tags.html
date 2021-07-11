@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
       <div class="row">
-        <div class="col-12"><p class="lead"><h3> {{tag}}</h3></p><br></div>
+        <div class="col-12"><p class="lead"><h3> #{{tag}}</h3></p><br></div>
            <div class="col-12">
            {% if tag_post %}
               {% for x in tag_post %}
@@ -13,7 +13,7 @@
                 <br><hr>
           {% endfor %}
            {% else %}
-                <p class='lead'><strong>NOT FOUND TAG: {{tag}}</strong></p>
+                <p class='lead'><strong>NOT FOUND TAG: #{{tag}}</strong></p>
            {% endif %}
             
           </div>
