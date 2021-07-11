@@ -1,14 +1,16 @@
+from blogapp.views.tags import tags
 from django.shortcuts import render
 from django.http import HttpResponse
 from blogapp.models.Post import Post
 from blogapp.models.Setting import Vul
+from blogapp.models.Tag import Tags
 from django.core.paginator import Paginator
 
-def blog(request, pid):
+def blog(request, pid=None):
     xss = Vul.objects.filter(name="XSS").values()[0]['status']
     object_list = Post.objects.all()
-
     paginator = Paginator(object_list, 2)
+    listtag = Tags.objects.all()
     # print(paginator.count)
 
     try:
@@ -20,7 +22,8 @@ def blog(request, pid):
             'object_list': object_list,
             'xss': xss,
             'paginator': paginator, 
-            'page_num_obj': page_num_obj
+            'page_num_obj': page_num_obj,
+            'listtag':listtag
             }
         )
     except:
@@ -32,6 +35,7 @@ def blog(request, pid):
             'object_list': object_list,
             'xss': xss,
             'paginator': paginator, 
-            'page_num_obj': page_num_obj
+            'page_num_obj': page_num_obj,
+            'listtag':listtag
             }
         )
