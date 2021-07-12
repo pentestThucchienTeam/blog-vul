@@ -22,7 +22,7 @@ def search(request):
         query=request.GET.get("search", None)
         tag= request.GET.get("tagId")
         if sql:
-          sqli=   "SELECT * FROM blogapp_post inner  join blogapp_post_tags on blogapp_post.id = blogapp_post_tags.post_id left join blogapp_tags on blogapp_post_tags.tags_id = blogapp_tags.id WHERE title ILIKE '%%" + str(query) + "%%' AND 'name' ILIKE '%%" + str(tag) + "%%'"
+          sqli=   "SELECT * FROM blogapp_post inner  join blogapp_post_tags on blogapp_post.id = blogapp_post_tags.post_id left join blogapp_tags on blogapp_post_tags.tags_id = blogapp_tags.id WHERE title ILIKE '%%" + str(query) + "%%' AND name ILIKE  '%%"+str(tag)+"%%' "
           result=Post.objects.raw(sqli)
         else:
           # ORM
