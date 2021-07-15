@@ -4,4 +4,6 @@ from django.shortcuts import redirect
 
 def logout_view(request):
     logout(request)
-    return redirect(settings.LOGOUT_REDIRECT_URL)
+    response = redirect(settings.LOGOUT_REDIRECT_URL)
+    response.delete_cookie('ten')
+    return response

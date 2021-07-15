@@ -2,6 +2,18 @@ from  django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .form import LoginForm
 from django.contrib.auth import authenticate, login
+import time
+from django.utils.http import http_date
+import jwt
+
+
+def create_cookie(user):
+    is_admin = user.is_superuser
+    username = user.username
+    payload = {"username": username, "admin": is_admin}
+
+    return jwt.encode(payload, 'secret', algorithm="HS256")
+
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -16,10 +28,25 @@ def login_view(request):
             
             if user is not None:
                 login(request,user)
+                cookie_name = create_cookie(user)
                 try:
-                    return redirect(request.GET['redirect_url'])
+                    max_age = request.session.get_expiry_age()
+                    expires_time = time.time() + max_age
+                    expires = http_date(expires_time)
+                    response = redirect(request.GET['next'])
+                    response.set_cookie(
+                        'ten',cookie_name,
+                        max_age=max_age, expires=expires)
+                    return response
                 except:
-                    return redirect("/")
+                    max_age = request.session.get_expiry_age()
+                    expires_time = time.time() + max_age
+                    expires = http_date(expires_time)
+                    response = redirect("/")
+                    response.set_cookie(
+                        'ten',cookie_name,
+                        max_age=max_age, expires=expires)
+                    return response
             
             else:
                msg = "Username, password meo dung"

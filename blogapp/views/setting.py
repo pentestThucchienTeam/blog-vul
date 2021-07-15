@@ -3,10 +3,21 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from blogapp.models.Setting import Vul
+from django.contrib.auth.decorators import login_required
+import jwt
 
 
-
+@login_required
 def setting (request):
+
+    cookie_check = request.COOKIES['ten']
+
+    cookie_decode = jwt.decode(cookie_check, "secret", algorithms="HS256")
+
+    if not cookie_decode['admin']:
+        return render(request, "blogapp/setting.html")
+    
+    print(request.session._session_key)
     ren = Vul.objects.all()
     query1=""
     query2=""
@@ -14,7 +25,6 @@ def setting (request):
     xss=[]
     csrf=[]
     sqli=[]
-
 
     if request.method =="POST":
         query1 = request.POST.get('XSS',None)
