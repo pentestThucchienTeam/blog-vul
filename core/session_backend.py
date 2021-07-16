@@ -5,7 +5,7 @@ from django.utils.functional import cached_property
 import string
 
 import jwt
-from blogapp.models.Setting import Vul
+from blogapp.models.Setting import Vul 
 
 VALID_KEY_CHARS = string.ascii_lowercase + string.digits
 

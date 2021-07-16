@@ -10,15 +10,18 @@ import jwt
 
 def create_cookie(user):
     jwts = Vul.objects.filter(name="JWT").values()[0]['status']
-    if jwts:
-        key = "anhyeuem"
-    else:
-        key = "pentestThucchienTeam"
+    
     is_admin = user.is_superuser
     username = user.username
     payload = {"username": username, "admin": is_admin}
-    return jwt.encode(payload, key, algorithm="HS256")
-
+    
+    if jwts:
+        from core.lib import jwt_vul
+        key = "anhyeuem"
+        return jwt_vul.encode(payload, key, algorithm="HS256").decode()
+    else:
+        key = "pentestThucchienTeam"
+        return jwt.encode(payload, key, algorithm="HS256")
 
 def login_view(request):
     form = LoginForm(request.POST or None)

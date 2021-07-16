@@ -87,7 +87,7 @@
                     </div>
                   </form>
                 {%else%} 
-                  <p><strong> <a href="{% url 'user_login' %}?redirect_url={{request.path}}"> Log in </a> to comment now</strong></p>
+                  <p><strong> <a href="{% url 'user_login' %}?next={{request.path}}"> Log in </a> to comment now</strong></p>
                 {%endif%}
                 </div>
               </div>
