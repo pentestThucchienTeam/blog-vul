@@ -7,28 +7,27 @@ from django.contrib.auth.decorators import login_required
 import jwt
 
 
-@login_required
+@login_required(login_url="/login")
 def setting (request):
     jwts = Vul.objects.filter(name="JWT").values()[0]['status']
+    cookie_check = request.COOKIES['ten']
+
     if jwts:
+        from core.lib import jwt_vul
         key = "anhyeuem"
+        cookie_decode = jwt_vul.decode(cookie_check, key)               
     else:
         key = "pentestThucchienTeam"
-    cookie_check = request.COOKIES['ten']
-    cookie_decode = jwt.decode(cookie_check, key, algorithms="HS256")
+        cookie_decode = jwt.decode(cookie_check, key, algorithms="HS256")
 
+    print(cookie_decode['admin'])
     if not cookie_decode['admin']:
         return render(request, "blogapp/setting.html")
     
-    print(request.session._session_key)
     ren = Vul.objects.all()
-    query1=""
-    query2=""
-    query3=""
-    xss=[]
-    csrf=[]
-    sqli=[]
-    jwt1=[] 
+    query1 = query2 = query3 = query4 = ""
+    xss = csrf = sqli = jwt1 = ""
+    
     if request.method =="POST":
         query1 = request.POST.get('XSS',None)
         if query1 == "1":
@@ -56,9 +55,7 @@ def setting (request):
         else:
             jwt1 = Vul.objects.filter(name="JWT").update(status="False")
 
-
-
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sqli':sqli, 'jwt1':jwt1})
+    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'ren':ren, 'sqli':sqli, 'jwt1':jwt1})
 
 
 
