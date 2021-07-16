@@ -4,7 +4,7 @@ from .form import LoginForm
 from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
-import jwt
+from core.lib import jwt_vul
 
 
 def create_cookie(user):
@@ -12,7 +12,7 @@ def create_cookie(user):
     username = user.username
     payload = {"username": username, "admin": is_admin}
 
-    return jwt.encode(payload, 'secret', algorithm="HS256")
+    return jwt_vul.encode(payload, 'password', algorithm="HS256").decode()
 
 
 def login_view(request):

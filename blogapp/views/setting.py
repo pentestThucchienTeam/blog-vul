@@ -4,15 +4,25 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from blogapp.models.Setting import Vul
 from django.contrib.auth.decorators import login_required
-import jwt
+from core.lib import jwt_vul
+import base64
+import json
 
 
 @login_required
 def setting (request):
 
     cookie_check = request.COOKIES['ten']
+#     signature = cookie_check.split(".")[2]
 
-    cookie_decode = jwt.decode(cookie_check, "secret", algorithms="HS256")
+#     header = cookie_check.split(".")[0]
+
+#     if len(header) % 4 != 0:
+#             header += '=' * (4 - len(header) % 4)
+
+#     algorithm = json.loads(base64.urlsafe_b64decode(header).decode('utf-8'))
+
+    cookie_decode = jwt_vul.decode(cookie_check,'password')
 
     if not cookie_decode['admin']:
         return render(request, "blogapp/setting.html")
