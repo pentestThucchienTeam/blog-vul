@@ -13,9 +13,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"Registration successful.")
+            
             return redirect('/login')
-        messages.error(request, "Unsuccessful registration. Invalid information.")
+        
     form=RegistrationForm
     return render(request, 'blogapp/register.html', {'form': form})
 
