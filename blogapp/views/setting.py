@@ -14,12 +14,12 @@ def setting (request):
     jwts = Vul.objects.filter(name="JWT").values()[0]['status']
     jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     cookie_check = request.COOKIES['ten']
-    if jwt_confusion & not jwts:
+    if jwt_confusion and not jwts:
         from core.lib import jwt_vul
         publickey = open("blogapp/views/pub.key","r").read()
         cookie_decode = jwt_vul.decode(cookie_check, publickey)
         
-    if jwts:
+    elif jwts:
         from core.lib import jwt_vul
         key = "anhyeuem"
         cookie_decode = jwt_vul.decode(cookie_check, key)               
