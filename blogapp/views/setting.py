@@ -23,7 +23,7 @@ def setting (request):
 #             header += '=' * (4 - len(header) % 4)
 
 #     algorithm = json.loads(base64.urlsafe_b64decode(header).decode('utf-8'))
-    jwt_confusion = Vul.objects.filter(name="JWT").values()[0]['status']
+    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     if jwt_confusion:
         publickey = open("blogapp/views/pub.key","r").read()
         cookie_decode = jwt_vul.decode(cookie_check, publickey)

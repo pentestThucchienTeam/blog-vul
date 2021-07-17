@@ -5,10 +5,10 @@ from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
 import jwt
-
+from blogapp.models.Setting import Vul
 
 def create_cookie(user):
-    jwt_confusion = Vul.objects.filter(name="JWT").values()[0]['status']
+    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     is_admin = user.is_superuser
     username = user.username
     payload = {"username": username, "admin": is_admin}
@@ -17,7 +17,8 @@ def create_cookie(user):
         privatekey= open("blogapp/views/priv.pem").read()
         return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
     else:
-        return jwt.encode(payload, key, algorithm="HS256")
+        privatekey= open("blogapp/views/priv.pem").read()
+        return jwt.encode(payload,privatekey, algorithm="RS256")
 
 
 def login_view(request):
