@@ -5,27 +5,13 @@ from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
 from core.lib import jwt_vul
-import textwrap
 
 
 def create_cookie(user):
     is_admin = user.is_superuser
     username = user.username
-    payload = {"username": username, "admin": is_admin}
-    privatekey= textwrap.dedent("""\
-        -----BEGIN RSA PRIVATE KEY-----
-        Proc-Type: <,ENCRYPTED
-        DEK-Info: AES-128-CBC,5E22A2BD85A653FB7A3ED20DE84F54CD
-
-        hAqtb5ZkTMGcs4BBDQ1SKZzdQThWRDzEDxM3qBfjvYa35KxZ54aic013mW/lwj2I
-        v5bbpOjrHYHNAiZYZ7RNb+ztbF6F/g5PA5g7mFwEq+LFBY0InIplYBSv9QtE+lot
-        Dy4AlZa/+NzJwgdKDb+JVfk5SddyD4ywnyeORnMPy4xXKvjXwmW+iLibZVKsjIgw
-        H8hSxcD+FhWyJm9h9uLtmpuqhQo0jTUYpnTezZx2xeVPB53Ev7YCxR9Nsgj5GsVf
-        9Z/hqLB7IFgM3pa0z3PQeUIZF/cEf72fISWIOBwwkzVrPUkXWfbuWeJXQXSs3amE
-        5A295jD9BQp9CY0nNFSsy+qiXWToq2xT3y5zVNEStmN0SCGNaIlUnJzL9IHW+oMI
-        kPmXZMnAYBWeeCF1gf3J3aE5lZInegHNfEI0+J0LazC2aNU5Dg/BNqrmRqKWEIo/
-        -----END RSA PRIVATE KEY-----
-        """).encode()
+    payload = {"username": username, "admin": is_admin}    
+    privatekey= open("home/kali/blog/blog-vul/blogapp/views/priv.pem","r").read()
     return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
 
 

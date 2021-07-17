@@ -7,7 +7,7 @@ from .compat import constant_time_compare, string_types, text_type
 from cryptography.hazmat.primitives import  hashes
 from cryptography.hazmat.primitives.serialization import (load_pem_private_key, load_pem_public_key, load_ssh_public_key)
 from cryptography.hazmat.primitives.asymmetric import ec, padding
-from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.backends import default_backend, interfaces
 from cryptography.hazmat.primitives.asymmetric.rsa import (
         RSAPrivateKey,
         RSAPrivateNumbers,
@@ -116,7 +116,7 @@ if has_crypto:
         def prepare_key(self, key):
             if isinstance(key, RSAPrivateKey) or \
                isinstance(key, RSAPublicKey):
-                return key
+                return key            
             if isinstance(key, string_types):
                 if isinstance(key, text_type):
                     key = key.encode('utf-8')
