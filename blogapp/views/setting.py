@@ -16,7 +16,8 @@ def setting (request):
     cookie_check = request.COOKIES['ten']
     if jwt_confusion and not jwts:
         from core.lib import jwt_vul
-        publickey = open("blogapp/views/pub.key","r").read()
+        with open("blogapp/views/pub.key","r") as filekey:
+            publickey= filekey.read()
         cookie_decode = jwt_vul.decode(cookie_check, publickey)
         
     elif jwts:

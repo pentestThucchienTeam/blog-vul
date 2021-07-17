@@ -17,7 +17,8 @@ def create_cookie(user):
     payload = {"username": username, "admin": is_admin}
     if jwt_confusion and not jwts:
         from core.lib import jwt_vul    
-        privatekey= open("blogapp/views/priv.pem").read()
+        with open("blogapp/views/priv.pem") as filekey:
+            privatekey=filekey.read()
         return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
     
     elif jwts:
