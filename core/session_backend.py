@@ -3,9 +3,8 @@ from django.utils.crypto import get_random_string
 from django.utils.module_loading import import_string
 from django.utils.functional import cached_property
 import string
-
 import jwt
-from blogapp.models.Setting import Vul 
+from blogapp.models.Setting import Vul
 
 VALID_KEY_CHARS = string.ascii_lowercase + string.digits
 
@@ -26,7 +25,6 @@ class SessionStore(OriginalSessionStore):
             q = jwt.encode({"key": key}, pas, algorithm="HS256")
             print(q)
             return q    
-
     def _get_new_session_key(self):
         "Returns session key that isn't being used."
         while True:

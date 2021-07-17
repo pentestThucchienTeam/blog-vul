@@ -3,15 +3,19 @@ import hmac
 
 from .api import register_algorithm
 from .compat import constant_time_compare, string_types, text_type
-
 try:
-    from cryptography.hazmat.primitives import interfaces, hashes
+    from cryptography.hazmat.primitives import hashes
     from cryptography.hazmat.primitives.serialization import (
         load_pem_private_key, load_pem_public_key, load_ssh_public_key
     )
     from cryptography.hazmat.primitives.asymmetric import ec, padding
-    from cryptography.hazmat.backends import default_backend
+    from cryptography.hazmat.backends import default_backend, interfaces
     from cryptography.exceptions import InvalidSignature
+    from cryptography.hazmat.primitives.asymmetric.rsa import (
+        RSAPrivateKey,
+        RSAPrivateNumbers,
+        RSAPublicKey,
+        RSAPublicNumbers)
 
     has_crypto = True
 except ImportError:
@@ -113,10 +117,9 @@ if has_crypto:
             self.hash_alg = hash_alg
 
         def prepare_key(self, key):
-            if isinstance(key, interfaces.RSAPrivateKey) or \
-               isinstance(key, interfaces.RSAPublicKey):
-                return key
-
+            if isinstance(key, RSAPrivateKey) or \
+               isinstance(key, RSAPublicKey):
+                return key            
             if isinstance(key, string_types):
                 if isinstance(key, text_type):
                     key = key.encode('utf-8')

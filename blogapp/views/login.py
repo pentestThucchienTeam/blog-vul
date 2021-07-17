@@ -7,21 +7,28 @@ import time
 from django.utils.http import http_date
 import jwt
 
+from blogapp.models.Setting import Vul
 
 def create_cookie(user):
+    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     jwts = Vul.objects.filter(name="JWT").values()[0]['status']
-    
     is_admin = user.is_superuser
     username = user.username
     payload = {"username": username, "admin": is_admin}
+    if jwt_confusion and not jwts:
+        from core.lib import jwt_vul    
+        with open("blogapp/views/priv.pem") as filekey:
+            privatekey=filekey.read()
+        return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
     
-    if jwts:
+    elif jwts:
         from core.lib import jwt_vul
         key = "anhyeuem"
         return jwt_vul.encode(payload, key, algorithm="HS256").decode()
     else:
         key = "pentestThucchienTeam"
         return jwt.encode(payload, key, algorithm="HS256")
+
 
 def login_view(request):
     form = LoginForm(request.POST or None)
