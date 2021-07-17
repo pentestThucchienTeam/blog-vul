@@ -4,16 +4,20 @@ from .form import LoginForm
 from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
-from core.lib import jwt_vul
-import textwrap
+import jwt
 
 
 def create_cookie(user):
+    jwt_confusion = Vul.objects.filter(name="JWT").values()[0]['status']
     is_admin = user.is_superuser
     username = user.username
-    payload = {"username": username, "admin": is_admin}    
-    privatekey= open("blogapp/views/priv.pem").read()
-    return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
+    payload = {"username": username, "admin": is_admin}
+    if jwt_confusion:
+        from core.lib import jwt_vul    
+        privatekey= open("blogapp/views/priv.pem").read()
+        return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
+    else:
+        return jwt.encode(payload, key, algorithm="HS256")
 
 
 def login_view(request):
