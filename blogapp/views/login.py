@@ -5,13 +5,14 @@ from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
 from core.lib import jwt_vul
+import textwrap
 
 
 def create_cookie(user):
     is_admin = user.is_superuser
     username = user.username
     payload = {"username": username, "admin": is_admin}    
-    privatekey= open("home/kali/blog/blog-vul/blogapp/views/priv.pem","r").read()
+    privatekey= open("blogapp/views/priv.pem").read()
     return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
 
 
