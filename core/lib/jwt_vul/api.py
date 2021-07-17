@@ -87,8 +87,6 @@ def encode(payload, key, algorithm='HS256', headers=None, json_encoder=None):
 
 def decode(jwt, key='', verify=True, **kwargs):
     payload, signing_input, header, signature = load(jwt)
-    print(f"aaaaaaaaaaa: {signing_input}")
-
     if verify:
         verify_signature(payload, signing_input, header, signature, key,
                          **kwargs)

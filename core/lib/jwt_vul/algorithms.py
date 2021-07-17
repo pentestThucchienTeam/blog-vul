@@ -3,20 +3,23 @@ import hmac
 
 from .api import register_algorithm
 from .compat import constant_time_compare, string_types, text_type
-
-from cryptography.hazmat.primitives import  hashes
-from cryptography.hazmat.primitives.serialization import (load_pem_private_key, load_pem_public_key, load_ssh_public_key)
-from cryptography.hazmat.primitives.asymmetric import ec, padding
-from cryptography.hazmat.backends import default_backend, interfaces
-from cryptography.hazmat.primitives.asymmetric.rsa import (
+try:
+    from cryptography.hazmat.primitives import hashes
+    from cryptography.hazmat.primitives.serialization import (
+        load_pem_private_key, load_pem_public_key, load_ssh_public_key
+    )
+    from cryptography.hazmat.primitives.asymmetric import ec, padding
+    from cryptography.hazmat.backends import default_backend, interfaces
+    from cryptography.exceptions import InvalidSignature
+    from cryptography.hazmat.primitives.asymmetric.rsa import (
         RSAPrivateKey,
         RSAPrivateNumbers,
         RSAPublicKey,
         RSAPublicNumbers)
-from cryptography.exceptions import InvalidSignature
 
-has_crypto = True
-
+    has_crypto = True
+except ImportError:
+    has_crypto = False
 
 
 def _register_default_algorithms():
@@ -76,7 +79,7 @@ class NoneAlgorithm(Algorithm):
         return b''
 
     def verify(self, msg, key, sig):
-        return True
+        return True 
 
 
 class HMACAlgorithm(Algorithm):

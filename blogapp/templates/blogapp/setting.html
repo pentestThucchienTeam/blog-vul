@@ -12,7 +12,11 @@
                 {% endfor %}
             {% endif %}
         <div class="d-flex justify-content-center">
+                {% if not ren %}
+            <div class="p-2"><p>Nhan Pham chua du de dung chuc nang nay</p><br></div>
+                {% else %}
             <div class="p-2"><h2 >Setting Vulnerability</h2><br></div>
+                {% endif %}
         </div>
         <div class="p-2">
             <div class="d-flex justify-content-center">
