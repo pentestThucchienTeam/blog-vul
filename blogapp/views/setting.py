@@ -74,7 +74,7 @@ def setting (request):
 
 
 
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sqli':sqli})
+    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion})
 
 
 
