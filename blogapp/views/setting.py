@@ -13,6 +13,7 @@ import json
 def setting (request):
 
     cookie_check = request.COOKIES['ten']
+    publickey = "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApwOkzVqmWqFGfdPUSU73A3UqwlqRdA40pDhyuIN56yZWRXVqp8Hgxl3ai5gFayhbJAkg1Z5wUKFVFmCa7J6j97QAzTDNHA17YPOu/WoRBuQobSL8A1epiBpnRfQn/+gabWYG4jRBZ6q0Zjh12qAJvdO6Fq+e0sfp7gvgp5XXJhqIGiOCTT5hDHFygefjmSA9TX3xOSrlPMUrnDzrhfgapIEMlx6xli3hhEfCo0ISCMI4S/r+35GHayezbtdz7mLOF8ODuagEX0HDyoLvJ5q14NrCLStIY1plWUDJ3DVFKjMbSREVTzRSmU1sMrgEztG+hG23iUNGwo4zH53U4sHduwIDAQAB\n-----END PUBLIC KEY-----"
 #     signature = cookie_check.split(".")[2]
 
 #     header = cookie_check.split(".")[0]
@@ -21,8 +22,7 @@ def setting (request):
 #             header += '=' * (4 - len(header) % 4)
 
 #     algorithm = json.loads(base64.urlsafe_b64decode(header).decode('utf-8'))
-
-    cookie_decode = jwt_vul.decode(cookie_check,'password')
+    cookie_decode = jwt_vul.decode(cookie_check, publickey)
 
     if not cookie_decode['admin']:
         return render(request, "blogapp/setting.html")

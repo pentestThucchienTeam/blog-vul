@@ -18,7 +18,7 @@ class SessionStore(OriginalSessionStore):
         else:
             import jwt
             key = get_random_string(10, VALID_KEY_CHARS)
-            return jwt.encode({"key": key}, "secrect", algorithm="HS256").decode()
+            return jwt.encode({"key": key}, "secrect", algorithm="HS256")
 
     def _get_new_session_key(self):
         "Returns session key that isn't being used."
