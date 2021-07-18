@@ -12,9 +12,11 @@ from core.lib.jwt_vul.utils import base64url_decode, base64url_encode
 
 @login_required(login_url="/login")
 def setting (request):
+
     jwts = Vul.objects.filter(name="JWT").values()[0]['status']
     jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     cookie_check = request.COOKIES['ten']
+
     if jwt_confusion and not jwts:
         ext,fake=cookie_check.split('.',1)
         header= base64url_decode(bytes(str(ext),'utf-8'))
@@ -26,10 +28,10 @@ def setting (request):
         
     elif jwts:
         from core.lib import jwt_vul
-        key = "anhyeuem"
+        key = request.session['key']
         cookie_decode = jwt_vul.decode(cookie_check, key)               
     else:
-        key = "pentestThucchienTeam"
+        key = request.session['key']
         cookie_decode = jwt.decode(cookie_check, key, algorithms="HS256")
     
     ren = Vul.objects.all()

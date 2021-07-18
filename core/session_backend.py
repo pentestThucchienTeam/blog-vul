@@ -23,7 +23,6 @@ class SessionStore(OriginalSessionStore):
             pas = 'iloveyou'
             key = get_random_string(10, VALID_KEY_CHARS)
             q = jwt.encode({"key": key}, pas, algorithm="HS256")
-            print(q)
             return q    
     def _get_new_session_key(self):
         "Returns session key that isn't being used."
