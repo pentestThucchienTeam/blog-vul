@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 import base64
 import json
 import jwt
-
+from decouple import config
+from core.lib.jwt_vul.utils import base64url_decode, base64url_encode
 
 @login_required(login_url="/login")
 def setting (request):
@@ -15,9 +16,12 @@ def setting (request):
     jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     cookie_check = request.COOKIES['ten']
     if jwt_confusion and not jwts:
+        ext,fake=cookie_check.split('.',1)
+        header= base64url_decode(bytes(str(ext),'utf-8'))
+        pubkey = json.loads(header.decode('utf-8'))    
+        publickey=pubkey['publickey']
+
         from core.lib import jwt_vul
-        with open("blogapp/views/pub.key","r") as filekey:
-            publickey= filekey.read()
         cookie_decode = jwt_vul.decode(cookie_check, publickey)
         
     elif jwts:
