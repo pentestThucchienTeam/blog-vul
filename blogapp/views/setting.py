@@ -65,8 +65,10 @@ def setting (request):
             jwt1 = Vul.objects.filter(name="JWT").update(status="False")
 
     if not cookie_decode['admin']:
-        return render(request, "blogapp/setting.html",{'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
-    return render(request, "blogapp/setting.html",{'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
+        block = 'staff'
+        print()
+        return render(request, "blogapp/setting.html",{'aut': 'staff', 'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
+    return render(request, "blogapp/setting.html",{'aut': 'admin', 'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
     # else:    
     #     return render(request, "blogapp/setting.html",{'block': , 'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
 
