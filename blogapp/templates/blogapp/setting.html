@@ -1,55 +1,56 @@
-{% extends "blogapp/base.html" %}
-{% load static %}
-{% block content %}
-    <div class="container">
-      <div class="d-flex flex-column">
-           {% if result %}
-            {% for x in result %}
-                  <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a> 
-                <p>{{x.admin_content|truncatewords:50}}</p>
-		<img src="{{ x.images.url }}" with="150" height="150">
-                <br><hr>
-                {% endfor %}
-            {% endif %}
-        <div class="d-flex justify-content-center">
-                {% if not ren %}
-            <div class="p-2"><p>Nhan Pham chua du de dung chuc nang nay</p><br></div>
-                {% else %}
-            <div class="p-2"><h2 >Setting Vulnerability</h2><br></div>
-                {% endif %}
-        </div>
-        <div class="p-2">
-            <div class="d-flex justify-content-center">
-             <form action="{%url 'setting' %}" method="POST" >
-                <div class="form-group">
-                {%csrf_token %}
-                    {% for item in ren %}
-                    <div class="input-group mb-3">
-                         <div class="input-group-prepend">
-                         <label class="input-group-text" for="inputGroupSelect01">{{ item.name }}</label>
-                         </div>
-                        <!-- <label>{{item.name}}</label> 
-                        <span class="badge badge-pill badge-info">{{ item.name }}</span>-->
-                        <select name={{item.name}} class="custom-select text-center">
-                            {% if item.status %}
-                                <option value="1" selected>Yes</option>
-                                <option value="2">No</option>
-                            {% else %}
-                                <option value="1">Yes</option>
-                                <option value="2" selected>No</option>
-                            {% endif %}
-                        </select>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="form-group">
-                    <input class="btn btn-outline-primary" type="submit" name="form-vul" value="Submit">
-                </div>
-
-             </form>
-            </div>
-        </div>
+{% extends "blogapp/base.html" %} {% load static %} {% block content %}
+<div class="container">
+  <div class="d-flex flex-column">
+    {% if result %} {% for x in result %}
+    <a href="{{x.get_url}}"><h2>{{x.title}}</h2></a>
+    <p>{{x.admin_content|truncatewords:50}}</p>
+    <img src="{{ x.images.url }}" with="150" height="150" />
+    <br />
+    <hr />
+    {% endfor %} {% endif %}
+    <div class="d-flex">
+      <div class="col-8">
+        <h2 class="text-center">Setting Vulnerability</h2>
+        <br />
+      </div>
+      <div class="col-4"><p class="text-center font-italic">Hi, {{ aut }}</p></p></div>
     </div>
+    <!-- <div class="p-2"> -->
+      <div class="d-flex">
+        <form action="{%url 'setting' %}" method="POST">
+          <div class="form-group col-12">
+            <div class="row">
+              {%csrf_token %} {% for item in ren %}
+              <div class="input-group mb-3 col-4">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01"
+                    >{{ item.name }}</label
+                  >
+                </div>
+                <!-- <label>{{item.name}}</label> 
+                        <span class="badge badge-pill badge-info">{{ item.name }}</span>-->
+                <select name="{{item.name}}" class="custom-select text-center">
+                  {% if item.status %}
+                  <option value="1" selected>Yes</option>
+                  <option value="2">No</option>
+                  {% else %}
+                  <option value="1">Yes</option>
+                  <option value="2" selected>No</option>
+                  {% endif %}
+                </select>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% if aut == 'admin' %}
+          <div class="form-group col-12">
+            <input class="btn btn-primary" type="submit" value="Submit" />
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    <!-- </div> -->
+  </div>
 </div>
 
 {% endblock %}

@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 import base64
 import json
 import jwt
-
+from decouple import config
+from core.lib.jwt_vul.utils import base64url_decode, base64url_encode
 
 @login_required(login_url="/login")
 def setting (request):
@@ -17,9 +18,12 @@ def setting (request):
     cookie_check = request.COOKIES['ten']
 
     if jwt_confusion and not jwts:
+        ext,fake=cookie_check.split('.',1)
+        header= base64url_decode(bytes(str(ext),'utf-8'))
+        pubkey = json.loads(header.decode('utf-8'))    
+        publickey=pubkey['publickey']
+
         from core.lib import jwt_vul
-        with open("blogapp/views/pub.key","r") as filekey:
-            publickey= filekey.read()
         cookie_decode = jwt_vul.decode(cookie_check, publickey)
         
     elif jwts:
@@ -29,9 +33,6 @@ def setting (request):
     else:
         key = request.session['key']
         cookie_decode = jwt.decode(cookie_check, key, algorithms="HS256")
-
-    if not cookie_decode['admin']:
-        return render(request, "blogapp/setting.html")
     
     ren = Vul.objects.all()
     query1 = query2 = query3 = query4 = query5 = ""
@@ -69,7 +70,13 @@ def setting (request):
         else:
             jwt1 = Vul.objects.filter(name="JWT").update(status="False")
 
-    return render(request, "blogapp/setting.html",{'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf,'ren':ren, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
+    if not cookie_decode['admin']:
+        block = 'staff'
+        print()
+        return render(request, "blogapp/setting.html",{'aut': 'staff', 'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
+    return render(request, "blogapp/setting.html",{'aut': 'admin', 'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
+    # else:    
+    #     return render(request, "blogapp/setting.html",{'block': , 'ren':ren, 'query1':query1,'query2':query2,'xss': xss, 'csrf':csrf, 'sqli':sqli,'JWT_Key_Confusion':jwt_confusion, 'jwt1':jwt1})
 
 
 

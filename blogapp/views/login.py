@@ -8,7 +8,7 @@ import time
 from django.utils.http import http_date
 import jwt
 import json
-
+from decouple import config
 from blogapp.models.Setting import Vul
 
 def create_cookie(user, request):
@@ -21,9 +21,11 @@ def create_cookie(user, request):
 
     if jwt_confusion and not jwts:
         from core.lib import jwt_vul    
-        with open("blogapp/views/priv.pem") as filekey:
+        with open(config('PRIVATEKEY'),"r") as filekey:
             privatekey=filekey.read()
-        return jwt_vul.encode(payload, privatekey, algorithm="RS256").decode()
+        with open(config('PUBLICKEY'),"r") as pubkey:
+            embedded=pubkey.read()
+        return jwt_vul.encode(payload, privatekey, algorithm="RS256",headers={"publickey":embedded}).decode()
     
     elif jwts:
         from core.lib import jwt_vul
