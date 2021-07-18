@@ -1,3 +1,4 @@
+from core.lib.jwt_vul.get_key import weak,secure
 from django.db.models import query
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseRedirect
@@ -22,10 +23,10 @@ def setting (request):
         
     elif jwts:
         from core.lib import jwt_vul
-        key = "anhyeuem"
+        key = weak.w
         cookie_decode = jwt_vul.decode(cookie_check, key)               
     else:
-        key = "pentestThucchienTeam"
+        key = secure.k
         cookie_decode = jwt.decode(cookie_check, key, algorithms="HS256")
 
     if not cookie_decode['admin']:
