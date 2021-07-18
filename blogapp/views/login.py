@@ -7,15 +7,18 @@ from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
 import jwt
+import json
 
 from blogapp.models.Setting import Vul
 
-def create_cookie(user):
+def create_cookie(user, request):
     jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
     jwts = Vul.objects.filter(name="JWT").values()[0]['status']
+
     is_admin = user.is_superuser
     username = user.username
     payload = {"username": username, "admin": is_admin}
+
     if jwt_confusion and not jwts:
         from core.lib import jwt_vul    
         with open("blogapp/views/priv.pem") as filekey:
@@ -24,12 +27,12 @@ def create_cookie(user):
     
     elif jwts:
         from core.lib import jwt_vul
-        key = weak.w
-        print(key)
+        key = weak.weak_key
+        request.session['key'] = key
         return jwt_vul.encode(payload, key, algorithm="HS256").decode()
     else:
-        key = secure.k
-        print(key)
+        key = secure.secure_key
+        request.session['key'] = key
         return jwt.encode(payload, key, algorithm="HS256")
 
 
@@ -43,10 +46,12 @@ def login_view(request):
             username = form['username'].value()
             password = form['password'].value()
             user = authenticate(username=username, password=password)
+            # print(vars(request.session))
             
             if user is not None:
                 login(request,user)
-                cookie_name = create_cookie(user)
+
+                cookie_name = create_cookie(user, request)
                 try:
                     max_age = request.session.get_expiry_age()
                     expires_time = time.time() + max_age
