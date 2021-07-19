@@ -18,11 +18,21 @@ class postviews:
             post_render= get_object_or_404(Post,id=id)
         form = CommentForm()
         if request.method =="POST":
-            form =CommentForm(data = request.POST,author_id=request.user, post_id=post_render, email=request.user)
+            form =CommentForm(  data = request.POST,
+                                author_id=request.user,
+                                post_id=post_render,
+                                email=request.user)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect(request.path)
     
     
-        return render(request,'blogapp/post.html',{'object_list':object_list,'listtag':listtag,'post_render':post_render,'form':form,'xss':xss,'sql':sql})
+        return render(request,'blogapp/post.html',{ 'object_list':object_list,
+                                                    'listtag':listtag,
+                                                    'post_render':post_render,
+                                                    'form':form,
+                                                    'xss':xss,
+                                                    'sql':sql
+                                                }
+                                            )
   

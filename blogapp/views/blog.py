@@ -17,25 +17,24 @@ class blogviews:
             page_number = pid
             page_num_obj = paginator.page(page_number)
             print(page_num_obj.has_next)
-            return render(request, 'blogapp/blog.html', {
+            return render(request,  'blogapp/blog.html',{
 
-            'object_list': object_list,
-            'xss': xss,
-            'paginator': paginator, 
-            'page_num_obj': page_num_obj,
-            'listtag':listtag
-            }
+                                    'object_list': object_list,
+                                    'xss': xss,
+                                    'paginator': paginator, 
+                                    'page_num_obj': page_num_obj,
+                                    'listtag':listtag
+                                                        }
         )
         except:
             page_number = 1
             page_num_obj = paginator.page(page_number)
             print(page_num_obj.has_next)
-            return render(request, 'blogapp/blog.html', {
-
-            'object_list': object_list,
-            'xss': xss,
-            'paginator': paginator, 
-            'page_num_obj': page_num_obj,
-            'listtag':listtag
-            }
-        )
+            return render(request,  'blogapp/blog.html',{
+                                    'object_list': object_list,
+                                    'xss': xss,
+                                    'paginator': paginator, 
+                                    'page_num_obj': page_num_obj,
+                                    'listtag':listtag
+                                                        }
+                        )
