@@ -12,6 +12,14 @@ class postviews:
         listtag = Tags.objects.all()
         xss = Vul.objects.filter(name="XSS").values()[0]['status']
         sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+        try:
+            pre_post= get_object_or_404(Post,id=(id-1))
+        except:
+            pre_post= get_object_or_404(Post,id=id)
+        try:
+            next_post= get_object_or_404(Post,id=(id+1))
+        except:
+            next_post= get_object_or_404(Post,id=id)
         if sql:
             post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id) 
         else:
@@ -30,6 +38,8 @@ class postviews:
         return render(request,'blogapp/post.html',{ 'object_list':object_list,
                                                     'listtag':listtag,
                                                     'post_render':post_render,
+                                                    'pre_post':pre_post,
+                                                    'next_post':next_post,
                                                     'form':form,
                                                     'xss':xss,
                                                     'sql':sql

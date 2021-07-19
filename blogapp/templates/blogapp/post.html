@@ -40,14 +40,13 @@
                 <div class="post-body">
                 <p class="lead">{{x.admin_content}}</p>
               </div>
-                <div class="post-tags"><a href="#" class="tag">#Business</a><a href="#" class="tag">#Tricks</a><a href="#" class="tag">#Financial</a><a href="#" class="tag">#Economy</a></div>
                 <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="#" class="prev-post text-left d-flex align-items-center">
                   <div class="icon prev"><i class="fa fa-angle-left"></i></div>
-                    <div class="text" ><strong class="text-primary">Previous Post </strong>
-                    <h6></h6>
+                    <div class="text" href="/post/{{pre_post.id}}"><strong class="text-primary">Previous Post </strong>
+                    <h6>{{pre_post.title.}}</h6>
                     </div></a><a href="#" class="next-post text-right d-flex align-items-center justify-content-end">
-                    <div class="text" href=""><strong class="text-primary">Next Post </strong> 
-                    <h6>.</h6>
+                    <div class="text" href="/post/{{next_post.id}}"><strong class="text-primary">Next Post </strong> 
+                    <h6>{{next_post.title}}.</h6>
                     </div>
                     <div class="icon next"><i class="fa fa-angle-right">   </i></div></a></div>
                 <div class="post-comments">
