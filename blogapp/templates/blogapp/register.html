@@ -1,44 +1,46 @@
-{% extends "blogapp/base.html" %}
-{% load crispy_forms_tags %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content%}
 
-{% block content %}
-
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-		<div class="container-sm border">	
-			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
-					
-						<legend class="border-bottom mb-4"  align="center"><big>Register Account</big></legend>
-						{{ form|crispy}}
-						<div align="center">
-							<div class="spinner-grow text-primary"></div>
-							<div class="spinner-grow text-danger"></div>
-							<div class="spinner-grow text-warning"></div>							
-							<button class="btn btn-outline-info" type="submit" >
-								<span>Sign Up</span>
-							 </button>
-							<div class="spinner-grow text-primary"></div>
-							<div class="spinner-grow text-danger"></div>
-							<div class="spinner-grow text-warning"></div>
-							
-						</div>
-						<div>
-						<h6>If you already have account <a href="{% url 'user_login' %}">login</a> now.</h6>
-						</div>
-				</div>
-				<div class="col-sm-3"></div>
-			</div>
-		</div>
-			
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="#">Sign In</a>
-            </small>
+<div class="content-section">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="container-sm border">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          {% if text %}
+          <h2>{{ text }}</h2>
+          {% endif %}
+          <legend class="border-bottom mb-4" align="center">
+            <big>Register Account</big>
+          </legend>
+          {{ form|crispy}}
+          <div align="center">
+            <div class="spinner-grow text-primary"></div>
+            <div class="spinner-grow text-danger"></div>
+            <div class="spinner-grow text-warning"></div>
+            <button class="btn btn-outline-info" type="submit">
+              <span>Sign Up</span>
+            </button>
+            <div class="spinner-grow text-primary"></div>
+            <div class="spinner-grow text-danger"></div>
+            <div class="spinner-grow text-warning"></div>
+          </div>
+          <div>
+            <h6>
+              If you already have account
+              <a href="{% url 'user_login' %}">login</a> now.
+            </h6>
+          </div>
         </div>
+        <div class="col-sm-3"></div>
+      </div>
     </div>
+  </form>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Already Have An Account? <a class="ml-2" href="#">Sign In</a>
+    </small>
+  </div>
+</div>
 
 {% endblock content %}

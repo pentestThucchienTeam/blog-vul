@@ -1,22 +1,33 @@
 from django.contrib.auth import login,authenticate
 from django.http.response import HttpResponse
-from blogapp.forms import RegistrationForm
+from django.views.generic.base import TemplateView
+from .register_form import RegistrationForm
 from django.http import HttpResponseRedirect 
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from blogapp.views.login import login_view
+from .login import loginView
 
-def register(request):
-    form = RegistrationForm()
-    if request.method == 'POST':
+
+class registerView(TemplateView):
+    template_name = 'register.html'
+
+    def get(self, request):
+        form = RegistrationForm()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
         form = RegistrationForm(request.POST)
+
         if form.is_valid():
+            form.cleaned_data['username']
+            form.cleaned_data['email']
+            form.cleaned_data['password1']
+            form.cleaned_data['password2']
             form.save()
-            
-            return redirect('/login')
+
+        args = {'form': form, 'text': 'Success'}
+        return render(request, self.template_name, args)
         
-    form=RegistrationForm
-    return render(request, 'blogapp/register.html', {'form': form})
 
 

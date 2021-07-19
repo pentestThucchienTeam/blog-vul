@@ -71,14 +71,15 @@ CACHES = {
 ROOT_URLCONF = 'core.urls'
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "index"  # Route defined in app/urls.py
-TEMPLATE_DIR = os.path.join(CORE_DIR, "core/templates")  # ROOT dir for templates
+TEMPLATE_DIR_CORE = os.path.join(CORE_DIR, "core/templates")  # ROOT dir for templates
+TEMPLATE_DIR_APP = os.path.join(CORE_DIR, "blogapp/templates/blogapp")  # ROOT dir for templates
 
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],
+        'DIRS': [TEMPLATE_DIR_CORE, TEMPLATE_DIR_APP],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

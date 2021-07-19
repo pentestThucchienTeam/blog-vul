@@ -5,6 +5,7 @@ import re
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.base import Model
+
 class RegistrationForm(forms.Form):
     username = forms.CharField(label='Username', max_length=30,  widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     email = forms.EmailField(label='Email',widget=forms.TextInput(attrs={'placeholder': 'Email'}))

@@ -8,7 +8,7 @@ from django.urls import path, include  # add this
 from django.conf.urls.static import static
 from django.conf import settings
 
-print('coreeeeeeeeeeeeeeeeeeeeeeeee')
+
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
     path("", include("blogapp.urls")),             # UI Kits Html files
