@@ -5,9 +5,9 @@ from blogapp import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('blog/', views.blog.blogviews, name="blog"),
-    path('blog/<pid>/', views.blog.blogviews, name="blog"), # parameter 'pid' phai trung ten voi agrument 'pid' trong view blog
-    path('post/<id>/', views.post.postviews, name="post"),
+    path('blog/', views.blogviews.blog, name="blog"),
+    path('blog/<pid>/', views.blogviews.blog, name="blog"), # parameter 'pid' phai trung ten voi agrument 'pid' trong view blog
+    path('post/<id>/', views.postviews.post, name="post"),
     path('search/', views.search, name="search"), 
     path('setting/', views.setting , name="setting"),
     path('register/', views.register, name="register"),

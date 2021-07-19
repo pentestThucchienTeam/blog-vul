@@ -13,11 +13,11 @@ class postviews:
         xss = Vul.objects.filter(name="XSS").values()[0]['status']
         sql = Vul.objects.filter(name="SQLI").values()[0]['status']
         try:
-            pre_post= get_object_or_404(Post,id=(id-1))
+            pre_post= get_object_or_404(Post,id=(int(id)-1))
         except:
             pre_post= get_object_or_404(Post,id=id)
         try:
-            next_post= get_object_or_404(Post,id=(id+1))
+            next_post= get_object_or_404(Post,id=(int(id)+1))
         except:
             next_post= get_object_or_404(Post,id=id)
         if sql:
