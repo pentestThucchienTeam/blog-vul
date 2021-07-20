@@ -11,7 +11,7 @@ conn.autocommit = True
 cursor = conn.cursor()
 
 # Create table
-with open('./createDB.txt','r') as file:
+with open('./createDB.txt', 'r') as file:
     for i in file.readlines():
         cursor.execute(i.rstrip())
 

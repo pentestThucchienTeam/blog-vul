@@ -8,5 +8,5 @@ class secure():
     secure_key = get_random_string(32, VALID_KEY_CHARS)
 
 class weak():
-    with open("text/key.txt","r") as file:
+    with open("/code/text/key.txt","r") as file:
         weak_key =  secrets.choice(file.readlines())

@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.conf import settings
 
 class Post(models.Model):
+    
     title = models.CharField(max_length=30, default='')
     tags = models.ManyToManyField(Tags)
     status = models.CharField(max_length=50, default='')

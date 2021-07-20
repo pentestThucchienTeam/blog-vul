@@ -11,13 +11,13 @@ from blogapp.models.Setting import Vul
 class postView(TemplateView):
 
     template_name = 'post.html'
-    object_list = Post.objects.all()
-    listtag = Tags.objects.all()
-    xss = Vul.objects.filter(name="XSS").values()[0]['status']
-    sql = Vul.objects.filter(name="SQLI").values()[0]['status']
 
     def get(self, request , id):
         form = CommentForm()
+        postView.object_list = Post.objects.all()
+        postView.listtag = Tags.objects.all()
+        postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
+        postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id) 
         else:
