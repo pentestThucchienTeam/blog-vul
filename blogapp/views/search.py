@@ -10,7 +10,7 @@ from blogapp.models.Tag import Tags
 from django.views import View
 
 class searchView(View):
-  def search(self, request, *args, **kwargs):
+  def get(self, request, *args, **kwargs):
     if self.request.GET['tagId']:
       query=""
       tag=""
