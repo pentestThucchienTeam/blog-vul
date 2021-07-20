@@ -1,12 +1,9 @@
-from django.contrib.auth import login,authenticate
-from django.http.response import HttpResponse
+from django import forms
 from django.views.generic.base import TemplateView
 from .register_form import RegistrationForm
-from django.http import HttpResponseRedirect 
-from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from django.contrib import messages
-from .login import loginView
+from .validate import validate
+
 
 
 class registerView(TemplateView):
@@ -19,11 +16,9 @@ class registerView(TemplateView):
     def post(self, request):
         form = RegistrationForm(request.POST)
 
-        if form.is_valid():
-            form.cleaned_data['username']
-            form.cleaned_data['email']
-            form.cleaned_data['password1']
-            form.cleaned_data['password2']
+        if form.is_valid():         
+            validate.clean_password2(form)
+            validate.clean_username(form)
             form.save()
 
         args = {'form': form, 'text': 'Success'}
