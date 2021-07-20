@@ -31,18 +31,18 @@
                         <span class="badge badge-pill badge-info">{{ item.name }}</span>-->
                 <select name="{{item.name}}" class="custom-select text-center">
                   {% if item.status %}
-                  <option value="1" selected>Yes</option>
-                  <option value="2">No</option>
+                  <option value="yes" selected>Yes</option>
+                  <option value="no">No</option>
                   {% else %}
-                  <option value="1">Yes</option>
-                  <option value="2" selected>No</option>
+                  <option value="yes">Yes</option>
+                  <option value="no" selected>No</option>
                   {% endif %}
                 </select>
               </div>
               {% endfor %}
             </div>
           </div>
-          {% if user %}
+          {% if user.is_superuser %}
           <div class="form-group col-12">
             <input class="btn btn-primary" type="submit" value="Submit" />
             {% endif %}
