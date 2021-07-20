@@ -9,7 +9,7 @@ from django.urls import path, re_path
 urlpatterns = [
     path('', indexView.as_view(), name="index"),
     re_path(r'blog/', blogView.as_view(), name="blog"),
-    re_path(r'blog/(<pid>/)+', blogView.as_view(), name="blog"), # parameter 'pid' phai trung ten voi agrument 'pid' trong view blog
+    path('blog/<pid>/', blogView.as_view(), name="blog"), # parameter 'pid' phai trung ten voi agrument 'pid' trong view blog
     path('post/<id>/', postView.as_view(), name="post"),
     path('search/', searchView.as_view(), name="search"), 
     path('setting/', settingView.as_view() , name="setting"),

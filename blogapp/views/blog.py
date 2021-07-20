@@ -10,14 +10,13 @@ from django.core.paginator import Paginator
 class blogView(TemplateView):
     template_name = 'blog.html'
 
-    def get(self, request, pid=None):
+    def get(self, request):
         xss = Vul.objects.filter(name="XSS").values()[0]['status']
         object_list = Post.objects.all()
         paginator = Paginator(object_list, 2)
         listtag = Tags.objects.all()
-        print(pid)
         try:
-            page_number = pid
+            page_number = request.GET.get('')
             page_num_obj = paginator.page(page_number)
             # print(page_num_obj.has_next)
             return render(request, self.template_name, {
