@@ -1,12 +1,8 @@
-from django.contrib.auth import login,authenticate
-from django.http.response import HttpResponse
 from django.views.generic.base import TemplateView
 from .register_form import RegistrationForm
-from django.http import HttpResponseRedirect 
-from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from django.contrib import messages
-from .login import loginView
+import time
+from blogapp.views.validate import validate
 
 
 class registerView(TemplateView):
@@ -20,12 +16,10 @@ class registerView(TemplateView):
         form = RegistrationForm(request.POST)
 
         if form.is_valid():
-            form.cleaned_data['username']
-            form.cleaned_data['email']
-            form.cleaned_data['password1']
-            form.cleaned_data['password2']
+            validate.clean_password2(form)
+            validate.clean_username(form)
             form.save()
-
+            # return redirect('/login')
         args = {'form': form, 'text': 'Success'}
         return render(request, self.template_name, args)
         
