@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 class blogView(TemplateView):
     template_name = 'blog.html'
 
-    def get(self, request, pid):
+    def get(self, request, pid=None):
         xss = Vul.objects.filter(name="XSS").values()[0]['status']
         object_list = Post.objects.all()
         paginator = Paginator(object_list, 2)

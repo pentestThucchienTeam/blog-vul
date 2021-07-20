@@ -18,6 +18,14 @@ class postView(TemplateView):
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+        try:
+            postView.pre_post= get_object_or_404(Post,id=(int(id)-1))
+        except:
+            postView.pre_post= get_object_or_404(Post,id=id)
+        try:
+            postView.next_post= get_object_or_404(Post,id=(int(id)+1))
+        except:
+            postView.next_post= get_object_or_404(Post,id=id)
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id) 
         else:
@@ -30,7 +38,9 @@ class postView(TemplateView):
             'post_render': self.post_render, 
             'form': form,
             'xss': self.xss,
-            'sql': self.sql
+            'sql': self.sql,
+            'pre_post':self.pre_post,
+            'next_post':self.next_post
         })
     
     def post(self, request):    
@@ -45,6 +55,8 @@ class postView(TemplateView):
         'post_render': self.post_render, 
         'form': form,
         'xss': self.xss, 
-        'sql': self.sql
+        'sql': self.sql,
+        'pre_post':self.pre_post,
+        'next_post':self.next_post
     })    
 
