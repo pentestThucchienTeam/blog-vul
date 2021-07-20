@@ -1,3 +1,4 @@
+from blogapp import views
 from blogapp.views.tags import tagsView
 from blogapp.views.register import registerView
 from blogapp.views.index import indexView
@@ -11,10 +12,10 @@ urlpatterns = [
     re_path(r'blog/', blogView.as_view(), name="blog"),
     re_path(r'blog/(<pid>/)+', blogView.as_view(), name="blog"), # parameter 'pid' phai trung ten voi agrument 'pid' trong view blog
     path('post/<id>/', postView.as_view(), name="post"),
-    path('search/', searchView.as_view(), name="search"), 
-    # path('setting/', views.setting , name="setting"),
+    path('search/', views.search.search, name="search"), 
+    path('setting/', views.setting.setting , name="setting"),
     path('register/', registerView.as_view(), name="register"),
-    path('login', loginView.as_view(), name="user_login"),
+    path('login', views.login_view, name="user_login"),
     path('logout/', logoutView.as_view(), name="user_logout"),
     path('tag/<tag>/', tagsView.as_view(), name="tags"),
 ]
