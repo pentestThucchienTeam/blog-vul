@@ -11,6 +11,9 @@
     <div class="d-flex">
       <div class="col-8">
         <h2 class="text-center">Setting Vulnerability</h2>
+        {% if msg %}
+        <h2 class="text-center">{{ msg }}</h2>
+        {% endif %}
         <br />
       </div>
       <div class="col-4"><p class="text-center font-italic">Hi, {{ user }}</p></p></div>
@@ -42,7 +45,7 @@
               {% endfor %}
             </div>
           </div>
-          {% if user.is_superuser %}
+            {% if user.is_authenticated %}
           <div class="form-group col-12">
             <input class="btn btn-primary" type="submit" value="Submit" />
             {% endif %}
