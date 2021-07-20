@@ -1,4 +1,4 @@
-from core.lib.jwt_vul.get_key import secure, weak
+from core.lib.jwt_vul.get_key import get_key 
 from  django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .form import LoginForm
@@ -29,11 +29,11 @@ def create_cookie(user, request):
     
     elif jwts:
         from core.lib import jwt_vul
-        key = weak.weak_key
+        key = get_key.weak()
         request.session['key'] = key
         return jwt_vul.encode(payload, key, algorithm="HS256").decode()
     else:
-        key = secure.secure_key
+        key = get_key.secrure()
         request.session['key'] = key
         return jwt.encode(payload, key, algorithm="HS256")
 

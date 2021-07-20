@@ -3,7 +3,9 @@ from blogapp.views.blog import blog
 from blogapp.views.post import post
 from blogapp.views.search import search
 from blogapp.views.setting import  setting
-from blogapp.views.register import register
+from blogapp.views.register import registerView
 from blogapp.views.login import login_view
 from blogapp.views.logout import logout_view
-from blogapp.views.tags import tags
+from blogapp.views.tags import tag
+from blogapp.views.register_form import RegistrationForm
+from blogapp.views.validate import validate
