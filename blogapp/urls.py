@@ -3,7 +3,6 @@ from blogapp.views.register import registerView
 from blogapp.views.index import indexView
 from blogapp.views import *
 from django.urls import path, re_path
-from blogapp import views
 # from blogapp.views.post import post
 
 
