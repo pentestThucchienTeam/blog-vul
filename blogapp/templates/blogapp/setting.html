@@ -11,16 +11,19 @@
     <div class="d-flex">
       <div class="col-8">
         <h2 class="text-center">Setting Vulnerability</h2>
+        {% if msg %}
+        <h2 class="text-center">{{ msg }}</h2>
+        {% endif %}
         <br />
       </div>
-      <div class="col-4"><p class="text-center font-italic">Hi, {{ aut }}</p></p></div>
+      <div class="col-4"><p class="text-center font-italic">Hi, {{ user }}</p></p></div>
     </div>
     <!-- <div class="p-2"> -->
       <div class="d-flex">
         <form action="{%url 'setting' %}" method="POST">
           <div class="form-group col-12">
             <div class="row">
-              {%csrf_token %} {% for item in ren %}
+              {%csrf_token %} {% for item in object_list %}
               <div class="input-group mb-3 col-4">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01"
@@ -31,21 +34,26 @@
                         <span class="badge badge-pill badge-info">{{ item.name }}</span>-->
                 <select name="{{item.name}}" class="custom-select text-center">
                   {% if item.status %}
-                  <option value="1" selected>Yes</option>
-                  <option value="2">No</option>
+                  <option value="yes" selected>Yes</option>
+                  <option value="no">No</option>
                   {% else %}
-                  <option value="1">Yes</option>
-                  <option value="2" selected>No</option>
+                  <option value="yes">Yes</option>
+                  <option value="no" selected>No</option>
                   {% endif %}
                 </select>
               </div>
               {% endfor %}
             </div>
           </div>
-          {% if aut == 'admin' %}
+            {% if user.is_authenticated %}
           <div class="form-group col-12">
             <input class="btn btn-primary" type="submit" value="Submit" />
             {% endif %}
+          </div>
+         <div> 
+                  {% if text %}
+                      <h6>{{ text }}</h6>
+                   {% endif %}
           </div>
         </form>
       </div>

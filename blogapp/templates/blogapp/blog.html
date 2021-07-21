@@ -36,7 +36,7 @@
               <ul class="pagination pagination-template d-flex justify-content-center">
                 {% for item in paginator.page_range %}
                     {% if item == 1 %}
-                <li class="page-item"><a href="/blog/{{ item }}/" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                <li class="page-item"><a href="/blog/{{ item }}/"  class="page-link"> <i class="fa fa-angle-left"></i></a></li>
                 <li class="page-item"><a href="/blog/{{ item }}/" class="page-link">{{ item }}</a></li>
                     {% elif item == paginator.num_pages %}
                 <li class="page-item"><a href="/blog/{{ item }}/" class="page-link">{{ item }}</a></li>                    
