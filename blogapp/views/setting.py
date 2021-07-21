@@ -46,6 +46,6 @@ class settingView(ListView):
 
 			object_list = Vul.objects.all()
 
-			return render(request, self.template_name, {'object_list': object_list})
+			return render(request, self.template_name, {'object_list': object_list,'text':'Change is success!'})
 		else:
 			return render(request, self.template_name, {'msg': "You don't have permission"})
