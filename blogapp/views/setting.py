@@ -2,6 +2,10 @@ from django.views.generic import ListView
 from blogapp.models.Setting import Vul
 from django.shortcuts import render
 import base64, json, jwt
+from django.http import HttpResponse
+from django.template import engines
+from django.contrib.auth import authenticate
+
 
 class settingView(ListView):
 	# ListView mac dinh xu ly request GET nen khong can method GET
@@ -13,6 +17,7 @@ class settingView(ListView):
 
 	def post(self, request):
 		cookie_check = request.COOKIES['auth']
+		engine = engines["django"]
 
 		if self.jwt_confusion and not self.jwts:
 
@@ -46,6 +51,10 @@ class settingView(ListView):
 
 			object_list = Vul.objects.all()
 
-			return render(request, self.template_name, {'object_list': object_list,'msg':'Change is success!'})
+			
+			return HttpResponse(ssti.render({'object_list': object_list,'msg':'Change is success!'},request))
 		else:
-			return render(request, self.template_name, {'msg': "You don't have permission"})
+			username = request.user.username
+			ssti = engine.from_string("Hi," + "{% debug %}").render()
+			return render(request,self.template_name,{'msg':"You don't have permission",'user':ssti})
+			#return render(request, self.template_name, {'msg': "You don't have permission"})
