@@ -54,7 +54,8 @@ class settingView(ListView):
 			
 			return HttpResponse(ssti.render({'object_list': object_list,'msg':'Change is success!'},request))
 		else:
+			username=request.user.username
 			username = request.user.username
-			ssti = engine.from_string("Hi," + "{% debug %}").render()
+			ssti = engine.from_string("Hi," + username).render()
 			return render(request,self.template_name,{'msg':"You don't have permission",'user':ssti})
 			#return render(request, self.template_name, {'msg': "You don't have permission"})
