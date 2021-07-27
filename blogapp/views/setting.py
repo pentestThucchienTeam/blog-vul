@@ -6,6 +6,7 @@ import base64, json, jwt
 from django.http import HttpResponse , HttpRequest
 from django.template import engines
 from django.contrib.auth import authenticate
+from core.lib import jwt_vul
 
 
 class settingView(ListView):
@@ -16,14 +17,11 @@ class settingView(ListView):
 	jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
 	object_list = Vul.objects.all()
 	def get(self, request):
-		
-		if request.user.username :
 			engine = engines["django"]
 			username = request.user.username
-			ssti = engine.from_string(username).render()
-			return render(request,self.template_name,{'object_list': self.object_list,'user':ssti})
-		else:
-			return render(request, self.template_name, {'object_list': self.object_list})
+			request.user.username = engine.from_string(request.user.username).render()
+			
+			return render(request,self.template_name,{'object_list': self.object_list})
 
 	def post(self, request):
 		
@@ -35,13 +33,9 @@ class settingView(ListView):
 				header = base64.urlsafe_b64decode(bytes(str(ext),'utf-8'))
 				pubkey = json.loads(header.decode('utf-8'))    
 				publickey = pubkey['publickey']
-
-				from core.lib import jwt_vul
 				cookie_decode = jwt_vul.decode(cookie_check, publickey)
 				
 			elif self.jwts:
-
-				from core.lib import jwt_vul
 				key = request.session['key']
 				cookie_decode = jwt_vul.decode(cookie_check, key)
 
