@@ -10,14 +10,14 @@
       {% endfor %} 
     {% endif %}
     <div class="d-flex">
-      <div class="col-8">
+      <div class="col-11">
         <h2 class="text-center">Setting Vulnerability</h2>
         {% if msg %}
         <h2 class="text-center">{{ msg }}</h2>
         {% endif %}
         <br />
       </div>
-      <div class="col-4"><p class="text-center font-italic">Hi, {{user}}</p></p></div>
+      <div><p class="text-center font-italic">Hi, {{user}}</p></p></div>
     </div>
     <!-- <div class="p-2"> -->
       <div class="d-flex">
@@ -47,10 +47,10 @@
               {% endfor %}
             </div>
           </div>
-          {% if not msg %}
+           {% if not msg %}
           <div class="form-group col-12">
             <input class="btn btn-primary" type="submit" value="Submit" />
-          {% endif %}
+          {% endif %} 
           </div>
          <div>  {%if msg%}
                 {% if not user.is_authenticated %}
