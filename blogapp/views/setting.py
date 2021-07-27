@@ -1,4 +1,5 @@
-from django.views.generic import ListView
+from django.views.generic import ListView,View
+from django.views.generic.base import TemplateView
 from blogapp.models.Setting import Vul
 from django.shortcuts import render
 import base64, json, jwt
@@ -10,7 +11,6 @@ from django.contrib.auth import authenticate
 class settingView(ListView):
 	# ListView mac dinh xu ly request GET nen khong can method GET
 	template_name = 'setting.html'
-	model = Vul
 	nameVuls = Vul.objects.values('name')
 	jwts = Vul.objects.filter(name="JWT").values('status')
 	jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
