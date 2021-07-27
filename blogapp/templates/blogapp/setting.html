@@ -54,7 +54,7 @@
           </div>
          <div>  {%if msg%}
                 {% if not user.is_authenticated %}
-                 <button><a href="{% url 'user_login' %}?next={{request.path}}">login</a></button>
+                <p><a href="{% url 'user_login' %}?next={{request.path}}" > <button class="btn btn-primary" type="button">Log in</button></a></p>
                 {%else%}
                 <input class="btn btn-primary" type="submit" value="Submit" />      
                 {% endif %}
