@@ -16,17 +16,17 @@ class settingView(ListView):
 	jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
 	object_list = Vul.objects.all()
 	def get(self, request):
-		object_list = Vul.objects.all()
+		
 		if request.user.username :
 			engine = engines["django"]
 			username = request.user.username
 			ssti = engine.from_string(username).render()
-			return render(request,self.template_name,{'object_list': object_list,'user':ssti})
+			return render(request,self.template_name,{'object_list': self.object_list,'user':ssti})
 		else:
-			return render(request, self.template_name, {'object_list': object_list})
+			return render(request, self.template_name, {'object_list': self.object_list})
 
 	def post(self, request):
-		object_list = Vul.objects.all()		
+		
 		if request.user.username :
 			cookie_check = request.COOKIES['auth']
 			if self.jwt_confusion and not self.jwts:
@@ -60,10 +60,10 @@ class settingView(ListView):
 						Vul.objects.filter(name=_vuls['name']).update(status=False)
 
 				
-				return render(request, self.template_name, {'object_list': object_list,'msg':'Change is success!'})
+				return render(request, self.template_name, {'object_list': self.object_list,'msg':'Change is success!'})
 			else:
 				
-				return render(request,self.template_name,{'object_list': object_list,'msg':"You don't have permission"})
+				return render(request,self.template_name,{'object_list': self.object_list,'msg':"You don't have permission"})
 				
 		else:
-			return render(request, self.template_name, {'object_list': object_list,'msg':'Please login to apply this change!'})
+			return render(request, self.template_name, {'object_list': self.object_list,'msg':'Please login to apply this change!'})
