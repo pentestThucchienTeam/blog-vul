@@ -12,30 +12,33 @@ from core.lib import jwt_vul
 class settingView(ListView):
 	# ListView mac dinh xu ly request GET nen khong can method GET
 	template_name = 'setting.html'
-	nameVuls = Vul.objects.values('name')
-	jwts = Vul.objects.filter(name="JWT").values('status')
-	jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
-	object_list = Vul.objects.all()
+	nameVuls = Vul.objects.values()[0]['status']
+	jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
+	
 	def get(self, request):
+		object_list = Vul.objects.all()
+		ssti = Vul.objects.filter(name="SSTI").values()[0]['status']
+		if ssti:
 			engine = engines["django"]
-			username = request.user.username
 			request.user.username = engine.from_string(request.user.username).render()
-			
-			return render(request,self.template_name,{'object_list': self.object_list})
+			object_list = Vul.objects.all()
+			return render(request,self.template_name,{'object_list': object_list})
+		else:
+			return render(request,self.template_name,{'object_list': object_list})
 
 	def post(self, request):
-		
+		object_list = Vul.objects.all()
+		jwts = Vul.objects.filter(name="JWT").values()[0]['status']
 		if request.user.username :
 			cookie_check = request.COOKIES['auth']
 			if self.jwt_confusion and not self.jwts:
-
 				ext, fake = cookie_check.split('.',1)
 				header = base64.urlsafe_b64decode(bytes(str(ext),'utf-8'))
 				pubkey = json.loads(header.decode('utf-8'))    
 				publickey = pubkey['publickey']
 				cookie_decode = jwt_vul.decode(cookie_check, publickey)
 				
-			elif self.jwts:
+			elif jwts:
 				key = request.session['key']
 				cookie_decode = jwt_vul.decode(cookie_check, key)
 
@@ -54,10 +57,10 @@ class settingView(ListView):
 						Vul.objects.filter(name=_vuls['name']).update(status=False)
 
 				
-				return render(request, self.template_name, {'object_list': self.object_list,'msg':'Change is success!'})
+				return render(request, self.template_name, {'object_list':object_list,'msg':'Change is success!'})
 			else:
 				
-				return render(request,self.template_name,{'object_list': self.object_list,'msg':"You don't have permission"})
+				return render(request,self.template_name,{'object_list':object_list,'msg':"You don't have permission"})
 				
 		else:
-			return render(request, self.template_name, {'object_list': self.object_list,'msg':'Please login to apply this change!'})
+			return render(request, self.template_name, {'object_list':object_list,'msg':'Please login to apply this change!'})

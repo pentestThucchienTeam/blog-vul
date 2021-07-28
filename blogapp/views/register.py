@@ -15,11 +15,10 @@ class registerView(TemplateView):
         return render(request, self.template_name, {'form': form})
     
     def post(self, request):
-        SSTI = Vul.objects.filter(name="SSTI").values('status')
         form = RegistrationForm(request.POST)
-
         if form.is_valid():      
-            if SSTI:
+            ssti = Vul.objects.filter(name="SSTI").values()[0]['status']
+            if ssti:
                 validate.clean_password2(form)
                 form.save()
             else:
