@@ -7,23 +7,25 @@
     <img src="{{ x.images.url }}" with="150" height="150" />
     <br />
     <hr />
-    {% endfor %} {% endif %}
+      {% endfor %} 
+    {% endif %}
     <div class="d-flex">
-      <div class="col-8">
+      <div class="col-11">
         <h2 class="text-center">Setting Vulnerability</h2>
         {% if msg %}
         <h2 class="text-center">{{ msg }}</h2>
         {% endif %}
         <br />
       </div>
-      <div class="col-4"><p class="text-center font-italic">Hi, {{ user }}</p></p></div>
     </div>
+     <div class="col-2"><p class="text-center font-italic">Hi, {{user}}</p></p></div>
     <!-- <div class="p-2"> -->
       <div class="d-flex">
         <form action="{%url 'setting' %}" method="POST">
           <div class="form-group col-12">
             <div class="row">
-              {%csrf_token %} {% for item in object_list %}
+              {%csrf_token %} 
+                {% for item in object_list %}
               <div class="input-group mb-3 col-4">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01"
@@ -45,15 +47,18 @@
               {% endfor %}
             </div>
           </div>
-            {% if user.is_authenticated %}
+           {% if not msg %}
           <div class="form-group col-12">
             <input class="btn btn-primary" type="submit" value="Submit" />
-            {% endif %}
+          {% endif %} 
           </div>
-         <div> 
-                  {% if text %}
-                      <h6>{{ text }}</h6>
-                   {% endif %}
+         <div>  {%if msg%}
+                {% if not user.is_authenticated %}
+                <p><a href="{% url 'user_login' %}?next={{request.path}}" > <button class="btn btn-primary" type="button">Log in</button></a></p>
+                {%else%}
+                <input class="btn btn-primary" type="submit" value="Submit" />      
+                {% endif %}
+                {% endif %}
           </div>
         </form>
       </div>
