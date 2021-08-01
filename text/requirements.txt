@@ -17,3 +17,5 @@ pyjwt
 django-crispy-forms
 cryptography
 paramiko
+lxml
+dicttoxml

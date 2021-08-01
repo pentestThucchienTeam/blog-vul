@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!DOCTYPE xxe [<!ENTITY abc SYSTEM "file:///etc/hostname">]>
+<root>
+	<a><foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///etc/hostname"/></foo></a>
+    <f xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///etc/hostname"/></f>
+    <b><c>&abc;</c></b>
+</root>
+
+data = {'a': 2,
+        'b': {
+               'c': '<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///etc/hostname"/></foo>',
+               'f': True},
+        'd': 7,
+        }
