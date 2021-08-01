@@ -17,5 +17,6 @@ urlpatterns = [
     path('login', loginView.as_view(), name="user_login"),
     path('logout/', logoutView.as_view(), name="user_logout"),
     path('tag/<tag>/', tagsView.as_view(), name="tags"),
-    re_path(r'profile/(?P<id>[\w])?/', profileView.as_view(), name="profile"),
+    path('profile/', profileView.as_view(), name="profile"),
+    # re_path(r'profile/(?P<id>[\w])?/', profileView.as_view(), name="profile"),
 ]
