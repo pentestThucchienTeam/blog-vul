@@ -18,7 +18,7 @@ class settingView(ListView):
 	
 	def get(self, request):
 		object_list = Vul.objects.all()
-		ssti = Vul.objects.filter(name="SSTI").values()[0]['status']
+		ssti = Vul.objects.filter(name="SSTI").values('status')
 		if ssti:
 			engine = engines["django"]
 			request.user.username = engine.from_string(request.user.username).render()
@@ -29,8 +29,8 @@ class settingView(ListView):
 
 	def post(self, request):
 		object_list = Vul.objects.all()
-		jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
-		jwts = Vul.objects.filter(name="JWT").values()[0]['status']
+		jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
+		jwts = Vul.objects.filter(name="JWT").values('status')
 		if request.user.username :
 			cookie_check = request.COOKIES['auth']
 			if jwt_confusion and not jwts:
