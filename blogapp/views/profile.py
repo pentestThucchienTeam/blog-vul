@@ -26,7 +26,7 @@ class profileView(LoginRequiredMixin, TemplateView):
 			parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
 			tree = etree.parse(xmlfile, parser=parser)
 			root = tree.getroot() # Parse cac element vao mot array root
-			
+
 			profile.objects.filter(id=id).update(first_name=root[0].text)
 			profile.objects.filter(id=id).update(last_name=root[1].text)
 			profile.objects.filter(id=id).update(phone=int(root[2].text))
