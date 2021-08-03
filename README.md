@@ -1,10 +1,63 @@
-# blog-vul
-move command python to entrypoint   
+# Blog Vulnerable Web Application
 
-move ENTRYPOINT ["./entrypoint.sh"] into cmd of docker-compose
+Blog-vul is developed by small team as Damn vulnerable application. It is using the Django as the framewok and PSQL as a database. It main goals is to be an aid for the security learn with the vulnerability. It is developed to practice some some of the most common web vulnerabilities. we are encouraged to try and discover as many issues as possible. 
 
-move to ENV:
 
-DATABASES
+# Installation
 
-SECRET_KEY 
+Every data is available in the source. To running and check it. Please follow step by step as below: 
+
+## Step 1
+
+clone the source
+
+``` 
+git clone https://github.com/pentestThucchienTeam/blog-vul.git
+
+```
+
+## Step 2
+
+running
+
+```
+docker-compose up --build
+
+```
+running success.
+
+![rm1](./core/static/assets/img/rm1.png)
+
+![rm1](./core/static/assets/img/rm2.png)
+
+## Step 3
+
+Go to setting endpoint and make the application 
+![rm1](./core/static/assets/img/RM3.png)
+
+To submmiting the setting, you need to login with admin user. Here is the credentials. 
+
+```
+username: admin
+
+password: 123
+```
+### Note
+
+> Yes:  the application is vulnerable to attack.
+> No: the vulnerability defenses attack. 
+
+
+# Anything else
+
+For anything relate to bug or a new feature. Please don't hestate to contact us. 
+
+[Tuan Tran ](https://www.facebook.com/leiz95) 
+[Tuan Anh ](https://www.facebook.com/nguyentu4nanh)
+[Quyen Son ](https://www.facebook.com/S0vvn)
+[Do Tuan ](https://www.facebook.com/do.thanhtuan.923)
+
+
+
+
+
