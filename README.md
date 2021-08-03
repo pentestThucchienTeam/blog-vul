@@ -62,6 +62,7 @@ For anything relate to bug or a new feature. Please don't hestate to contact us.
 [Do Tuan ](https://www.facebook.com/do.thanhtuan.923)
 
 
+Thanks you!!!
 
 
 
