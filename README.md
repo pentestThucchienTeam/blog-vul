@@ -9,7 +9,7 @@ Every data is available in the source. To running and check it. Please follow st
 
 ## Step 1
 
-clone the source
+Clone the source
 
 ``` 
 git clone https://github.com/pentestThucchienTeam/blog-vul.git
@@ -18,13 +18,13 @@ git clone https://github.com/pentestThucchienTeam/blog-vul.git
 
 ## Step 2
 
-running
+Running
 
 ```
 docker-compose up --build
 
 ```
-running success.
+Check it running or not.
 
 ![rm1](./core/static/assets/img/rm1.png)
 
@@ -33,9 +33,12 @@ running success.
 ## Step 3
 
 Go to setting endpoint and make the application 
+
 ![rm1](./core/static/assets/img/RM3.png)
 
-To submmiting the setting, you need to login with admin user. Here is the credentials. 
+To submiting the setting, you need to login with admin user. 
+
+Here is the credentials. 
 
 ```
 username: admin
@@ -45,6 +48,7 @@ password: 123
 ### Note
 
 > Yes:  the application is vulnerable to attack.
+
 > No: the vulnerability defenses attack. 
 
 
