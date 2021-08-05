@@ -16,8 +16,8 @@ class postView(TemplateView):
         form = CommentForm()
         postView.object_list = Post.objects.all()
         postView.listtag = Tags.objects.all()
-        postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
-        postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+        postView.xss = Vul.objects.filter(name="XSS").values('status')
+        postView.sql = Vul.objects.filter(name="SQLI").values('status')
         try:
             postView.pre_post= get_object_or_404(Post,id=(int(id)-1))
         except:
@@ -46,8 +46,8 @@ class postView(TemplateView):
     def post(self, request,id):
         postView.object_list = Post.objects.all()
         postView.listtag = Tags.objects.all()
-        postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
-        postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+        postView.xss = Vul.objects.filter(name="XSS").values('status')
+        postView.sql = Vul.objects.filter(name="SQLI").values('status')
         try:
             postView.pre_post= get_object_or_404(Post,id=(int(id)-1))
         except:

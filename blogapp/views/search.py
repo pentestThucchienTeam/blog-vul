@@ -15,8 +15,8 @@ class searchView(View):
       query=""
       tag=""
       result=[]
-      xss = Vul.objects.filter(name="XSS").values()[0]['status']
-      sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+      xss = Vul.objects.filter(name="XSS").values('status')
+      sql = Vul.objects.filter(name="SQLI").values('status')
       if self.request.method=="GET":
           query=self.request.GET.get("search", None)
           tag= self.request.GET.get("tagId")
@@ -37,8 +37,8 @@ class searchView(View):
     else :
       query=""
       result=[]
-      xss = Vul.objects.filter(name="XSS").values()[0]['status']
-      sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+      xss = Vul.objects.filter(name="XSS").values('status')
+      sql = Vul.objects.filter(name="SQLI").values('status')
       if self.request.method=="GET":
           query=self.request.GET.get("search", None)
           if sql:

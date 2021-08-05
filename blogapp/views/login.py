@@ -11,8 +11,8 @@ from decouple import config
 from django.views.generic import TemplateView
 
 def create_cookie(user, request):
-    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
-    jwts = Vul.objects.filter(name="JWT").values()[0]['status']
+    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
+    jwts = Vul.objects.filter(name="JWT").values('status')
 
     is_admin = user.is_superuser
     username = user.username
