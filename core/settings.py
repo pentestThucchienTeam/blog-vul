@@ -150,9 +150,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # /code/core/media
 MEDIA_URL = '/media/'
-print(f'base dir {BASE_DIR}')
-print(f'core dirs {CORE_DIR}')
-print(f'media dirs {MEDIA_ROOT}')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (

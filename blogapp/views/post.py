@@ -45,6 +45,7 @@ class postView(TemplateView):
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
+        try:
             postView.pre_post= get_object_or_404(Post,id=(int(id)-1))
         except:
             postView.pre_post= get_object_or_404(Post,id=id)
