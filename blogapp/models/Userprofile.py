@@ -11,7 +11,7 @@ class Userprofile(models.Model):
     first_name = models.CharField(max_length=15, default=None, null=True)
     last_name = models.CharField(max_length=10, default=None, null=True)
     phone = models.CharField(max_length=32, null=True, blank=True)
-    avatar = models.ImageField(default='assets/img/avatar5.png', upload_to='uploads/', null=True, blank=True)
+    avatar = models.ImageField(upload_to='uploads/', null=True, blank=True)
     status = models.TextField(blank=True, max_length=200)
     address = models.CharField(max_length=255, null=True, blank=True)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)

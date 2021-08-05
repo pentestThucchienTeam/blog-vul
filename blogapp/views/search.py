@@ -1,12 +1,8 @@
-  
-from django import db
 from django.http.response import HttpResponse
-from django.shortcuts import render
 from blogapp.models.Post import Post
 from django.db.models import Q
 from django.template.loader import render_to_string
 from blogapp.models.Setting import Vul
-from blogapp.models.Tag import Tags
 from django.views import View
 
 class searchView(View):
@@ -15,8 +11,8 @@ class searchView(View):
       query=""
       tag=""
       result=[]
-      xss = Vul.objects.filter(name="XSS").values('status')
-      sql = Vul.objects.filter(name="SQLI").values('status')
+      xss = Vul.objects.filter(name="XSS").values()[0]['status']
+      sql = Vul.objects.filter(name="SQLI").values()[0]['status']
       if self.request.method=="GET":
           query=self.request.GET.get("search", None)
           tag= self.request.GET.get("tagId")
@@ -37,8 +33,12 @@ class searchView(View):
     else :
       query=""
       result=[]
-      xss = Vul.objects.filter(name="XSS").values('status')
-      sql = Vul.objects.filter(name="SQLI").values('status')
+      xss = Vul.objects.filter(name="XSS").values()[0]['status']
+      xss1 = Vul.objects.filter(name="XSS").values()[0]['status']
+      sql = Vul.objects.get(name="SQLI").status
+      print(xss)
+      print(xss1)
+      print(sql)
       if self.request.method=="GET":
           query=self.request.GET.get("search", None)
           if sql:

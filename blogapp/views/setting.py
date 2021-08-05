@@ -1,13 +1,10 @@
-from django.views.generic import ListView,View
-from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 from blogapp.models.Setting import Vul
 from django.shortcuts import render
-import base64, json, jwt
-from django.http import HttpResponse , HttpRequest
+import json, jwt
 from django.template import engines
-from django.contrib.auth import authenticate
 from core.lib import jwt_vul
-from core.lib.jwt_vul.utils import base64url_decode, base64url_encode
+from core.lib.jwt_vul.utils import base64url_decode
 
 
 class settingView(ListView):
@@ -18,7 +15,7 @@ class settingView(ListView):
 	
 	def get(self, request):
 		object_list = Vul.objects.all()
-		ssti = Vul.objects.filter(name="SSTI").values('status')
+		ssti = Vul.objects.filter(name="SSTI").values()[0]['status']
 		if ssti:
 			engine = engines["django"]
 			request.user.username = engine.from_string(request.user.username).render()
@@ -29,8 +26,8 @@ class settingView(ListView):
 
 	def post(self, request):
 		object_list = Vul.objects.all()
-		jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values('status')
-		jwts = Vul.objects.filter(name="JWT").values('status')
+		jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
+		jwts = Vul.objects.filter(name="JWT").values()[0]['status']
 		if request.user.username :
 			cookie_check = request.COOKIES['auth']
 			if jwt_confusion and not jwts:

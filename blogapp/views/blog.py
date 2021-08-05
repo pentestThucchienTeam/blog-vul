@@ -11,7 +11,7 @@ class blogView(TemplateView):
     template_name = 'blog.html'
 
     def get(self, request,pid=None):
-        xss = Vul.objects.filter(name="XSS").values('status')
+        xss = Vul.objects.get(name="XSS").status
         object_list = Post.objects.all()
         paginator = Paginator(object_list, 2)
         listtag = Tags.objects.all()

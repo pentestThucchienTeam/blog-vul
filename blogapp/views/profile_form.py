@@ -1,4 +1,3 @@
-from django.forms import fields
 from blogapp.models.Userprofile import Userprofile
 from django import forms
 

@@ -1,11 +1,8 @@
-from django.db.models import query
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from .comment_form import CommentForm
 from blogapp.models.Post import Post
 from blogapp.models.Tag import Tags
-from blogapp.models.Comment import  Comment
 from blogapp.models.Setting import Vul
 
 class postView(TemplateView):
@@ -16,8 +13,8 @@ class postView(TemplateView):
         form = CommentForm()
         postView.object_list = Post.objects.all()
         postView.listtag = Tags.objects.all()
-        postView.xss = Vul.objects.filter(name="XSS").values('status')
-        postView.sql = Vul.objects.filter(name="SQLI").values('status')
+        postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
+        postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
         try:
             postView.pre_post= get_object_or_404(Post,id=(int(id)-1))
         except:
@@ -46,9 +43,8 @@ class postView(TemplateView):
     def post(self, request,id):
         postView.object_list = Post.objects.all()
         postView.listtag = Tags.objects.all()
-        postView.xss = Vul.objects.filter(name="XSS").values('status')
-        postView.sql = Vul.objects.filter(name="SQLI").values('status')
-        try:
+        postView.xss = Vul.objects.filter(name="XSS").values()[0]['status']
+        postView.sql = Vul.objects.filter(name="SQLI").values()[0]['status']
             postView.pre_post= get_object_or_404(Post,id=(int(id)-1))
         except:
             postView.pre_post= get_object_or_404(Post,id=id)
