@@ -22,8 +22,6 @@ class searchView(View):
           else:
             # ORM
             result=Post.objects.filter(Q(title__icontains=query)& Q(tags__name=tag))
-            #result=Post.objects.raw('SELECT * FROM blogapp_post_tags natural join blogapp_post natural join blogapp_tags WHERE title ILIKE  %s AND name ILIKE  %s',  ['%%' + query + '%%'],  ['%%' + tag + '%%'] )
-
 
       html = render_to_string('blogapp/search.html',
       {'query':query, "result":result, "xss": xss, 'sql':sql,'tag':tag})
@@ -46,7 +44,6 @@ class searchView(View):
             result=Post.objects.raw(sqli)
           else:
             # ORM
-            # result=Post.objects.filter(Q(title__icontains=query)|Q(content__icontains=query))
             result=Post.objects.raw('SELECT * FROM blogapp_post WHERE title ILIKE  %s',  ['%%' + query + '%%'] )
 
 
