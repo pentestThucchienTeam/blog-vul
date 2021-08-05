@@ -3,9 +3,7 @@ from django.contrib.auth.models import User
 from blogapp.models.Role import Role
 from django.utils.translation import gettext as _
 from django.conf import settings
-
-def upload_location(instance, filename):
-    return f'uploads/{instance.user.username}/{filename}'
+from PIL import Image
 
 class Userprofile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="profile", on_delete=models.CASCADE)
@@ -13,7 +11,7 @@ class Userprofile(models.Model):
     first_name = models.CharField(max_length=15, default=None, null=True)
     last_name = models.CharField(max_length=10, default=None, null=True)
     phone = models.CharField(max_length=32, null=True, blank=True)
-    avatar = models.ImageField(upload_to=upload_location, null=True, blank=True)
+    avatar = models.ImageField(default='assets/img/avatar5.png', upload_to='uploads/', null=True, blank=True)
     status = models.TextField(blank=True, max_length=200)
     address = models.CharField(max_length=255, null=True, blank=True)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
@@ -36,3 +34,10 @@ class Userprofile(models.Model):
     def __str__(self):
         return f'{self.user.username}  profile'
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.avatar.path)
+        if img.height > 100 or img.width > 100:
+            size = (200,200)
+            img.thumbnail(size)
+            img.save(self.avatar.path)

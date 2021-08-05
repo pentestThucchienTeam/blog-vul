@@ -6,129 +6,130 @@
 
 <div class="container">
   <div class="row">
-    <div class="row col-12">
-      <h1>Profile</h1>
-    </div>
-    <div class="row col-12">
-      <form action="" enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        <div class="form-group col-12">
+    <form
+      class="form col-12 mt-3"
+      action=""
+      enctype="multipart/form-data"
+      method="post"
+      id="UpdateForm"
+    >
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-3 form-group text-center">
+          <!--left col-->
+          <!-- <div class="form-group"> -->
+          <img src="{{objectProfile.avatar.url}}" class="rounded-circle img-thumbnail" alt="avatar">
+          <p>Upload photo...</p>
+          <input type="file" class="form-control-file" name="avatar">
+          <!-- </div> -->
+        </hr><br>
+        </div>
+        <!--/col-3-->
+
+        <div class="col-9">
           <div class="row">
-            <div class="mb-3 col-4">
-              <img src="{{objectProfile.avatar}}" class="rounded" alt="..." />
-            </div>
-            <div class="input-group mb-3 col-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"
-                  >First Name</span
-                >
+            <div class="form-group col-6">
+              <div>
+                <label for="first_name"><h6>First name</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="first_name"
+                  id="first_name"
+                  value="{{objectProfile.first_name}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.first_name}}"
-                aria-describedby="basic-addon1"
-                name="first_name"
-              />
             </div>
-            <div class="input-group mb-3 col-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"
-                  >Last Name</span
-                >
+
+            <div class="form-group col-6">
+              <div>
+                <label for="last_name"><h6>Last name</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="last_name"
+                  id="last_name"
+                  value="{{objectProfile.last_name}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.last_name}}"
-                aria-describedby="basic-addon1"
-                name="last_name"
-              />
             </div>
-            <div class="input-group mb-3 col-6">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Phone</span>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="phone"><h6>Phone</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  id="phone"
+                  value="{{objectProfile.phone}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.phone}}"
-                aria-describedby="basic-addon1"
-                name="phone"
-              />
             </div>
-            <div class="input-group mb-3 col-6">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Address</span>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="address"><h6>Address</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  id="address"
+                  value="{{objectProfile.address}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.address}}"
-                aria-describedby="basic-addon1"
-                name="address"
-              />
             </div>
-            <div class="input-group mb-3 col-6">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Facebook</span>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="facebook"><h6>Facebook</h6></label>
+                <input
+                  type="url"
+                  class="form-control"
+                  name="facebook"
+                  id="facebook"
+                  value="{{objectProfile.facebook}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.facebooke}}"
-                aria-describedby="basic-addon1"
-                name="facebooke"
-              />
             </div>
-            <div class="input-group mb-3 col-6">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">github</span>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="github"><h6>Github</h6></label>
+                <input
+                  type="url"
+                  class="form-control"
+                  name="github"
+                  id="github"
+                  value="{{objectProfile.github}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.github}}"
-                aria-describedby="basic-addon1"
-                name="github"
-              />
             </div>
-            <div class="input-group mb-3 col-6">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">twitter</span>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="twitter"><h6>Twitter</h6></label>
+                <input
+                  type="url"
+                  class="form-control"
+                  name="twitter"
+                  id="twitter"
+                  value="{{objectProfile.twitter}}"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.twitter}}"
-                aria-describedby="basic-addon1"
-                name="twitter"
-              />
             </div>
-            <div class="input-group mb-3 col-6">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Status</span>
+
+            <div class="form-group col-6">
+              <div class="col-xs-12">
+                <br />
+                <button class="btn btn-success" type="submit">Save</button>
+                <button class="btn btn-outline-primary" type="reset">Reset</button>
               </div>
-              <input
-                type="text"
-                class="form-control"
-                value="{{objectProfile.status}}"
-                aria-describedby="basic-addon1"
-                name="status"
-              />
             </div>
           </div>
         </div>
-        <div class="form-group col-12">
-          <div class="input-group mb-3 col-4">
-            <label>Input Config file</label>
-            <input type="file" class="form-control-file" name="xmlfile" />
-          </div>
-          <input class="btn btn-primary" type="submit" value="Update" />
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
-
 {% endblock %}

@@ -10,8 +10,8 @@ import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).parent # duong dan luu file
-CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # duong dan thu muc root 
+BASE_DIR = Path(__file__).parent # duong dan luu file /code/core
+CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # duong dan thu muc root /code
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
@@ -148,9 +148,11 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(CORE_DIR, 'core/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # /code/core/media
 MEDIA_URL = '/media/'
-
+print(f'base dir {BASE_DIR}')
+print(f'core dirs {CORE_DIR}')
+print(f'media dirs {MEDIA_ROOT}')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (

@@ -1,4 +1,4 @@
-from blogapp.models.Userprofile import upload_location, Userprofile
+from blogapp.models.Userprofile import Userprofile
 from blogapp.models.Post import Post
 from django.contrib.auth.models import User
 from blogapp.models.Tag import  Tags
