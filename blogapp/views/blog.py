@@ -18,7 +18,6 @@ class blogView(TemplateView):
         try:
             page_number = pid
             page_num_obj = paginator.page(page_number)
-            # print(page_num_obj.has_next)
             return render(request, self.template_name, {
 
                 'object_list': object_list,
@@ -31,7 +30,6 @@ class blogView(TemplateView):
         except:
             page_number = 1
             page_num_obj = paginator.page(page_number)
-            # print(page_num_obj.has_next)
             return render(request, self.template_name, {
 
                 'object_list': object_list,

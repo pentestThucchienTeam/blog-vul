@@ -8,7 +8,6 @@ from core.lib.jwt_vul.utils import base64url_decode
 
 
 class settingView(ListView):
-	# ListView mac dinh xu ly request GET nen khong can method GET
 	template_name = 'setting.html'
 	nameVuls = Vul.objects.values('name')
 	

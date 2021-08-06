@@ -2,8 +2,7 @@ from blogapp.views.tags import tagsView
 from blogapp.views.register import registerView
 from blogapp.views.index import indexView
 from blogapp.views import *
-from django.urls import path, re_path
-# from blogapp.views.post import post
+from django.urls import path
 
 
 urlpatterns = [

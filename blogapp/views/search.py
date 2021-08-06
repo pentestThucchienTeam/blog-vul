@@ -32,11 +32,7 @@ class searchView(View):
       query=""
       result=[]
       xss = Vul.objects.filter(name="XSS").values()[0]['status']
-      xss1 = Vul.objects.filter(name="XSS").values()[0]['status']
       sql = Vul.objects.get(name="SQLI").status
-      print(xss)
-      print(xss1)
-      print(sql)
       if self.request.method=="GET":
           query=self.request.GET.get("search", None)
           if sql:
