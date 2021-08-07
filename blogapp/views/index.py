@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from blogapp.models.Post import Post
 from blogapp.models.Setting import Vul
 from django.views.generic import TemplateView

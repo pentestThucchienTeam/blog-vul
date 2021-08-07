@@ -6,7 +6,6 @@ from django.contrib.auth import authenticate, login
 import time
 from django.utils.http import http_date
 import jwt
-import json
 from decouple import config
 from django.views.generic import TemplateView
 

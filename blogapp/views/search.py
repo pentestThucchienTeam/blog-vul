@@ -7,21 +7,22 @@ from django.views import View
 
 class searchView(View):
   def get(self, request, *args, **kwargs):
+
     if self.request.GET['tagId']:
+
       query=""
       tag=""
       result=[]
       xss = Vul.objects.filter(name="XSS").values()[0]['status']
       sql = Vul.objects.filter(name="SQLI").values()[0]['status']
       if self.request.method=="GET":
-          query=self.request.GET.get("search", None)
-          tag= self.request.GET.get("tagId")
+          query = self.request.GET.get("search", None)
+          tag = self.request.GET.get("tagId")
           if sql:
-            sqli=   "SELECT * FROM blogapp_post inner  join blogapp_post_tags on blogapp_post.id = blogapp_post_tags.post_id left join blogapp_tags on blogapp_post_tags.tags_id = blogapp_tags.id WHERE title ILIKE '%%" + str(query) + "%%' AND name ILIKE  '%%"+str(tag)+"%%' "
-            result=Post.objects.raw(sqli)
+            sqli =   "SELECT * FROM blogapp_post inner  join blogapp_post_tags on blogapp_post.id = blogapp_post_tags.post_id left join blogapp_tags on blogapp_post_tags.tags_id = blogapp_tags.id WHERE title ILIKE '%%" + str(query) + "%%' AND name ILIKE  '%%"+str(tag)+"%%' "
+            result = Post.objects.raw(sqli)
           else:
-            # ORM
-            result=Post.objects.filter(Q(title__icontains=query)& Q(tags__name=tag))
+            result = Post.objects.filter(Q(title__icontains=query)& Q(tags__name=tag))
 
       html = render_to_string('blogapp/search.html',
       {'query':query, "result":result, "xss": xss, 'sql':sql,'tag':tag})
@@ -39,7 +40,6 @@ class searchView(View):
             sqli=   "SELECT * FROM blogapp_post WHERE title ILIKE '%%" + str(query) + "%%'"
             result=Post.objects.raw(sqli)
           else:
-            # ORM
             result=Post.objects.raw('SELECT * FROM blogapp_post WHERE title ILIKE  %s',  ['%%' + query + '%%'] )
 
 

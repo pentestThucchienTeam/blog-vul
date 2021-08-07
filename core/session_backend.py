@@ -1,9 +1,7 @@
 from django.contrib.sessions.backends.cache import SessionStore as OriginalSessionStore
 from django.utils.crypto import get_random_string
 from django.utils.module_loading import import_string
-from django.utils.functional import cached_property
 import string
-import jwt
 from blogapp.models.Setting import Vul
 
 VALID_KEY_CHARS = string.ascii_lowercase + string.digits

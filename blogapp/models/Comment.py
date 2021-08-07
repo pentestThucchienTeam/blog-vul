@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
 from django.conf import settings
-# Create your models here.
+
 class Comment(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
     author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='user_id')

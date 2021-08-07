@@ -1,7 +1,5 @@
 from django.views.generic.base import TemplateView
-from .tags import tagsView
 from django.shortcuts import render
-from django.http import HttpResponse
 from blogapp.models.Post import Post
 from blogapp.models.Setting import Vul
 from blogapp.models.Tag import Tags

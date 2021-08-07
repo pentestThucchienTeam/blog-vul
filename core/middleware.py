@@ -20,19 +20,12 @@ class SessionMiddleware(Original):
         request.session = self.SessionStore(session_key)
 
     def process_response(self, request, response):
-        """
-        If request.session was modified, or if the configuration is to save the
-        session every time, save the changes and set a session cookie or delete
-        the session cookie if the session has been emptied.
-        """
         try:
             accessed = request.session.accessed
             modified = request.session.modified
             empty = request.session.is_empty()
         except AttributeError:
             return response
-        # First check if we need to delete this cookie.
-        # The session should be deleted only if the session is entirely empty.
         if settings.SESSION_COOKIE_NAME in request.COOKIES and empty:
             response.delete_cookie(
                 settings.SESSION_COOKIE_NAME,
@@ -52,8 +45,6 @@ class SessionMiddleware(Original):
                     max_age = request.session.get_expiry_age()
                     expires_time = time.time() + max_age
                     expires = http_date(expires_time)
-                # Save the session data and refresh the client cookie.
-                # Skip session save for 500 responses, refs #3881.
                 if response.status_code != 500:
                     try:
                         request.session.save()
