@@ -9,9 +9,10 @@ import jwt
 from decouple import config
 from django.views.generic import TemplateView
 
+
 def create_cookie(user, request):
-    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]['status']
-    jwts = Vul.objects.filter(name="JWT").values()[0]['status']
+    jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]["status"]
+    jwts = Vul.objects.filter(name="JWT").values()[0]["status"]
 
     is_admin = user.is_superuser
     username = user.username
@@ -19,76 +20,71 @@ def create_cookie(user, request):
 
     if jwt_confusion and not jwts:
 
-        from core.lib import jwt_vul    
+        from core.lib import jwt_vul
 
-        with open(config('PRIVATEKEY'),"r") as filekey:
-            privatekey=filekey.read()
+        with open(config("PRIVATEKEY"), "r") as filekey:
+            privatekey = filekey.read()
 
-        with open(config('PUBLICKEY'),"r") as pubkey:
-            embedded=pubkey.read()
+        with open(config("PUBLICKEY"), "r") as pubkey:
+            embedded = pubkey.read()
 
-        return jwt_vul.encode(payload, privatekey, algorithm="RS256",headers={"publickey":embedded}).decode()
-    
+        return jwt_vul.encode(payload, privatekey, algorithm="RS256", headers={"publickey": embedded}).decode()
+
     elif jwts:
         from core.lib import jwt_vul
 
         key = get_key.weak()
-        request.session['key'] = key
+        request.session["key"] = key
 
         return jwt_vul.encode(payload, key, algorithm="HS256").decode()
 
     else:
         key = get_key.secrure()
-        request.session['key'] = key
+        request.session["key"] = key
 
         return jwt.encode(payload, key, algorithm="HS256")
 
+
 class loginView(TemplateView):
-    template_name = 'login.html'
+    template_name = "login.html"
 
     def get(self, request):
         form = LoginForm()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {"form": form})
 
     def post(self, request):
         form = LoginForm(request.POST)
-        
+
         msg = None
-        
+
         if form.is_valid():
-            username = form['username'].value()
-            password = form['password'].value()
+            username = form["username"].value()
+            password = form["password"].value()
             user = authenticate(username=username, password=password)
 
             if user:
-                login(self.request,user)
+                login(self.request, user)
 
                 cookie_name = create_cookie(user, self.request)
                 try:
                     max_age = self.request.session.get_expiry_age()
                     expires_time = time.time() + max_age
                     expires = http_date(expires_time)
-                    response = redirect(self.request.GET['next'])
-                    response.set_cookie(
-                        'auth',cookie_name,
-                        max_age=max_age, expires=expires)
+                    response = redirect(self.request.GET["next"])
+                    response.set_cookie("auth", cookie_name, max_age=max_age, expires=expires)
                     return response
                 except:
                     max_age = self.request.session.get_expiry_age()
                     expires_time = time.time() + max_age
                     expires = http_date(expires_time)
                     response = redirect("/")
-                    response.set_cookie(
-                        'auth',cookie_name,
-                        max_age=max_age, expires=expires)
+                    response.set_cookie("auth", cookie_name, max_age=max_age, expires=expires)
                     return response
-            
+
             else:
                 msg = "Username, password meo dung"
-                return render(request, self.template_name, {'form': form, 'msg': msg})
-        
+                return render(request, self.template_name, {"form": form, "msg": msg})
+
         else:
             msg = "Username, password meo dung"
-            return render(request, self.template_name, {'form': form, 'msg': msg})
- 
- 
+            return render(request, self.template_name, {"form": form, "msg": msg})

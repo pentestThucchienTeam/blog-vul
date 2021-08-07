@@ -9,6 +9,7 @@ from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import http_date
 from django.contrib.sessions.middleware import SessionMiddleware as Original
 
+
 class SessionMiddleware(Original):
     def __init__(self, get_response):
         super().__init__(get_response)
@@ -33,10 +34,10 @@ class SessionMiddleware(Original):
                 domain=settings.SESSION_COOKIE_DOMAIN,
                 samesite=settings.SESSION_COOKIE_SAMESITE,
             )
-            patch_vary_headers(response, ('Cookie',))
+            patch_vary_headers(response, ("Cookie",))
         else:
             if accessed:
-                patch_vary_headers(response, ('Cookie',))
+                patch_vary_headers(response, ("Cookie",))
             if (modified or settings.SESSION_SAVE_EVERY_REQUEST) and not empty:
                 if request.session.get_expire_at_browser_close():
                     max_age = None
@@ -56,8 +57,10 @@ class SessionMiddleware(Original):
                         )
                     response.set_cookie(
                         settings.SESSION_COOKIE_NAME,
-                        request.session.session_key, max_age=max_age,
-                        expires=expires, domain=settings.SESSION_COOKIE_DOMAIN,
+                        request.session.session_key,
+                        max_age=max_age,
+                        expires=expires,
+                        domain=settings.SESSION_COOKIE_DOMAIN,
                         path=settings.SESSION_COOKIE_PATH,
                         secure=settings.SESSION_COOKIE_SECURE or None,
                         httponly=settings.SESSION_COOKIE_HTTPONLY or None,

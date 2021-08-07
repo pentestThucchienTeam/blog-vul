@@ -5,20 +5,24 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
 from django.conf import settings
 
+
 class Comment(models.Model):
-    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
-    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='user_id')
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comment")
+    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_id")
     content = RichTextUploadingField(default="")
     status = models.BooleanField(default=True)
     create_time = models.DateTimeField(auto_now_add=True)
-    email = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_id')
-    image = models.ImageField(upload_to='uploads/%Y/%m/%d', height_field=None, width_field=None, max_length=100, blank=True )
-    
+    email = models.ForeignKey(User, on_delete=models.CASCADE, related_name="email_id")
+    image = models.ImageField(
+        upload_to="uploads/%Y/%m/%d", height_field=None, width_field=None, max_length=100, blank=True
+    )
+
     def __str__(self):
-        return self.content 
+        return self.content
 
     def admin_content(self):
-            return mark_safe(self.content)
+        return mark_safe(self.content)
+
     @property
     def cmt_image(self):
         if self.image:
