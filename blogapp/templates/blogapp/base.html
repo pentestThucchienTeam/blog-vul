@@ -24,36 +24,36 @@
     <link rel="stylesheet" href="{% static 'blogapp/css/custom.css' %}">
     <!-- Favicon-->
     <link rel="shortcut icon" href="{% static 'blogapp/favicon.png' %}">
+
     <script>
-	function validateForm() {
+  function validateForm() {
             let blacklist = [">","<","{","}","\"","[","]","'","?","/",";","%","@","!","#","\\"];
-	    var input = document.getElementById("search").value;
+      var input = document.getElementById("search").value;
             //var input = (new URLSearchParams(window.location.search)).get('tagId');
-	    for(var i = 0; i < blacklist.length; i++){
+      for(var i = 0; i < blacklist.length; i++){
                 if(input.includes(blacklist[i])){
-		    alert("Remove special character");
-		    return false;
-		}
-	    }
-	    return true;
+        alert("Remove special character");
+        return false;
+    }
+      }
+      return true;
         }
       </script>
     <script>
-	function validate(input) {
+  function validate(input) {
             let blacklist = [">","<","{","}","\"","[","]","'","?","/",";","%","@","!","#","\\"];
-	    console.log(input);
-            //var input = (new URLSearchParams(window.location.search)).get('tagId');
-	    for(var i = 0; i < blacklist.length; i++){
+      console.log(input);
+      for(var i = 0; i < blacklist.length; i++){
                 if(input.includes(blacklist[i])){
-		    alert("Remove special character");
-		    return false;
-		}
-	    }
-	    return true;
+        alert("Remove special character");
+        return false;
+    }
+      }
+      return true;
         }
       </script>
   </head>
-    <body>
+    <body style="position: relative; min-height: 100vh;">
     <header class="header">
       <!-- Main Navbar-->
       <nav class="navbar navbar-expand-lg">
@@ -62,29 +62,29 @@
             <div class="close-btn"><i class="icon-close"></i></div>
             <div class="row d-flex justify-content-center">
               <div class="col-md-8">
-		{% if xss %}
+    {% if xss %}
                 <form action="{% url 'search' %}" method = "GET">
-		{% else %}
+    {% else %}
                 <form action="{% url 'search' %}" onsubmit="return validateForm()" method = "GET">
-		{% endif %}
+    {% endif %}
                   <div class="form-group">
                     <input type="search" name="search" id="search" placeholder="What are you looking for?">
                     <button type="submit" class="submit"><i class="icon-search-1"></i></button>
                   </div>
                   <div class="form-group">
                     <script>
-            		let blacklist = [">","]",">","<","\""];
+                let blacklist = [">","]",">","<","\""];
                         var tag = (new URLSearchParams(window.location.search)).get('tagId');
                          var tags = [" ","kinhnghiem","chiase","kienthuc"];
                          document.write('<select name="tagId" id="tagId">');
                          if(tag) {
-				{% if not xss %}
+        {% if not xss %}
                             if(validate(tag)){
                              document.write('<option selected>'+tag+'</option>');
-			    }
-				{% else %}
-			    document.write('<option selected>'+tag+'</option>');
-				{% endif %}
+          }
+        {% else %}
+          document.write('<option selected>'+tag+'</option>');
+        {% endif %}
                          }
                          for(var i=0;i<tags.length;i++) {
                              if(tags[i] === tag) {
@@ -110,17 +110,15 @@
           <!-- Navbar Menu -->
           <div id="navbarcollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="{% url 'index' %}" class="nav-link ">Home</a>
-              </li>
-              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link active ">Blog</a>
-              </li>
-              <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
+              <li class="nav-item"><a href="{% url 'index' %}" class="nav-link ">Home</a></li>
+              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link active ">Blog</a></li>
+              <li class="nav-item"><a href="#" class="nav-link ">Contact</a></li>
+              <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link ">Profile</a></li>
               {% if user.is_authenticated %}
               <li class="nav-item"><a href="{% url 'user_logout' %}" class="nav-link ">Logout</a> </li>
               {% else %}
               <li class="nav-item"><a href="{% url 'user_login' %}" class="nav-link ">Login</a> </li>
               {% endif %}
-              </li>
             </ul>
             <div class="navbar-text"><a href="{% url 'search' %}" class="search-btn"><i class="icon-search-1"></i></a></div>
             <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
@@ -132,7 +130,7 @@
 
         {% endblock %}
     <!-- Page Footer-->
-    <footer class="main-footer">
+    <footer class="main-footer" style="padding-top: 20px; position: absolute;height: 200px; width: 100%;bottom: 0;">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -168,7 +166,7 @@
           </div>
         </div>
       </div>
-      <div class="copyrights">
+      <div class="copyrights" style="margin-top: 10px;">
         <div class="container">
           <div class="row">
             <div class="col-md-6">
@@ -176,7 +174,6 @@
             </div>
             <div class="col-md-6 text-right">
               <p>Template By <a href="https://bootstrapious.com/p/bootstrap-carousel" class="text-white">Bootstrapious</a>
-                <!-- Please do not remove the backlink to Bootstrap Temple unless you purchase an attribution-free license @ Bootstrap Temple or support us at http://bootstrapious.com/donate. It is part of the license conditions. Thanks for understanding :)                         -->
               </p>
             </div>
           </div>
@@ -192,5 +189,6 @@
     <script src="{% static 'blogapp/js/front.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+  <!-- </div>   -->
   </body>
   </html>

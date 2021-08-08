@@ -5,6 +5,5 @@ insert into blogapp_role (id,name) values (2, 'user_role') ON CONFLICT DO NOTHIN
 insert into blogapp_tags (id,name) values (1,'kienthuc') ON CONFLICT DO NOTHING;
 insert into blogapp_tags (id,name) values (2,'chiase') ON CONFLICT DO NOTHING;
 insert into blogapp_tags (id,name) values (3,'kinhnghiem') ON CONFLICT DO NOTHING;
-insert into blogapp_userprofile (id,status,facebooke,github,twitter,created_at,updated_at,email_id,role_id,user_id) values (1,'admin','admin.com','admin.com','admin.com','2016-06-20 19:10:25-07','2016-06-22 20:10:25-07','1','1','1') ON CONFLICT DO NOTHING;
-insert into blogapp_userprofile (id,status,facebooke,github,twitter,created_at,updated_at,email_id,role_id,user_id) values (2,'abc1','abc1.com','abc1.com','abc1.com','2016-06-22 19:10:25-07','2016-06-22 19:10:25-07','2','2','2') ON CONFLICT DO NOTHING;
-insert into blogapp_userprofile (id,status,facebooke,github,twitter,created_at,updated_at,email_id,role_id,user_id) values (1,'admin','admin.com','admin.com','admin.com','2016-06-20 19:10:25-07','2016-06-22 20:10:25-07','1','1','1') ON CONFLICT DO NOTHING;
+insert into blogapp_userprofile (id,status,facebook,github,twitter,created_at,updated_at,email_id,role_id,user_id) values (1,'admin','admin.com','admin.com','admin.com','2016-06-20 19:10:25-07','2016-06-22 20:10:25-07','1','1','1') ON CONFLICT DO NOTHING;
+insert into blogapp_userprofile (id,status,facebook,github,twitter,created_at,updated_at,email_id,role_id,user_id) values (2,'abc1','abc1.com','abc1.com','abc1.com','2016-06-22 19:10:25-07','2016-06-22 19:10:25-07','2','2','2') ON CONFLICT DO NOTHING;

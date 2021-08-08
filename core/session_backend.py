@@ -1,29 +1,31 @@
 from django.contrib.sessions.backends.cache import SessionStore as OriginalSessionStore
 from django.utils.crypto import get_random_string
 from django.utils.module_loading import import_string
-from django.utils.functional import cached_property
 import string
-import jwt
 from blogapp.models.Setting import Vul
 
 VALID_KEY_CHARS = string.ascii_lowercase + string.digits
 
+
 class SessionStore(OriginalSessionStore):
-    jwts = Vul.objects.filter(name="JWT").values()[0]['status']
+    jwts = Vul.objects.filter(name="JWT").values()[0]["status"]
 
     def create_jwt(self):
         if self.jwts:
             from .lib import jwt_vul
-            pas = 'password'
+
+            pas = "password"
             key = get_random_string(10, VALID_KEY_CHARS)
             return jwt_vul.encode({"key": key}, pas, algorithm="HS256").decode()
-            
+
         else:
             import jwt
-            pas = 'iloveyou'
+
+            pas = "iloveyou"
             key = get_random_string(10, VALID_KEY_CHARS)
             q = jwt.encode({"key": key}, pas, algorithm="HS256")
-            return q    
+            return q
+
     def _get_new_session_key(self):
         "Returns session key that isn't being used."
         while True:

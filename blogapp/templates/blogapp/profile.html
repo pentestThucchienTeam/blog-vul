@@ -1,0 +1,138 @@
+{% extends "blogapp/base.html" %} {% load static %} {% block title %}
+
+<title>Profile user</title>
+
+{% endblock %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <form
+      class="form col-12 mt-3"
+      action=""
+      enctype="multipart/form-data"
+      method="post"
+      id="UpdateForm"
+    >
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-3 form-group text-center">
+          <!--left col-->
+          {% if objectProfile.avatar %}
+          <img src="{{objectProfile.avatar.url}}" class="rounded-circle img-thumbnail" alt="avatar">
+          {% else %}
+          <img src="{% static 'blogapp/img/avatar.png' %}" class="rounded-circle img-thumbnail" alt="avatar">
+          {% endif %}
+          <p>Upload photo...</p>
+          <input type="file" class="form-control-file" name="avatar">
+          <!-- </div> -->
+        </hr><br>
+        </div>
+        <!--/col-3-->
+
+        <div class="col-9">
+          <div class="row">
+            <div class="form-group col-6">
+              <div>
+                <label for="first_name"><h6>First name</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="first_name"
+                  id="first_name"
+                  value="{{objectProfile.first_name}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="last_name"><h6>Last name</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="last_name"
+                  id="last_name"
+                  value="{{objectProfile.last_name}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="phone"><h6>Phone</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  id="phone"
+                  value="{{objectProfile.phone}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="address"><h6>Address</h6></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  id="address"
+                  value="{{objectProfile.address}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="facebook"><h6>Facebook</h6></label>
+                <input
+                  type="url"
+                  class="form-control"
+                  name="facebook"
+                  id="facebook"
+                  value="{{objectProfile.facebook}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="github"><h6>Github</h6></label>
+                <input
+                  type="url"
+                  class="form-control"
+                  name="github"
+                  id="github"
+                  value="{{objectProfile.github}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div>
+                <label for="twitter"><h6>Twitter</h6></label>
+                <input
+                  type="url"
+                  class="form-control"
+                  name="twitter"
+                  id="twitter"
+                  value="{{objectProfile.twitter}}"
+                />
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="col-xs-12">
+                <br />
+                <button class="btn btn-success" type="submit">Save</button>
+                <button class="btn btn-outline-primary" type="reset">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
