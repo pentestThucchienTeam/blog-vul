@@ -103,6 +103,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+django_heroku.settings(locals())
 
 DATABASES = {
     "default": {
@@ -173,4 +174,3 @@ LOGGING = {
         },
     },
 }
-django_heroku.settings(locals())

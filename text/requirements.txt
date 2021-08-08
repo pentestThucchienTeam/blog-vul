@@ -4,9 +4,12 @@ pycodestyle
 pytz
 sqlparse
 Unipath
-dj-database-url
 python-decouple
+dj-database-url
 whitenoise
+gunicorn
+django-heroku
+django-bmemcached==0.3.0
 Django>=3.0,<4.0
 psycopg2-binary>=2.8
 pillow==8.2.0
@@ -18,6 +21,3 @@ django-crispy-forms
 cryptography
 paramiko
 lxml
-gunicorn
-django-heroku
-django-bmemcached
