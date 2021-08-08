@@ -1,12 +1,12 @@
 #!/bin/bash
 # echo "start memcached"
 # /etc/init.d/memcached restart 2>&1
-# echo "collect static"
+echo "collect static"
 
-# while ! python manage.py collectstatic --noinput 2>&1; do
-# 	echo "Collecting"
-# 	sleep 3
-# done
+while ! python manage.py collectstatic --noinput 2>&1; do
+	echo "Collecting"
+	sleep 3
+done
 
 echo "Makemigrations"
 
