@@ -148,4 +148,29 @@ MEDIA_URL = "/media/"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # STATICFILES_DIRS = (os.path.join(CORE_DIR, "core/static"),)
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            "datefmt": "%d/%b/%Y %H:%M:%S",
+        },
+        "simple": {"format": "%(levelname)s %(message)s"},
+    },
+    "handlers": {
+        "file": {"level": "DEBUG", "class": "logging.FileHandler", "filename": "mysite.log", "formatter": "verbose"},
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "propagate": True,
+            "level": "DEBUG",
+        },
+        "core": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+        },
+    },
+}
 django_heroku.settings(locals())
