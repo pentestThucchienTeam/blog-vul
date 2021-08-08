@@ -12,11 +12,12 @@ class profileView(LoginRequiredMixin, TemplateView):
 
     def get(self, request):
         id = request.user.id
-        objectProfile = get_object_or_404(profile, id=id)
+        objectProfile = get_object_or_404(profile, user_id=id)
         return render(request, self.template_name, {"objectProfile": objectProfile})
 
     def post(self, request):
         id = request.user.id
+        print(request.POST)
         if request.FILES:
             profile_update = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
             if profile_update.is_valid():
@@ -26,6 +27,6 @@ class profileView(LoginRequiredMixin, TemplateView):
             if profile_update.is_valid():
                 profile_update.save()
 
-        objectProfile = get_object_or_404(profile, id=id)
+        objectProfile = get_object_or_404(profile, user_id=id)
 
         return render(request, self.template_name, {"objectProfile": objectProfile})

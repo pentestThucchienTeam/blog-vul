@@ -23,5 +23,6 @@ class registerView(TemplateView):
                 validate.clean_password2(form)
                 validate.clean_username(form)
                 form.save()
+
         args = {"form": form, "text": "Success"}
         return render(request, self.template_name, args)
