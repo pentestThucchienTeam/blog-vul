@@ -5,13 +5,12 @@ import dj_database_url
 import django_heroku
 
 
-django_heroku.settings(locals())
 BASE_DIR = Path(__file__).parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = config("DEBUG", cast=bool)
+DEBUG = False
 
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS")
@@ -149,3 +148,4 @@ MEDIA_URL = "/media/"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 STATICFILES_DIRS = (os.path.join(CORE_DIR, "core/static"),)
+django_heroku.settings(locals())
