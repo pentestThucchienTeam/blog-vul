@@ -1,14 +1,18 @@
 import psycopg2
-from decouple import config
+import os
+import dj_database_url
 
-database = config("DATABASE_NAME")
-user = config("DATABASE_USER")
-password = config("DATABASE_PASSWORD")
-host = config("DATABASE_HOST")
-port = config("DATABASE_PORT")
+DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASES = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
 
-conn = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
 
+conn = psycopg2.connect(
+    database=DATABASES["NAME"],
+    user=DATABASES["USER"],
+    password=DATABASES["PASSWORD"],
+    host=DATABASES["HOST"],
+    port=DATABASES["PORT"],
+)
 conn.autocommit = True
 
 

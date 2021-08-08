@@ -1,16 +1,16 @@
 #!/bin/bash
-echo "start memcached"
-/etc/init.d/memcached restart 2>&1
+# echo "start memcached"
+# /etc/init.d/memcached restart 2>&1
 
- echo "Makemigrations"
+echo "Makemigrations"
 
- while ! python manage.py makemigrations 2>&1; do
-    echo "Makemigrations"
-    sleep 3
- done
+while ! python manage.py makemigrations 2>&1; do
+   echo "Makemigrations"
+   sleep 3
+done
 
 
- echo "Migrate the Database at startup of project"
+echo "Migrate the Database at startup of project"
 
 while ! python manage.py migrate  2>&1; do
    echo "Migration is in progress status"
@@ -26,9 +26,9 @@ done
      sleep 3
  done
 
-echo "Start server"
+# echo "Start server"
 
-python3 manage.py runserver 0.0.0.0:8000
+# python3 manage.py runserver 0.0.0.0:8000
 sleep 3
 
 

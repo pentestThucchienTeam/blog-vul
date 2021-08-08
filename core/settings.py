@@ -2,8 +2,10 @@ import os
 from decouple import config
 from unipath import Path
 import dj_database_url
+import django_heroku
 
 
+django_heroku.settings(locals())
 BASE_DIR = Path(__file__).parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -48,12 +50,35 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 SESSION_ENGINE = "core.session_backend"
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
-    }
-}
+
+
+def get_cache():
+    import os
+
+    try:
+        servers = os.environ["MEMCACHIER_SERVERS"]
+        username = os.environ["MEMCACHIER_USERNAME"]
+        password = os.environ["MEMCACHIER_PASSWORD"]
+        return {
+            "default": {
+                "BACKEND": "django_bmemcached.memcached.BMemcached",
+                # TIMEOUT is not the connection timeout! It's the default expiration
+                # timeout that should be applied to keys! Setting it to `None`
+                # disables expiration.
+                "TIMEOUT": None,
+                "LOCATION": servers,
+                "OPTIONS": {
+                    "username": username,
+                    "password": password,
+                },
+            }
+        }
+    except:
+        return {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+
+
+CACHES = get_cache()
+
 
 ROOT_URLCONF = "core.urls"
 LOGIN_URL = "/login"
@@ -82,16 +107,14 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": config("DATABASE_ENGINE"),
-        "NAME": config("DATABASE_NAME"),
-        "USER": config("DATABASE_USER"),
-        "PASSWORD": config("DATABASE_PASSWORD"),
-        "HOST": config("DATABASE_HOST"),
-        "PORT": int(config("DATABASE_PORT")),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
-
+DATABASE_URL = os.environ.get("DATABASE_URL")
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+DATABASES["default"].update(db_from_env)
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -117,7 +140,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfile")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
