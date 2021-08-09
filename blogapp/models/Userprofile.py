@@ -37,8 +37,9 @@ class Userprofile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = Image.open(self.avatar.path)
-        if img.height > 100 or img.width > 100:
-            size = (200, 200)
-            img.thumbnail(size)
-            img.save(self.avatar.path)
+        if self.avatar:
+            img = Image.open(self.avatar.path)
+            if img.height > 100 or img.width > 100:
+                size = (200, 200)
+                img.thumbnail(size)
+                img.save(self.avatar.path)
