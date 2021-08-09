@@ -148,7 +148,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-# STATICFILES_DIRS = (os.path.join(CORE_DIR, "core/static"),)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -164,12 +166,12 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["file"],
+            "handlers": ["console"],
             "propagate": True,
             "level": "DEBUG",
         },
         "core": {
-            "handlers": ["file"],
+            "handlers": ["console"],
             "level": "DEBUG",
         },
     },
