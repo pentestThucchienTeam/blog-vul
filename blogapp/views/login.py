@@ -9,7 +9,8 @@ from django.utils.http import http_date
 from decouple import config
 from django.views.generic import TemplateView
 from .validate import validate
-from django.http import HttpResponseNotFound
+from django.http.response import Http404
+
 
 def create_cookie(user, request):
     jwt_confusion = Vul.objects.filter(name="JWT_Key_Confusion").values()[0]["status"]
@@ -63,7 +64,7 @@ class loginView(TemplateView):
 
         if not openRedirect:
             if not validate.safe_url(safe_redirect):
-                return HttpResponseNotFound("Url isn't found")
+                raise Http404
 
         if form.is_valid():
             username = form["username"].value()
