@@ -115,6 +115,7 @@
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a></li>
               <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link ">Profile</a></li>
               {% if user.is_authenticated %}
+              <li class="nav-item"><a href="{% url 'addposts' %}" class="nav-link ">Posts</a></li>
               <li class="nav-item"><a href="{% url 'user_logout' %}" class="nav-link ">Logout</a> </li>
               {% else %}
               <li class="nav-item"><a href="{% url 'user_login' %}" class="nav-link ">Login</a> </li>
