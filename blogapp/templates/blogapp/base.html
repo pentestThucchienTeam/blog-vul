@@ -111,9 +111,10 @@
           <div id="navbarcollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a href="{% url 'index' %}" class="nav-link ">Home</a></li>
-              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link active ">Blog</a></li>
+              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link  ">Blog</a></li>
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a></li>
               <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link ">Profile</a></li>
+              <li class="nav-item"><a href="{% url 'contributor' %}" class="nav-link ">Contributor</a></li>
               {% if user.is_authenticated %}
               <li class="nav-item"><a href="{% url 'user_logout' %}" class="nav-link ">Logout</a> </li>
               {% else %}
@@ -121,7 +122,7 @@
               {% endif %}
             </ul>
             <div class="navbar-text"><a href="{% url 'search' %}" class="search-btn"><i class="icon-search-1"></i></a></div>
-            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
+            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>        </span><a href="#">ES</a></ul>
           </div>
         </div>
       </nav>
