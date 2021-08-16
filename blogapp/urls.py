@@ -17,5 +17,5 @@ urlpatterns = [
     path("logout/", logoutView.as_view(), name="user_logout"),
     path("tag/<tag>/", tagsView.as_view(), name="tags"),
     path("profile/", profileView.as_view(), name="profile"),
-    path("addposts/", addpostsView.as_view(), name = "addposts"),
+    path("requestpost/", requestpostView.as_view(), name = "requestpost"),
 ]

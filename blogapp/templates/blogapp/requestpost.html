@@ -27,7 +27,7 @@
       <div class="card-body">
         <div id="notification" >
           <h5 class="card-title">Attention</h5>
-          <p class="card-text">If you want to post an article, you can share it with us via URL or via XML file format by choose an option above.</p>
+          <p class="card-text">If you want to post an article, you can share it with us via <strong>URL</strong> or via <strong>XML file</strong> format by choose an option above.</p>
           <p class="card-text">The article will be considered by admin before it is made public and it will be posted on our blog page and show some your information as author. We will notify you when it is accepted.</p>
           <p class="card-text">Thank you!</p>
         </div>
@@ -85,55 +85,4 @@
     }
   }
   </script> 
-<!-- <div class="container">
-  <a href="#" class="btn btn-primary">Go somewhere</a>
-  <br>
-    <h1 class="text-center" >Contribute Posts</h1>
-    <br>
-    <h5 class="text-center" >The posts will be considered by admin before it is made public</h5>
-    <br>
-    <select onchange="myFunction()" id ="choice" class="custom-select">
-      <option disabled selected>Choose a way to share your posts</option>
-      <option value="1">Via URL</option>
-      <option value="2">Via XML file</option>
-    </select>
-    <br>
-    <br>
-    <hr>
-  <form style= "display: none;" id = "url" class="text-center">      
-      <div class="form-group">
-        <label for="exampleFormControlFile1"><h4>Up load Posts via URL</h4></label>
-        <input style="display: block;" type="url" class="form-control" id="inputurl" placeholder="Enter an url to preview">
-      </div>
-      <button  type="submit" class="btn btn-primary text-center">Submit</button>
-  </form>
-  <form style="display: none;" id = "xml" class="text-center">
-      <div class="form-group">
-        <label for="exampleFormControlFile1" style="display: block;"><h4>Up load Posts via xml file</h4></label>
-        <br>
-        <input type="file"  style="display: inline; margin-left: 110px;" class=""  id="exampleFormControlFile1">
-      </div>
-      <button type="submit" class=" btn btn-primary text-center">Submit</button>
-  </form>
-</div>
-<script>
-function myFunction() {
-  var x = document.getElementById("url");
-  var y = document.getElementById("xml");
-  var element = document.getElementById("choice");
-  var selectedValue = element.options[element.selectedIndex].value;
-  if (selectedValue == 1) {
-    x.style.display = "block";
-    y.style.display = "none";
-  } else if(selectedValue == 2){
-    y.style.display = "block";
-    x.style.display = "none";
-  }
-  else{
-    x.style.display = "none";
-    y.style.display = "none";
-  }
-}
-</script> 
--->
 {% endblock %}
