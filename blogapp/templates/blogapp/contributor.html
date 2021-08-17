@@ -1,0 +1,44 @@
+{% extends "blogapp/base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container" style=" height:100%;  min-height:100%; position:relative;"> 
+    <div class="row">
+        <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-md-8 text-center mb-6">
+              <br>
+              <br>
+                <h2 class="heading">Contributor</h2>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-wrap">
+                <hr>
+                <div align="left" corlor="red;"><p style="font-size:18px; color: black;"><strong>First of all we would like to thank you for your contributions. Thanks to those contributions, our Blog is increasingly expanding and developing in the security world. The following table is to remember the people who contributed and developed this Blog. Please contact the Admin and add what we are missing, your name will also be remembered by us. Love!</strong></p></div>
+                <hr>
+                <table class="table" style="overlow: auto; color: black;">
+                  <thead class="thead-primary">
+                    <tr style="background-color: #1e8bff; color: #fff;" align="center">
+                      <th ></th>
+                      <th>Name</th>
+                      <th>Contributed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr align="center">
+                      <th class="table-success" scope="row">1</th>
+                      <td class="table-success"><a href="https://www.facebook.com/minhth174" style="color: black;">Minh Thiều Hoàng</a></td>
+                      <td class="table-success">Open redirect attack</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+                </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+{% endblock  %}

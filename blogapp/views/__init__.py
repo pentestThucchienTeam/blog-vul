@@ -8,4 +8,5 @@ from blogapp.views.login import loginView
 from blogapp.views.logout import logoutView
 from blogapp.views.tags import tagsView
 from blogapp.views.profile import profileView
+from blogapp.views.contributor import contributorView
 from blogapp.views.requestpost import requestpostView

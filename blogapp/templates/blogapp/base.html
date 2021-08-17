@@ -53,7 +53,7 @@
         }
       </script>
   </head>
-    <body style="position: relative; min-height: 100vh;">
+    <body style="position: relative; min-height: 100vh; padding-bottom:165px;">
     <header class="header">
       <!-- Main Navbar-->
       <nav class="navbar navbar-expand-lg">
@@ -111,9 +111,10 @@
           <div id="navbarcollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a href="{% url 'index' %}" class="nav-link ">Home</a></li>
-              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link active ">Blog</a></li>
+              <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link  ">Blog</a></li>
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a></li>
               <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link ">Profile</a></li>
+              <li class="nav-item"><a href="{% url 'contributor' %}" class="nav-link ">Contributor</a></li>
               {% if user.is_authenticated %}
               <li class="nav-item"><a href="{% url 'requestpost' %}" class="nav-link ">Posts</a></li>
               <li class="nav-item"><a href="{% url 'user_logout' %}" class="nav-link ">Logout</a> </li>
@@ -122,7 +123,7 @@
               {% endif %}
             </ul>
             <div class="navbar-text"><a href="{% url 'search' %}" class="search-btn"><i class="icon-search-1"></i></a></div>
-            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
+            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>        </span><a href="#">ES</a></ul>
           </div>
         </div>
       </nav>
@@ -131,7 +132,7 @@
 
         {% endblock %}
     <!-- Page Footer-->
-    <footer class="main-footer" style="padding-top: 20px; position: absolute;height: 200px; width: 100%;bottom: 0;">
+    <footer class="main-footer" style="padding-top: 20px; position: absolute; height: 160px; width: 100%;bottom: 0;">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -159,7 +160,7 @@
                   <li> <a href="https://github.com/DoTuan1">Tuan Do</a></li>
                 </ul>
                 <ul class="list-unstyled">
-                  <li> <a href="https://github.com/S0vvn">Son Do</a></li>
+                  <li> <a href="https://github.com/S0vvn">Quyen Son</a></li>
                   <li> <a href="https://github.com/Tu4n4nh">Anh Nguyen</a></li>
                 </ul>
               </div>
