@@ -18,3 +18,4 @@ django-crispy-forms
 cryptography
 paramiko
 lxml
+requests
