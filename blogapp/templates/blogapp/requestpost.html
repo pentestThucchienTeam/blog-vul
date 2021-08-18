@@ -31,18 +31,19 @@
           <p class="card-text">The article will be considered by admin before it is made public and it will be posted on our blog page and show some your information as author. We will notify you when it is accepted.</p>
           <p class="card-text">Thank you!</p>
         </div>
-        <form style= "display: none;" id = "url" class="text-center">      
+        <form style= "display: none;" id = "url" class="text-center" >      
           <div class="form-group">
             <label for="exampleFormControlFile1"><h4>Via url</h4></label>
             <input style="display: block;" type="url" class="form-control" id="inputurl" placeholder="Enter an url to preview">
           </div>
           <button  type="submit" class="btn btn-primary text-center">Submit</button>
       </form>
-      <form style="display: none;" id = "xml" class="text-center">
+      <form method="POST" style="display: none;" id = "xml" class="text-center" enctype="multipart/form-data">
+            {% csrf_token %}
           <div class="form-group">
             <label for="exampleFormControlFile1" style="display: block;"><h4>Via xml file</h4></label>
             <br>
-            <input type="file"  style="display: inline; margin-left: 110px;" class=""  id="exampleFormControlFile1">
+            <input type="file"  style="display: inline; margin-left: 110px;" class=""  id="exampleFormControlFile1" id ="xmlfile" name="xmlfile">
           </div>
           <button type="submit" class=" btn btn-primary text-center">Submit</button>
       </form>
