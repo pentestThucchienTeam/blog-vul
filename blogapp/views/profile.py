@@ -17,7 +17,6 @@ class profileView(LoginRequiredMixin, TemplateView):
 
     def post(self, request):
         id = request.user.id
-        print(request.POST)
         if request.FILES:
             profile_update = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
             if profile_update.is_valid():
