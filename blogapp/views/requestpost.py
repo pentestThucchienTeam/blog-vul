@@ -20,9 +20,9 @@ class requestpostView(TemplateView):
             parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
             tree = etree.parse(xmlfile, parser=parser)
             root = tree.getroot()
-            create=Post.objects.create(title=root[0].text, status=root[2].text, content=root[3].text)
-            tag = Tags.objects.filter(name__in=root[1].text)
-            create.tags.set(tag)
+            create=Post.objects.create(title=root[0].text, status=root[2].text, content=root[3].text, images=root[4].text)
+            tag = Tags.objects.get(name=root[1].text)
+            create.tags.add(tag.id)
             create.author_id.add(request.user.id)
             
         return render(request, self.template_name)
