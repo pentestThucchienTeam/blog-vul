@@ -2,88 +2,131 @@
 
 <title>Contribute Posts</title>
 
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 
 <div class="container">
-  <br>
-    <h1 class="text-center" >Requesting for new posts</h1>
-    <br>
-    <br>
-    <div class="card text-center"  >
-      <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs" >
-          <li class="nav-item">
-            <a onclick="myFunction(this)"  id = "a1" value="url" class="nav-link" href="#">URL</a>
-          </li>
-          <li class="nav-item">
-            <a onclick="myFunction(this)" id="a2" value="xml" class="nav-link" href="#">XML file</a>
-          </li>
-
-          
-        </ul>
-      </div>
-      <div class="card-body">
-        <div id="notification" >
-          <h5 class="card-title">Attention</h5>
-          <p class="card-text">If you want to post an article, you can share it with us via <strong>URL</strong> or via <strong>XML file</strong> format by choose an option above.</p>
-          <p class="card-text">The article will be considered by admin before it is made public and it will be posted on our blog page and show some your information as author. We will notify you when it is accepted.</p>
-          <p class="card-text">Thank you!</p>
-        </div>
-        <form style= "display: none;" id = "url" class="text-center" >      
-          <div class="form-group">
-            <label for="exampleFormControlFile1"><h4>Via url</h4></label>
-            <input style="display: block;" type="url" class="form-control" id="inputurl" placeholder="Enter an url to preview">
-          </div>
-          <button  type="submit" class="btn btn-primary text-center">Submit</button>
-      </form>
-      <form method="POST" style="display: none;" id = "xml" class="text-center" enctype="multipart/form-data">
-            {% csrf_token %}
-          <div class="form-group">
-            <label for="exampleFormControlFile1" style="display: block;"><h4>Via xml file</h4></label>
-            <br>
-            <input type="file"  style="display: inline; margin-left: 110px;" class=""  id="exampleFormControlFile1" id ="xmlfile" name="xmlfile">
-          </div>
-          <button type="submit" class=" btn btn-primary text-center">Submit</button>
-      </form>
-      <p id ="ok"></p>
-      </div>
+  <br />
+  <h1 class="text-center">Requesting for new posts</h1>
+  <br />
+  <br />
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a
+            onclick="myFunction(this)"
+            id="a1"
+            value="url"
+            class="nav-link"
+            href="#"
+            >URL</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            onclick="myFunction(this)"
+            id="a2"
+            value="xml"
+            class="nav-link"
+            href="#"
+            >XML file</a
+          >
+        </li>
+        <li class="nav-item">
+          <a id="a3" value="preview" class="nav-link" href="/preview/{{id}}"
+            >Preview</a
+          >
+        </li>
+      </ul>
     </div>
-    
-  
-
+    <div class="card-body">
+      <div id="notification">
+        <h5 class="card-title">Attention</h5>
+        <p class="card-text">
+          If you want to post an article, you can share it with us via
+          <strong>URL</strong> or via <strong>XML file</strong> format by choose
+          an option above.
+        </p>
+        <p class="card-text">
+          The article will be considered by admin before it is made public and
+          it will be posted on our blog page and show some your information as
+          author. We will notify you when it is accepted.
+        </p>
+        <p class="card-text">Thank you!</p>
+      </div>
+      <form style="display: none" id="url" class="text-center">
+        <div class="form-group">
+          <label for="exampleFormControlFile1"><h4>Via url</h4></label>
+          <input
+            style="display: block"
+            type="url"
+            class="form-control"
+            id="inputurl"
+            placeholder="Enter an url to preview"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary text-center">
+          Submit
+        </button>
+      </form>
+      <form
+        method="POST"
+        style="display: none"
+        id="xml"
+        class="text-center"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleFormControlFile1" style="display: block"
+            ><h4>Via xml file</h4></label
+          >
+          <br />
+          <input
+            type="file"
+            style="display: inline; margin-left: 110px"
+            class=""
+            id="exampleFormControlFile1"
+            id="xmlfile"
+            name="xmlfile"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary text-center">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
   function myFunction(clicked) {
-    var a1 = document.getElementById("a1");
-    var a2 = document.getElementById("a2");
-    var x = document.getElementById("url");
-    var y = document.getElementById("xml");
-    var z = document.getElementById("notification");
-    var selected = clicked.getAttribute( "value" );
-    if (selected == "url") {
-      x.style.display = "block";
-      a1.style.background ="black";
-      a1.style.color ="white";
-      a2.style.color ="black";
-      a2.style.background ="none";
-      y.style.display = "none";
-      z.style.display = "none";
-    } else if(selected == "xml"){
-      y.style.display = "block";
-      a2.style.background ="black";
-      a2.style.color ="white";
-      a1.style.color ="black";
-      a1.style.background ="none";
-      x.style.display = "none";
-      z.style.display = "none";
-    }
-    else{
-      x.style.display = "none";
-      y.style.display = "none";
-      z.style.display = "block";
+    var a1 = document.getElementById('a1');
+    var a2 = document.getElementById('a2');
+    var x = document.getElementById('url');
+    var y = document.getElementById('xml');
+    var z = document.getElementById('notification');
+    var selected = clicked.getAttribute('value');
+    if (selected == 'url') {
+      x.style.display = 'block';
+      a1.style.background = 'black';
+      a1.style.color = 'white';
+      a2.style.color = 'black';
+      a2.style.background = 'none';
+      y.style.display = 'none';
+      z.style.display = 'none';
+    } else if (selected == 'xml') {
+      y.style.display = 'block';
+      a2.style.background = 'black';
+      a2.style.color = 'white';
+      a1.style.color = 'black';
+      a1.style.background = 'none';
+      x.style.display = 'none';
+      z.style.display = 'none';
+    } else {
+      x.style.display = 'none';
+      y.style.display = 'none';
+      z.style.display = 'block';
     }
   }
-  </script> 
+</script>
 {% endblock %}

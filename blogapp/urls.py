@@ -19,4 +19,6 @@ urlpatterns = [
     path("profile/", profileView.as_view(), name="profile"),
     path("contributor/", contributorView.as_view(), name="contributor"),
     path("requestpost/", requestpostView.as_view(), name = "requestpost"),
+    path("preview/<id>/", preView.as_view(), name="preview"),
+
 ]

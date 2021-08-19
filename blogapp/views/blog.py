@@ -11,7 +11,7 @@ class blogView(TemplateView):
 
     def get(self, request, pid=None):
         xss = Vul.objects.get(name="XSS").status
-        object_list = Post.objects.all()
+        object_list = Post.objects.filter(status=1)
         lastest_post = Post.objects.all().order_by('-creat_time')[:5]
         paginator = Paginator(object_list, 2)
         listtag = Tags.objects.all()

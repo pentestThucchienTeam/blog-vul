@@ -25,7 +25,7 @@ class requestpostView(TemplateView):
             with open("core/media/"+file, "wb") as img:
                 res = requests.get(root[4].text)
                 img.write(res.content)
-            create=Post.objects.create(title=root[0].text, status=root[2].text, content=root[3].text, images=file)
+            create=Post.objects.create(title=root[0].text, status=0, content=root[3].text, images=file)
             create.author_id.add(request.user.id)
             tag = Tags.objects.filter(name=root[1].text)
             if tag:
@@ -33,9 +33,8 @@ class requestpostView(TemplateView):
             else:
                 tagID = Tags(name=root[1].text)
                 tagID.save()
-            create.tags.add(tagID.id)
-                
-        return render(request, self.template_name)
+            create.tags.add(tagID.id)    
+        return render(request, self.template_name, {'id': create.id})
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
