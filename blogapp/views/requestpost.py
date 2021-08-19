@@ -26,10 +26,15 @@ class requestpostView(TemplateView):
                 res = requests.get(root[4].text)
                 img.write(res.content)
             create=Post.objects.create(title=root[0].text, status=root[2].text, content=root[3].text, images=file)
-            tag = Tags.objects.get(name=root[1].text)
-            create.tags.add(tag.id)
             create.author_id.add(request.user.id)
-            
+            tag = Tags.objects.filter(name=root[1].text)
+            if tag:
+                tagID = Tags.objects.get(name=root[1].text)
+            else:
+                tagID = Tags(name=root[1].text)
+                tagID.save()
+            create.tags.add(tagID.id)
+                
         return render(request, self.template_name)
 
     def generate_file(self):
