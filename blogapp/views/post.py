@@ -12,7 +12,7 @@ class postView(TemplateView):
 
     def get(self, request, id):
         form = CommentForm()
-        postView.object_list = Post.objects.all()
+        postView.object_list = Post.objects.all().order_by('-creat_time')[:5]
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]["status"]
@@ -45,7 +45,7 @@ class postView(TemplateView):
         )
 
     def post(self, request, id):
-        postView.object_list = Post.objects.all()
+        postView.object_list = Post.objects.all().order_by('-creat_time')[:5]
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]["status"]
