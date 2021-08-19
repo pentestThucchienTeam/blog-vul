@@ -1,6 +1,6 @@
 {% extends "blogapp/base.html" %} {% load static %} {% block title %}
 
-<title>Contribute Posts</title>
+<title>Request A New Post</title>
 
 {% endblock %} {% block content %}
 
@@ -32,28 +32,20 @@
             >XML file</a
           >
         </li>
-        {% if user.is_superuser %}
         <li class="nav-item">
           <a
             id="a3"
             onclick="myFunction(this)"
-            value="admin"
+            value="preview"
             class="nav-link"
             href="#"
-            >Admin</a
+            >Requested</a
           >
         </li>
-        {% else %}
-        <li class="nav-item">
-          <a id="a3" value="preview" class="nav-link" href="/preview/{{id}}"
-            >Preview</a
-          >
-        </li>
-        {% endif %}
       </ul>
     </div>
     <div class="card-body">
-      <div id="notification">
+      <div id="notification" style="display: none">
         <h5 class="card-title">Attention</h5>
         <p class="card-text">
           If you want to post an article, you can share it with us via
@@ -107,52 +99,39 @@
           Submit
         </button>
       </form>
-      <div class="row" style="display: none" id="admin" class="text-center">
-        {% for item in object_list %}
-        <form method="POST" action="">
-          {% csrf_token %}
-          <div class="row">
-            <div class="form-group col-2">
-              <p
-                type="text"
-                class="form-control"
-                name="postid"
-                value="{{item.id}}"
-              >
-                {{item.id}}
-              </p>
-            </div>
-            <div class="form-group col-2">
-              <a
-                href="/preview/{{item.id}}"
-                class="form-control"
-                name="postlink"
-                >{{item.title}}</a
-              >
-            </div>
-            <div class="form-group col-4">
-              <button
-                class="btn btn-success"
-                type="submit"
-                name="approve"
-                value="approve"
-              >
-                Approve
-              </button>
-            </div>
-            <div class="form-group col-4">
-              <button
-                class="btn btn-success"
-                type="submit"
-                name="reject"
-                value="reject"
-              >
-                Reject
-              </button>
-            </div>
-          </div>
-        </form>
-        {% endfor %}
+      <div class="row" style="display: none" id="preview" class="text-center">
+        <div class="col-sm-12">
+          <table
+            class="col-sm-12 table"
+            id="request_list"
+            role="grid"
+            align="center"
+          >
+            <thead class="thead-dark">
+              <tr role="row">
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in object_list %}
+              <tr>
+                <td scope="row">{{item.id}}</td>
+                <th><a href="/preview/{{item.id}}">{{item.title}}</a></th>
+
+                {% if item.status == '0' %}
+                <td class="text-danger">Deactive</td>
+                {% elif item.status == '1' %}
+                <td class="text-success">Active</td>
+                {% else %}
+                <td class="text-warning">Pending</td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -164,7 +143,7 @@
     var a3 = document.getElementById('a3');
     var x = document.getElementById('url');
     var y = document.getElementById('xml');
-    var t = document.getElementById('admin');
+    var t = document.getElementById('preview');
     var z = document.getElementById('notification');
     var selected = clicked.getAttribute('value');
     if (selected == 'url') {
@@ -189,7 +168,7 @@
       a3.style.background = 'none';
       t.style.display = 'none';
       z.style.display = 'none';
-    } else if (selected == 'admin') {
+    } else if (selected == 'preview') {
       a2.style.background = 'white';
       a2.style.color = 'black';
       y.style.display = 'none';

@@ -12,11 +12,12 @@ class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
     def get(self, request):
-        object_list = Post.objects.filter(status=2)
+        object_list = Post.objects.filter(author_id=request.user.id)
+        print(object_list)
         return render(request, self.template_name,{'object_list': object_list})
 
     def post(self, request):
-        print(request.POST)
+        print(request)
         if request.FILES:
             xmlfile = request.FILES['xmlfile']
             parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
@@ -39,7 +40,8 @@ class requestpostView(TemplateView):
 
         if request.user.is_superuser:
             if request.POST['approve']:
-                print(request.POST['postid'])
+                update = Post.objects.filter(id=request.POST['postid']).update(status=1)
+                return render(request, self.template_name, {'id': create.id})
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
