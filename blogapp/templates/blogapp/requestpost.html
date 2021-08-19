@@ -32,11 +32,24 @@
             >XML file</a
           >
         </li>
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a
+            id="a3"
+            onclick="myFunction(this)"
+            value="admin"
+            class="nav-link"
+            href="#"
+            >Admin</a
+          >
+        </li>
+        {% else %}
         <li class="nav-item">
           <a id="a3" value="preview" class="nav-link" href="/preview/{{id}}"
             >Preview</a
           >
         </li>
+        {% endif %}
       </ul>
     </div>
     <div class="card-body">
@@ -87,7 +100,6 @@
             style="display: inline; margin-left: 110px"
             class=""
             id="exampleFormControlFile1"
-            id="xmlfile"
             name="xmlfile"
           />
         </div>
@@ -95,6 +107,53 @@
           Submit
         </button>
       </form>
+      <div class="row" style="display: none" id="admin" class="text-center">
+        {% for item in object_list %}
+        <form method="POST" action="">
+          {% csrf_token %}
+          <div class="row">
+            <div class="form-group col-2">
+              <p
+                type="text"
+                class="form-control"
+                name="postid"
+                value="{{item.id}}"
+              >
+                {{item.id}}
+              </p>
+            </div>
+            <div class="form-group col-2">
+              <a
+                href="/preview/{{item.id}}"
+                class="form-control"
+                name="postlink"
+                >{{item.title}}</a
+              >
+            </div>
+            <div class="form-group col-4">
+              <button
+                class="btn btn-success"
+                type="submit"
+                name="approve"
+                value="approve"
+              >
+                Approve
+              </button>
+            </div>
+            <div class="form-group col-4">
+              <button
+                class="btn btn-success"
+                type="submit"
+                name="reject"
+                value="reject"
+              >
+                Reject
+              </button>
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -102,27 +161,47 @@
   function myFunction(clicked) {
     var a1 = document.getElementById('a1');
     var a2 = document.getElementById('a2');
+    var a3 = document.getElementById('a3');
     var x = document.getElementById('url');
     var y = document.getElementById('xml');
+    var t = document.getElementById('admin');
     var z = document.getElementById('notification');
     var selected = clicked.getAttribute('value');
     if (selected == 'url') {
-      x.style.display = 'block';
       a1.style.background = 'black';
       a1.style.color = 'white';
+      x.style.display = 'block';
       a2.style.color = 'black';
       a2.style.background = 'none';
       y.style.display = 'none';
+      a3.style.color = 'black';
+      a3.style.background = 'none';
+      t.style.display = 'none';
       z.style.display = 'none';
     } else if (selected == 'xml') {
-      y.style.display = 'block';
       a2.style.background = 'black';
       a2.style.color = 'white';
+      y.style.display = 'block';
       a1.style.color = 'black';
       a1.style.background = 'none';
       x.style.display = 'none';
+      a3.style.color = 'black';
+      a3.style.background = 'none';
+      t.style.display = 'none';
+      z.style.display = 'none';
+    } else if (selected == 'admin') {
+      a2.style.background = 'white';
+      a2.style.color = 'black';
+      y.style.display = 'none';
+      a1.style.background = 'white';
+      a1.style.color = 'black';
+      x.style.display = 'none';
+      a3.style.background = 'black';
+      a3.style.color = 'white';
+      t.style.display = 'block';
       z.style.display = 'none';
     } else {
+      t.style.display = 'none';
       x.style.display = 'none';
       y.style.display = 'none';
       z.style.display = 'block';

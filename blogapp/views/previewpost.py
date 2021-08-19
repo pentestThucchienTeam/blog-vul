@@ -29,7 +29,7 @@ class preView(TemplateView):
         preView.object_list = Post.objects.filter(status=1).order_by('-creat_time')[:5]
         preView.listtag = Tags.objects.all()
         preView.post_render = get_object_or_404(Post, id=id)
-        Post.objects.filter(id=id).update(status=1)
+        Post.objects.filter(id=id).update(status=2)
         return render(
             request,
             self.template_name,
