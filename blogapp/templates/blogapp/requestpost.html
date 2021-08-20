@@ -13,36 +13,24 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a
-            onclick="myFunction(this)"
-            id="a1"
-            value="url"
-            class="nav-link"
+          <a onclick="myFunction(this)" id="a1" value="url" class="nav-link"
             >URL</a
           >
         </li>
         <li class="nav-item">
-          <a
-            onclick="myFunction(this)"
-            id="a2"
-            value="xml"
-            class="nav-link"
+          <a onclick="myFunction(this)" id="a2" value="xml" class="nav-link"
             >XML file</a
           >
         </li>
         <li class="nav-item">
-          <a
-            id="a3"
-            onclick="myFunction(this)"
-            value="preview"
-            class="nav-link"
+          <a id="a3" onclick="myFunction(this)" value="preview" class="nav-link"
             >Requested</a
           >
         </li>
       </ul>
     </div>
     <div class="card-body">
-      <div id="notification" style="display: none">
+      <div id="notification">
         <h5 class="card-title">Attention</h5>
         <p class="card-text">
           If you want to post an article, you can share it with us via
@@ -116,14 +104,7 @@
               <tr>
                 <td scope="row">{{item.id}}</td>
                 <th><a href="/preview/{{item.id}}">{{item.title}}</a></th>
-
-                {% if item.status == '0' %}
-                <td class="text-danger">Deactive</td>
-                {% elif item.status == '1' %}
-                <td class="text-success">Active</td>
-                {% else %}
                 <td class="text-warning">Pending</td>
-                {% endif %}
               </tr>
               {% endfor %}
             </tbody>

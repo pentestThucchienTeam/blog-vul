@@ -13,8 +13,7 @@ class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
     def get(self, request):
-        object_list = Post.objects.filter(author_id=request.user.id).order_by('-creat_time')
-        print(object_list)
+        object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name,{'object_list': object_list})
 
     def post(self, request):
@@ -37,7 +36,8 @@ class requestpostView(TemplateView):
                 tagID = Tags(name=root[1].text)
                 tagID.save()
             create.tags.add(tagID.id)
-            return render(request, self.template_name, {'id': create.id})
+            object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
+            return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
