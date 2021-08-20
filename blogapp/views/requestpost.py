@@ -7,12 +7,13 @@ from blogapp.models.Tag import Tags
 from datetime import datetime
 import requests
 from django.utils.crypto import get_random_string
+from django.template.loader import render_to_string
 
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
     def get(self, request):
-        object_list = Post.objects.filter(author_id=request.user.id)
+        object_list = Post.objects.filter(author_id=request.user.id).order_by('-creat_time')
         print(object_list)
         return render(request, self.template_name,{'object_list': object_list})
 
@@ -25,9 +26,9 @@ class requestpostView(TemplateView):
             root = tree.getroot()
             file = self.generate_file()
             with open("core/media/"+file, "wb") as img:
-                res = requests.get(root[4].text)
+                res = requests.get(root[3].text)
                 img.write(res.content)
-            create=Post.objects.create(title=root[0].text, status=0, content=root[3].text, images=file)
+            create=Post.objects.create(title=root[0].text, status=0, content=root[2].text, images=file)
             create.author_id.add(request.user.id)
             tag = Tags.objects.filter(name=root[1].text)
             if tag:
@@ -37,11 +38,6 @@ class requestpostView(TemplateView):
                 tagID.save()
             create.tags.add(tagID.id)
             return render(request, self.template_name, {'id': create.id})
-
-        if request.user.is_superuser:
-            if request.POST['approve']:
-                update = Post.objects.filter(id=request.POST['postid']).update(status=1)
-                return render(request, self.template_name, {'id': create.id})
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")

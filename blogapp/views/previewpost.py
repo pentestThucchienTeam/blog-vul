@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic.base import TemplateView
 from .comment_form import CommentForm
 from blogapp.models.Post import Post
@@ -30,12 +30,5 @@ class preView(TemplateView):
         preView.listtag = Tags.objects.all()
         preView.post_render = get_object_or_404(Post, id=id)
         Post.objects.filter(id=id).update(status=2)
-        return render(
-            request,
-            self.template_name,
-            {
-                "object_list": self.object_list,
-                "listtag": self.listtag,
-                "post_render": self.post_render,             
-            }
-        )
+        return redirect('/requestpost/')
+    
