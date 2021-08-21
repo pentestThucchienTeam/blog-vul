@@ -7,7 +7,6 @@ from blogapp.models.Tag import Tags
 from datetime import datetime
 import requests
 from django.utils.crypto import get_random_string
-from django.template.loader import render_to_string
 
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
@@ -17,7 +16,6 @@ class requestpostView(TemplateView):
         return render(request, self.template_name,{'object_list': object_list})
 
     def post(self, request):
-        print(request)
         if request.FILES:
             xmlfile = request.FILES['xmlfile']
             parser = etree.XMLParser(load_dtd=True, resolve_entities=True)

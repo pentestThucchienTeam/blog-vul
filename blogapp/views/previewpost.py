@@ -14,7 +14,6 @@ class preView(TemplateView):
         preView.object_list = Post.objects.filter(status=1).order_by('-creat_time')[:5]
         preView.listtag = Tags.objects.all()
         preView.post_render = get_object_or_404(Post, id=id)
-        print(preView.post_render.status)
         if preView.post_render.status != '2':
             raise Http404 
         else:
