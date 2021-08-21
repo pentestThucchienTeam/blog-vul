@@ -27,7 +27,7 @@ class requestpostView(TemplateView):
             with open("core/media/"+file, "wb") as img:
                 res = requests.get(root[3].text)
                 img.write(res.content)
-            create=Post.objects.create(title=root[0].text, status=0, content=root[2].text, images=file)
+            create=Post.objects.create(title=root[0].text, status=2, content=root[2].text, images=file)
             create.author_id.add(request.user.id)
             tag = Tags.objects.filter(name=root[1].text)
             if tag:
