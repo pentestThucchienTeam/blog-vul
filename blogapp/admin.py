@@ -28,7 +28,7 @@ class CommentInline(admin.StackedInline):
 
 
 class Postadmin(admin.ModelAdmin):
-    list_display = ['title','creat_time', 'admin_content','post_images',]
+    list_display = ['title','creat_time', 'status','post_images',]
     list_filter = ['creat_time']
     readonly_fields = ('post_images',)
     inlines = [CommentInline]
