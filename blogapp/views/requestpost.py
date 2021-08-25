@@ -10,6 +10,7 @@ from datetime import datetime
 import requests
 from django.utils.crypto import get_random_string
 from defusedxml.ElementTree import parse
+import ctypes
 
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
@@ -21,8 +22,8 @@ class requestpostView(TemplateView):
 
     def post(self, request):
         xxe = Vul.objects.get(name='XXE').status
+        ssrf = Vul.objects.filter(name="SSRF").values()[0]["status"]
         if request.FILES:
-
             xmlfile = request.FILES['xmlfile']
             if xxe:
                 parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
@@ -45,6 +46,17 @@ class requestpostView(TemplateView):
             create.tags.add(tagID.id)
             object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
             return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
+        else:
+            if ssrf:
+                blacklist = [":8000","local","127.0","127.1","127.2","127-","admin","file:///","file://"," dict://","ftp://","gopher://",
+                "http://2130706433/","http://0177.0.0.1/","0.0.1","http://0/","①","②","⑦","⓪","⓿"]
+                url = self.request.POST.get("crawl")
+                for x in blacklist:
+                    if x in url:
+                        raise ValueError('Your URL does not match our rules. Please re-enter another URL')
+                          
+            return render(request, self.template_name)
+           
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
