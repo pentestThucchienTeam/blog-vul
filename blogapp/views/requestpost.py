@@ -1,4 +1,5 @@
 import os
+from django.http.response import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from lxml import etree
@@ -6,6 +7,8 @@ from blogapp.models.Post import Post
 from blogapp.models.Tag import Tags
 from datetime import datetime
 import requests
+from urllib.parse import urlparse
+import re
 from bs4 import BeautifulSoup
 from django.utils.crypto import get_random_string
 
@@ -37,9 +40,29 @@ class requestpostView(TemplateView):
             create.tags.add(tagID.id)
         else:
             url = self.request.POST.get("crawl")
+            url_parse = urlparse(url)
+            url_parse = url_parse.scheme + '://' + url_parse.netloc
             crawl = requests.get(url)
             soup = BeautifulSoup(crawl.content, 'html5lib')
-            create= Post.objects.create(title= soup.title.text,status=2, content=soup.body)
+            body = soup.body
+            for i in body.find_all('img', src=True):
+                if 'http' not in i['src']:
+                    file = self.generate_file()
+                    with open("core/media/"+file, "wb") as img:
+                        res = requests.get(url_parse+i['src'])
+                        img.write(res.content)
+                else:
+                    file = self.generate_file()
+                    with open("core/media/"+file, "wb") as img:
+                        res = requests.get(i['src'])
+                        img.write(res.content)
+                i['src'] = '/media/' + file
+            p_tag = body.find_all(['p','pre','span'])
+            content = ""
+            for i in p_tag:
+                content += str(i)
+
+            create= Post.objects.create(title="aaaa",status=2, content=content)
             create.author_id.add(request.user.id)
 
 
