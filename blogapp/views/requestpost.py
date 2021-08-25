@@ -54,7 +54,7 @@ class requestpostView(TemplateView):
                 for x in blacklist:
                     if x in url:
                         return render(request, self.template_name, {"message":"Your URL does not match our rules. Please re-enter another URL"})   
-           
+            return render(request, self.template_name)
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
