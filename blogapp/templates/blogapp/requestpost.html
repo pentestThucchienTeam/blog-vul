@@ -4,6 +4,7 @@
 
 {% endblock %} {% block content %}
 
+
 <div class="container">
   <br />
   <h1 class="text-center">Requesting for new posts</h1>
@@ -44,7 +45,8 @@
         </p>
         <p class="card-text">Thank you!</p>
       </div>
-      <form style="display: none" id="url" class="text-center">
+      <form style="display: none" id="url" class="text-center" onsubmit="return valueForm()" method = "POST">
+      {% csrf_token %}
         <div class="form-group">
           <label for="exampleFormControlFile1"><h4>Via url</h4></label>
           <input
@@ -52,6 +54,7 @@
             type="url"
             class="form-control"
             id="inputurl"
+            name="inputurl"
             placeholder="Enter an url to preview"
           />
         </div>
@@ -114,6 +117,20 @@
     </div>
   </div>
 </div>
+<script>
+  function valueForm() {
+            let blacklist = [":8000","local","127.0","127.1","127.2","127-","admin","file:///","file://"," dict://","ftp://","gopher://",
+            "http://2130706433/","http://0177.0.0.1/","0.0.1","http://0/","①","②","⑦","⓪","⓿"];
+      var input = document.getElementById("inputurl").value;
+      for(var i = 0; i < blacklist.length; i++){
+                if(input.includes(blacklist[i])){
+        alert("Your URL does not match our rules. Please re-enter another URL");
+        return false;
+    }
+      }
+      return true;
+        }
+      </script>
 <script type="text/javascript">
   function myFunction(clicked) {
     var a1 = document.getElementById('a1');
