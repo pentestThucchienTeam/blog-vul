@@ -1,25 +1,34 @@
 import os
+from django.http.response import Http404
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from lxml import etree
 from blogapp.models.Post import Post
 from blogapp.models.Tag import Tags
+from blogapp.models.Setting import Vul
 from datetime import datetime
 import requests
 from django.utils.crypto import get_random_string
+from defusedxml.ElementTree import parse
 
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
+
     def get(self, request):
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name,{'object_list': object_list})
 
     def post(self, request):
+        xxe = Vul.objects.get(name='XXE').status
         if request.FILES:
+
             xmlfile = request.FILES['xmlfile']
-            parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
-            tree = etree.parse(xmlfile, parser=parser)
+            if xxe:
+                parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
+                tree = etree.parse(xmlfile, parser=parser)
+            else:
+                tree = parse(xmlfile)
             root = tree.getroot()
             file = self.generate_file()
             with open("core/media/"+file, "wb") as img:

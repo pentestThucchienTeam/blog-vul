@@ -19,3 +19,4 @@ cryptography
 paramiko
 lxml
 requests
+defusedxml
