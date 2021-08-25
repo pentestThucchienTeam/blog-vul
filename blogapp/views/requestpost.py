@@ -53,9 +53,7 @@ class requestpostView(TemplateView):
                 url = self.request.POST.get("crawl")
                 for x in blacklist:
                     if x in url:
-                        raise ValueError('Your URL does not match our rules. Please re-enter another URL')
-                          
-            return render(request, self.template_name)
+                        return render(request, self.template_name, {"message":"Your URL does not match our rules. Please re-enter another URL"})   
            
 
     def generate_file(self):
