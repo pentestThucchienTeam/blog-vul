@@ -6,6 +6,7 @@ from blogapp.models.Post import Post
 from blogapp.models.Tag import Tags
 from datetime import datetime
 import requests
+from bs4 import BeautifulSoup
 from django.utils.crypto import get_random_string
 
 class requestpostView(TemplateView):
@@ -34,8 +35,16 @@ class requestpostView(TemplateView):
                 tagID = Tags(name=root[1].text)
                 tagID.save()
             create.tags.add(tagID.id)
-            object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
-            return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
+        else:
+            url = self.request.POST.get("crawl")
+            crawl = requests.get(url)
+            soup = BeautifulSoup(crawl.content, 'html5lib')
+            create= Post.objects.create(title= soup.title.text,status=2, content=soup.body)
+            create.author_id.add(request.user.id)
+
+
+        object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
+        return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
