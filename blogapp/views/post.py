@@ -21,14 +21,14 @@ class postView(TemplateView):
             id1 = int(id) - 1 
             postView.pre_post = get_object_or_404(Post, id=id1)
         except:
-            id1 = 1
-            postView.pre_post = get_object_or_404(Post, id=id1)
+           
+            postView.pre_post = get_object_or_404(Post, id=1)
         try:
             id1 = int(id) + 1 
             postView.next_post = get_object_or_404(Post, id=id1)
         except:
             id1 = 1
-            postView.next_post = get_object_or_404(Post, id=id1)
+            postView.next_post = get_object_or_404(Post, id=1)
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
         else:
@@ -59,14 +59,14 @@ class postView(TemplateView):
             id1 = int(id) - 1 
             postView.pre_post = get_object_or_404(Post, id=id1)
         except:
-            id1 = 1
-            postView.pre_post = get_object_or_404(Post, id=id1)
+            
+            postView.pre_post = get_object_or_404(Post, id=1)
         try:
             id1 = int(id) + 1 
             postView.next_post = get_object_or_404(Post, id=id1)
         except:
             id1 = 1
-            postView.next_post = get_object_or_404(Post, id=id1)
+            postView.next_post = get_object_or_404(Post, id=1)
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
         else:
