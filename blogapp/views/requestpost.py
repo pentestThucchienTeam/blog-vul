@@ -48,8 +48,8 @@ class requestpostView(TemplateView):
             return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
         else:
             if not ssrf:
-                blacklist = [":8000","local","127.0","127.1","127.2","127-","admin","file:///","file://"," dict://","ftp://","gopher://",
-                "http://2130706433/","http://0177.0.0.1/","0.0.1","http://0/","①","②","⑦","⓪","⓿"]
+                blacklist = [":8000",":80","local","127.0","127.1","127.2","127-","admin","file:///","file://"," dict://","ftp://","gopher://",
+                "http://2130706433/","http://0177.0.0.1/","0.0.1","http://0/","①","②","⑦","⓪","⓿","@","#"]
                 url = self.request.POST.get("crawl")
                 for x in blacklist:
                     if x in url:
