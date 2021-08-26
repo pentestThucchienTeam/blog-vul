@@ -19,9 +19,7 @@ cryptography
 paramiko
 lxml
 requests
-<<<<<<< HEAD
 bs4
 html5lib
-=======
 defusedxml
->>>>>>> 922fcb140bd431144c9cbfda142a59ce8eb0a85f
+

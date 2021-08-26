@@ -53,24 +53,23 @@ class requestpostView(TemplateView):
             crawl = requests.get(url)
             soup = BeautifulSoup(crawl.content, 'html5lib')
             body = soup.body
+            imgdb= '/uploads/2021/08/26/18vgsjkzhy.jpg'
             for i in body.find_all('img', src=True):
-                if 'http' not in i['src']:
+                
+                if '//' not in i['src']:
                     file = self.generate_file()
                     with open("core/media/"+file, "wb") as img:
                         res = requests.get(url_parse+i['src'])
                         img.write(res.content)
-                else:
-                    file = self.generate_file()
-                    with open("core/media/"+file, "wb") as img:
-                        res = requests.get(i['src'])
-                        img.write(res.content)
-                i['src'] = '/media/' + file
-            p_tag = body.find_all(['p','pre','span'])
+                    i['src'] = '/media/' + file    
+                    
+            #p_tag = body.find_all(['p','pre','span','h5','h6','h4','h3'])
+            p_tag = soup.find_all('body')
             content = ""
             for i in p_tag:
                 content += str(i)
 
-            create= Post.objects.create(title="aaaa",status=2, content=content)
+            create= Post.objects.create(title=soup.title.text,status=2, content=content, images= imgdb)
             create.author_id.add(request.user.id)
 
 
