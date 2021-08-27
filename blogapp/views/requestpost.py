@@ -52,27 +52,29 @@ class requestpostView(TemplateView):
             url_parse = url_parse.scheme + '://' + url_parse.netloc
             crawl = requests.get(url)
             soup = BeautifulSoup(crawl.content, 'html5lib')
-            body = soup.body
-            imgdb= '/uploads/2021/08/26/18vgsjkzhy.jpg'
-            for i in body.find_all('img', src=True):
+            imgdb= '/uploads/2021/05/31/postimages.jpg'
+            fulltag=soup.find_all(["div","main","section","p"],
+            class_ = ["post-content",
+            "td-post-content",
+            "section",
+            "markdown-body",
+            "ui pilled segment md",
+            "md-contents article-content__body my-2 flex-fill default",
+            "aq ar as at au fl aw w"])
+            for i in soup.body.find_all('img', src=True):
                 
                 if '//' not in i['src']:
                     file = self.generate_file()
                     with open("core/media/"+file, "wb") as img:
                         res = requests.get(url_parse+i['src'])
                         img.write(res.content)
-                    i['src'] = '/media/' + file    
-                    
-            #p_tag = body.find_all(['p','pre','span','h5','h6','h4','h3'])
-            p_tag = soup.find_all('body')
+                    i['src'] = '/media/' + file               
             content = ""
-            for i in p_tag:
+            for i in fulltag:
                 content += str(i)
 
             create= Post.objects.create(title=soup.title.text,status=2, content=content, images= imgdb)
             create.author_id.add(request.user.id)
-
-
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
 
