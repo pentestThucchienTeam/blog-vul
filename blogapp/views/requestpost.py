@@ -9,7 +9,6 @@ from blogapp.models.Setting import Vul
 from datetime import datetime
 import requests
 from urllib.parse import urlparse
-import re
 from bs4 import BeautifulSoup
 from django.utils.crypto import get_random_string
 from defusedxml.ElementTree import parse
@@ -17,7 +16,6 @@ from defusedxml.ElementTree import parse
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
-
     def get(self, request):
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name,{'object_list': object_list})
@@ -25,7 +23,6 @@ class requestpostView(TemplateView):
     def post(self, request):
         xxe = Vul.objects.get(name='XXE').status
         if request.FILES:
-
             xmlfile = request.FILES['xmlfile']
             if xxe:
                 parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
@@ -53,7 +50,7 @@ class requestpostView(TemplateView):
             crawl = requests.get(url)
             soup = BeautifulSoup(crawl.content, 'html5lib')
             imgdb= '/uploads/2021/05/31/postimages.jpg'
-            fulltag=soup.find_all(["div","main","section","p"],
+            fulltag=soup.body.find_all(["div","main","section","p"],
             class_ = ["post-content",
             "td-post-content",
             "section",
