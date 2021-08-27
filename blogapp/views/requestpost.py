@@ -47,15 +47,19 @@ class requestpostView(TemplateView):
             return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
         else:
             if not ssrf:
-                with open('text/blacklist.txt', 'r') as file:
-                    blacklist = [s.strip() for s in file.readlines()]
                 url = self.request.POST.get("crawl")
+                blacklist = requestpostView.readfile()
                 for x in blacklist:
                     if x in url:
 
                         return render(request, self.template_name,{"message":"Your URL does not match our rules. Please re-enter another URL"},status=403)        
             return render(request, self.template_name,)
-        
+    
+    def readfile():
+        with open('text/blacklist.txt', 'r') as file:
+                blacklist = [s.strip() for s in file.readlines()]
+        return blacklist
+
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
         filename = get_random_string(10, self.VALID_KEY_CHARS) + ".jpg"
