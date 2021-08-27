@@ -1,5 +1,4 @@
 import os
-from django.http.response import Http404
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from lxml import etree
@@ -10,7 +9,7 @@ from datetime import datetime
 import requests
 from django.utils.crypto import get_random_string
 from defusedxml.ElementTree import parse
-import ctypes
+
 
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
@@ -48,14 +47,15 @@ class requestpostView(TemplateView):
             return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
         else:
             if not ssrf:
-                blacklist = [":8000",":80","local","127.0","127.1","127.2","127-","admin","file:///","file://"," dict://","ftp://","gopher://",
-                "http://2130706433/","http://0177.0.0.1/","0.0.1","http://0/","①","②","⑦","⓪","⓿","@","#"]
+                with open('text/blacklist.txt', 'r') as file:
+                    blacklist = [s.strip() for s in file.readlines()]
                 url = self.request.POST.get("crawl")
                 for x in blacklist:
                     if x in url:
-                        return render(request, self.template_name, {"message":"Your URL does not match our rules. Please re-enter another URL"})   
-            return render(request, self.template_name)
 
+                        return render(request, self.template_name,{"message":"Your URL does not match our rules. Please re-enter another URL"},status=403)        
+            return render(request, self.template_name,)
+        
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
         filename = get_random_string(10, self.VALID_KEY_CHARS) + ".jpg"
