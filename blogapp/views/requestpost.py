@@ -16,6 +16,7 @@ from defusedxml.ElementTree import parse
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
+
     def get(self, request):
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name,{'object_list': object_list})
@@ -23,57 +24,13 @@ class requestpostView(TemplateView):
     def post(self, request):
         xxe = Vul.objects.get(name='XXE').status
         if request.FILES:
-            xmlfile = request.FILES['xmlfile']
-            if xxe:
-                parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
-                tree = etree.parse(xmlfile, parser=parser)
-            else:
-                tree = parse(xmlfile)
-            root = tree.getroot()
-            file = self.generate_file()
-            with open("core/media/"+file, "wb") as img:
-                res = requests.get(root[3].text)
-                img.write(res.content)
-            create=Post.objects.create(title=root[0].text, status=2, content=root[2].text, images=file)
-            create.author_id.add(request.user.id)
-            tag = Tags.objects.filter(name=root[1].text)
-            if tag:
-                tagID = Tags.objects.get(name=root[1].text)
-            else:
-                tagID = Tags(name=root[1].text)
-                tagID.save()
-            create.tags.add(tagID.id)
+            create = self.crawlxml(xxe)
         else:
-            url = self.request.POST.get("crawl")
-            url_parse = urlparse(url)
-            url_parse = url_parse.scheme + '://' + url_parse.netloc
-            crawl = requests.get(url)
-            soup = BeautifulSoup(crawl.content, 'html5lib')
-            imgdb= '/uploads/2021/05/31/postimages.jpg'
-            fulltag=soup.body.find_all(["div","main","section","p"],
-            class_ = ["post-content",
-            "td-post-content",
-            "section",
-            "markdown-body",
-            "ui pilled segment md",
-            "md-contents article-content__body my-2 flex-fill default",
-            "aq ar as at au fl aw w"])
-            for i in soup.body.find_all('img', src=True):
-                
-                if '//' not in i['src']:
-                    file = self.generate_file()
-                    with open("core/media/"+file, "wb") as img:
-                        res = requests.get(url_parse+i['src'])
-                        img.write(res.content)
-                    i['src'] = '/media/' + file               
-            content = ""
-            for i in fulltag:
-                content += str(i)
+            create = self.crawlurl(xxe)
 
-            create= Post.objects.create(title=soup.title.text,status=2, content=content, images= imgdb)
-            create.author_id.add(request.user.id)
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
+
 
     def generate_file(self):
         dirname = datetime.now().strftime("uploads/%Y/%m/%d/")
@@ -85,3 +42,55 @@ class requestpostView(TemplateView):
             return filename
         else:
             return filename
+          
+    def crawlurl(self, xxe):
+        url = self.request.POST.get("crawl")
+        url_parse = urlparse(url)
+        url_parse = url_parse.scheme + '://' + url_parse.netloc
+        crawl = requests.get(url)
+        soup = BeautifulSoup(crawl.content, 'html5lib')
+        imgdb= '/uploads/2021/05/31/postimages.jpg'
+        fulltag=soup.body.find_all(["div","main","section","p"],
+        class_ = ["post-content",
+                "td-post-content",
+                "section",
+                "markdown-body",
+                "ui pilled segment md",
+                "md-contents article-content__body my-2 flex-fill default",
+                "aq ar as at au fl aw w"])
+        for i in soup.body.find_all('img', src=True):                
+            if '//' not in i['src']:
+                file = self.generate_file()
+                with open("core/media/"+file, "wb") as img:
+                    res = requests.get(url_parse+i['src'])
+                    img.write(res.content)
+                i['src'] = '/media/' + file               
+        content = ""
+        for i in fulltag:
+            content += str(i)
+        create= Post.objects.create(title=soup.title.text,status=2, content=content, images= imgdb)
+        create.author_id.add(self.request.user.id)
+        return create
+
+    def crawlxml(self, xxe):
+        xmlfile = self.request.FILES['xmlfile']
+        if xxe:
+            parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
+            tree = etree.parse(xmlfile, parser=parser)
+        else:
+            tree = parse(xmlfile)
+        root = tree.getroot()
+        file = self.generate_file()
+        with open("core/media/"+file, "wb") as img:
+            res = requests.get(root[3].text)
+            img.write(res.content)
+        create=Post.objects.create(title=root[0].text, status=2, content=root[2].text, images=file)
+        create.author_id.add(self.request.user.id)
+        tag = Tags.objects.filter(name=root[1].text)
+        if tag:
+            tagID = Tags.objects.get(name=root[1].text)
+        else:
+            tagID = Tags(name=root[1].text)
+            tagID.save()
+        create.tags.add(tagID.id)
+        return create
