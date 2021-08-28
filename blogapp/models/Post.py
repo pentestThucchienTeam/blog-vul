@@ -11,7 +11,7 @@ from django.conf import settings
 
 class Post(models.Model):
 
-    title = models.CharField(max_length=30, default="")
+    title = models.CharField(max_length=255, default="")
     tags = models.ManyToManyField(Tags)
     status = models.CharField(max_length=50, default="")
     content = RichTextUploadingField(blank=True)
@@ -19,7 +19,7 @@ class Post(models.Model):
     update_time = models.DateTimeField(auto_now=True)
     author_id = models.ManyToManyField(settings.AUTH_USER_MODEL)
     images = models.ImageField(
-        upload_to="uploads/%Y/%m/%d", height_field=None, width_field=None, max_length=100, blank=True
+        upload_to="uploads/%Y/%m/%d", height_field=None, width_field=None, max_length=255,blank=True
     )
 
     def __str__(self):

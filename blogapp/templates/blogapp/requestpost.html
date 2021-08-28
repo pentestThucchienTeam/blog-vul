@@ -13,7 +13,7 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a onclick="myFunction(this)" id="a1" value="url" class="nav-link"
+          <a onclick="myFunction(this)"  id="a1" value="url" class="nav-link"
             >URL</a
           >
         </li>
@@ -44,10 +44,20 @@
         </p>
         <p class="card-text">Thank you!</p>
       </div>
-      <form style="display: none" id="url" class="text-center">
+      <form 
+      style="display: none" 
+      
+      id="url" 
+      class="text-center"
+      method="POST"
+      >
+      {% csrf_token %}
         <div class="form-group">
           <label for="exampleFormControlFile1"><h4>Via url</h4></label>
+          <p class="card-text">We only accept articles that come from the following page:  </p>
+          <p class="card-text"> <strong> hackingarticles.in, kipalog.com, zerodayinitiative.com/blog, securitylab.github.com</strong></p>
           <input
+            name="crawl" 
             style="display: block"
             type="url"
             class="form-control"
@@ -90,7 +100,6 @@
             class="col-sm-12 table"
             id="request_list"
             role="grid"
-            align="center"
           >
             <thead class="thead-dark">
               <tr role="row">
