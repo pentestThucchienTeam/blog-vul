@@ -24,9 +24,9 @@ class requestpostView(TemplateView):
     def post(self, request):
         xxe = Vul.objects.get(name='XXE').status
         if request.FILES:
-            create = self.crawlxml(xxe)
+            create = self.requestxml(xxe)
         else:
-            create = self.crawlurl(xxe)
+            create = self.requesturl(xxe)
 
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
@@ -43,7 +43,7 @@ class requestpostView(TemplateView):
         else:
             return filename
           
-    def crawlurl(self, xxe):
+    def requesturl(self, xxe):
         url = self.request.POST.get("crawl")
         url_parse = urlparse(url)
         url_parse = url_parse.scheme + '://' + url_parse.netloc
@@ -72,7 +72,7 @@ class requestpostView(TemplateView):
         create.author_id.add(self.request.user.id)
         return create
 
-    def crawlxml(self, xxe):
+    def requestxml(self, xxe):
         xmlfile = self.request.FILES['xmlfile']
         if xxe:
             parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
