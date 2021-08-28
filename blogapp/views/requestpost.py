@@ -29,11 +29,11 @@ class requestpostView(TemplateView):
         else:
             if not ssrf:
                 url = self.request.POST.get("crawl")
-                blacklist = self.readfile()
+                blacklist = requestpostView.readfile()
                 for x in blacklist:
                     if x in url:
                         return render(request, self.template_name,{"message":"Your URL does not match our rules. Please re-enter another URL"},status=403)    
-            create = self.requesturl(xxe)
+            create = self.requesturl()
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
 
