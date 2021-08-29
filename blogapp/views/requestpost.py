@@ -29,7 +29,7 @@ class requestpostView(TemplateView):
         else:
             if not ssrf:
                 url = self.request.POST.get("crawl")
-                blacklist = requestpostView.readfile()
+                blacklist = self.readfile()
                 for x in blacklist:
                     if x in url:
                         return render(request, self.template_name,{"message":"Your URL does not match our rules. Please re-enter another URL"},status=403)    
@@ -49,7 +49,7 @@ class requestpostView(TemplateView):
         else:
             return filename
 
-    def readfile():
+    def readfile(self):
         with open('text/blacklist.txt', 'r') as file:
                 blacklist = [s.strip() for s in file.readlines()]
         return blacklist
