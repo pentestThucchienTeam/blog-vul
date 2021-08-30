@@ -4,6 +4,7 @@
 
 {% endblock %} {% block content %}
 
+
 <div class="container">
   <br />
   <h1 class="text-center">Requesting for new posts</h1>
@@ -123,6 +124,11 @@
     </div>
   </div>
 </div>
+{% if message %}
+<script>
+  alert('{{message}}')
+</script>
+{% endif %}
 <script type="text/javascript">
   function myFunction(clicked) {
     var a1 = document.getElementById('a1');

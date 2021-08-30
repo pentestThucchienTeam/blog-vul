@@ -1,5 +1,4 @@
 import os
-from django.http.response import Http404
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from lxml import etree
@@ -13,6 +12,7 @@ from bs4 import BeautifulSoup
 from django.utils.crypto import get_random_string
 from defusedxml.ElementTree import parse
 
+
 class requestpostView(TemplateView):
     template_name = "requestpost.html"
     VALID_KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'
@@ -23,11 +23,17 @@ class requestpostView(TemplateView):
 
     def post(self, request):
         xxe = Vul.objects.get(name='XXE').status
+        ssrf = Vul.objects.filter(name="SSRF").values()[0]["status"]
         if request.FILES:
             create = self.requestxml(xxe)
         else:
-            create = self.requesturl(xxe)
-
+            if not ssrf:
+                url = self.request.POST.get("crawl")
+                blacklist = self.readfile()
+                for x in blacklist:
+                    if x in url:
+                        return render(request, self.template_name,{"message":"Your URL does not match our rules. Please re-enter another URL"},status=403)    
+            create = self.requesturl()
         object_list = Post.objects.filter(author_id=request.user.id, status=2).order_by('-creat_time')
         return render(request, self.template_name, {'id': create.id, 'object_list': object_list})
 
@@ -42,8 +48,13 @@ class requestpostView(TemplateView):
             return filename
         else:
             return filename
-          
-    def requesturl(self, xxe):
+
+    def readfile(self):
+        with open('text/blacklist.txt', 'r') as file:
+                blacklist = [s.strip() for s in file.readlines()]
+        return blacklist
+
+    def requesturl(self):
         url = self.request.POST.get("crawl")
         url_parse = urlparse(url)
         url_parse = url_parse.scheme + '://' + url_parse.netloc
