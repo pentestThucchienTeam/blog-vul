@@ -14,6 +14,7 @@ class profileView(LoginRequiredMixin, TemplateView):
         id = request.user.id
         objectProfile = get_object_or_404(profile, user_id=id)
         imageName = objectProfile.avatar.name.split('/')[-1]
+        print(imageName)
         return render(request, self.template_name, {"objectProfile": objectProfile, "imageName": imageName})
 
     def post(self, request):
@@ -28,5 +29,6 @@ class profileView(LoginRequiredMixin, TemplateView):
                 profile_update.save()
 
         objectProfile = get_object_or_404(profile, user_id=id)
+        imageName = objectProfile.avatar.name.split('/')[-1]
 
-        return render(request, self.template_name, {"objectProfile": objectProfile})
+        return render(request, self.template_name, {"objectProfile": objectProfile, "imageName": imageName})
