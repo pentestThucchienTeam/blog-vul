@@ -1,5 +1,4 @@
 from genericpath import exists
-from django.views.generic import TemplateView
 import os
 
 import mimetypes
@@ -11,7 +10,6 @@ from django.views import View
 class uploadView(View):
 	def get(self, request):
 		fileName = request.GET['image']
-		print(fileName)
 		uploadsFolder = "/code/core/media/uploads"
 		fullPath = os.path.normpath(os.path.join(uploadsFolder, fileName))
 		if not exists(fullPath):
