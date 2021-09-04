@@ -28,11 +28,13 @@ class settingView(ListView):
         jwts = Vul.objects.filter(name="JWT").values()[0]["status"]
         if request.user.username:
             cookie_check = request.COOKIES["auth"]
+            print(cookie_check)
             if jwt_confusion and not jwts:
                 ext, fake = cookie_check.split(".", 1)
                 header = base64url_decode(bytes(str(ext), "utf-8"))
                 pubkey = json.loads(header.decode("utf-8"))
                 publickey = pubkey["publickey"]
+                print(cookie_check)
                 cookie_decode = jwt_vul.decode(cookie_check, publickey)
 
             elif jwts:

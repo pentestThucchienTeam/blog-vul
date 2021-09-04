@@ -96,13 +96,16 @@ class HMACAlgorithm(Algorithm):
 
         if isinstance(key, text_type):
             key = key.encode('utf-8')
+            print(key)
 
         return key
 
     def sign(self, msg, key):
+        print(hmac.new(key, msg, self.hash_alg).digest())
         return hmac.new(key, msg, self.hash_alg).digest()
 
     def verify(self, msg, key, sig):
+        print(sig)
         return constant_time_compare(sig, self.sign(msg, key))
 
 if has_crypto:
