@@ -1,16 +1,16 @@
 from genericpath import exists
 import os
-
+from decouple import config
 import mimetypes
 import os
 from django.http import FileResponse, Http404
 from django.views import View
 
 
-class uploadView(View):
+class avatarView(View):
 	def get(self, request):
 		fileName = request.GET['image']
-		uploadsFolder = "/code/core/media/uploads"
+		uploadsFolder = config("avatarLink")
 		fullPath = os.path.normpath(os.path.join(uploadsFolder, fileName))
 		if not exists(fullPath):
 			raise Http404
