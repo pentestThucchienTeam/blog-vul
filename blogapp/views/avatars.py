@@ -6,7 +6,7 @@ import mimetypes
 from django.http import FileResponse, Http404
 from django.views import View
 from blogapp.models.Setting import Vul
-
+from decouple import config
 
 class avatarView(View):
 	def get(self, request):		
