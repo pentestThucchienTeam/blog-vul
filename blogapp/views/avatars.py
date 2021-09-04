@@ -8,7 +8,7 @@ from django.views import View
 from blogapp.models.Setting import Vul
 
 
-class uploadView(View):
+class avatarView(View):
 	def get(self, request):		
 		fileName = request.GET['image']
 		Ptraversal = Vul.objects.filter(name="Path travesal").values()[0]["status"]
