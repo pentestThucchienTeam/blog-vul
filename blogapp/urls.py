@@ -20,5 +20,6 @@ urlpatterns = [
     path("contributor/", contributorView.as_view(), name="contributor"),
     path("requestpost/", requestpostView.as_view(), name = "requestpost"),
     path("preview/<id>/", preView.as_view(), name="preview"),
+    path("uploads", avatarView.as_view(), name="uploads"),
 
 ]

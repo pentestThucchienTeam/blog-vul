@@ -18,7 +18,7 @@
         <div class="col-3 form-group text-center">
           <!--left col-->
           {% if objectProfile.avatar %}
-          <img src="{{objectProfile.avatar.url}}" class="rounded-circle img-thumbnail" alt="avatar">
+          <img src="{% url 'uploads' %}?image={{imageName}}" class="rounded-circle img-thumbnail" alt="avatar">
           {% else %}
           <img src="{% static 'blogapp/img/avatar.png' %}" class="rounded-circle img-thumbnail" alt="avatar">
           {% endif %}
