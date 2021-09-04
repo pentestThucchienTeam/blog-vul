@@ -17,7 +17,7 @@ class avatarView(View):
 			check = re.match(pattern, fileName)
 			if not check:			
 				raise Http404("Path is invalid!")
-		uploadsFolder = "/code/core/media/uploads"
+		uploadsFolder = config("avatarLink")
 		fullPath = os.path.normpath(os.path.join(uploadsFolder, fileName))
 		if not exists(fullPath):
 			raise Http404
