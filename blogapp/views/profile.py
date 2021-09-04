@@ -15,7 +15,6 @@ class profileView(LoginRequiredMixin, TemplateView):
         objectProfile = get_object_or_404(profile, user_id=id)
         imageName = objectProfile.avatar.name.split('/')[-1]
         return render(request, self.template_name, {"objectProfile": objectProfile, "imageName": imageName})
-
     def post(self, request):
         id = request.user.id
         if request.FILES:
