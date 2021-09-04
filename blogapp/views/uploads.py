@@ -13,7 +13,7 @@ class uploadView(View):
 		fileName = request.GET['image']
 		Ptraversal = Vul.objects.filter(name="Path travesal").values()[0]["status"]
 		if not Ptraversal:
-			pattern ="^[A-Za-z0-9\.\-\_]+$"
+			pattern ="^[A-Za-z0-9\.\-_]+$"
 			check = re.match(pattern, fileName)
 			if not check:			
 				raise Http404("Path is invalid!")
