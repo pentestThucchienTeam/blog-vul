@@ -12,18 +12,23 @@ class postView(TemplateView):
 
     def get(self, request, id):
         form = CommentForm()
-        postView.object_list = Post.objects.all()
+        postView.object_list = Post.objects.filter(status=1).order_by('-creat_time')[:5]
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]["status"]
+        
         try:
-            postView.pre_post = get_object_or_404(Post, id=(int(id) - 1))
+            id1 = int(id) - 1 
+            postView.pre_post = get_object_or_404(Post, id=id1)
         except:
-            postView.pre_post = get_object_or_404(Post, id=id)
+           
+            postView.pre_post = get_object_or_404(Post, id=1)
         try:
-            postView.next_post = get_object_or_404(Post, id=(int(id) + 1))
+            id1 = int(id) + 1 
+            postView.next_post = get_object_or_404(Post, id=id1)
         except:
-            postView.next_post = get_object_or_404(Post, id=id)
+            id1 = 1
+            postView.next_post = get_object_or_404(Post, id=1)
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
         else:
@@ -45,18 +50,23 @@ class postView(TemplateView):
         )
 
     def post(self, request, id):
-        postView.object_list = Post.objects.all()
+        postView.object_list = Post.objects.filter(status=1).order_by('-creat_time')[:5]
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]["status"]
+        
         try:
-            postView.pre_post = get_object_or_404(Post, id=(int(id) - 1))
+            id1 = int(id) - 1 
+            postView.pre_post = get_object_or_404(Post, id=id1)
         except:
-            postView.pre_post = get_object_or_404(Post, id=id)
+            
+            postView.pre_post = get_object_or_404(Post, id=1)
         try:
-            postView.next_post = get_object_or_404(Post, id=(int(id) + 1))
+            id1 = int(id) + 1 
+            postView.next_post = get_object_or_404(Post, id=id1)
         except:
-            postView.next_post = get_object_or_404(Post, id=id)
+            id1 = 1
+            postView.next_post = get_object_or_404(Post, id=1)
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
         else:

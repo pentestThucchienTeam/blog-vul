@@ -1,0 +1,170 @@
+{% extends "blogapp/base.html" %}
+{% load static %}
+
+{% block title %}
+  {%if sql%}
+    {%for x in post_render%}
+    <title>{{x.title}}</title>  
+    {%endfor%}
+  {%else%}
+    <title>{{post_render.title}}</title>
+{%endif%}
+{% endblock %}
+  
+
+{% block content %}
+<div class="container" style="padding-bottom: 100px;">
+  <div class="row">
+        <!-- Latest Posts -->
+        
+        <main class="post blog-post col-lg-8"> 
+          <div class="container">
+            <div class="post-single">
+            {%if sql%}
+              {%for x in post_render%}
+                <div class="post-thumbnail"><img src="{{x.images.url}}" alt="..." class="img-fluid"></div>
+                <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                <div class="category"><a href="#">Web</a><a href="#">Vulnerability</a></div>
+              </div>
+              <h1>{{x.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{x.id}}</span></div></a>
+                    <div class="d-flex align-items-center flex-wrap">       
+                    <div class="date"><i class="icon-clock"></i> {{x.creat_time}}</div>
+                    <div class="views"><i class="icon-eye"></i> 500</div>
+		    <div class="comments meta-last"><i class="icon-comment"></i>{{x.comment.count}}</div>
+                  </div>
+                </div>
+                <div class="post-body">
+                <p class="lead">{{x.admin_content}}</p>
+              </div>
+               
+              {%endfor%}
+            {%else%}
+              <div class="post-thumbnail"><img src="{{post_render.images.url}}" alt="..." class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="category"><a href="#">Web</a><a href="#">Vulnerability</a></div>
+                </div>
+                <h1>{{post_render.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{post_render.id}}</span></div></a>
+                  <div class="d-flex align-items-center flex-wrap">       
+                    <div class="date"><i class="icon-clock"></i> {{post_render.creat_time}}</div>
+                    <div class="views"><i class="icon-eye"></i> 500</div>
+                     <div class="comments meta-last"><i class="icon-comment"></i>{{post_render.comment.count}}</div>
+                  </div>
+                </div>
+                <div class="post-body">
+                  <p class="lead">{{post_render.admin_content}}</p> 
+                </div>
+
+                <div class="post-comments" style="padding-bottom: 10px;">
+                  
+        
+                  {% for comment in post_render.comment.all %}
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>{{comment.author_id}}</strong><span class="date">{{comment.create_time}}</span></div>
+                      </div>
+                    </div>
+                {%endfor%}
+                {%if user.username%}
+                <div class="add-comment">
+                  <form action="" method ="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div >
+                        <button type="submit" class="btn btn-secondary" >Submit Post</button>
+                      </div>
+                    </div>
+                  </form>
+                {%endif%}
+                </div>
+              </div>
+              {%endif%}
+            </div>
+          </div>
+        </main>
+        
+        <aside class="col-lg-4">
+          <!-- Widget [Search Bar Widget]-->
+          <div class="widget search">
+            <header>
+              <h3 class="h6">Search the blog</h3>
+            </header>
+             <form action="{% url 'search' %}" method = "GET" class="search-form">
+                
+              <div class="form-group">
+                    <input type="search" name="search" id="search" placeholder="What are you looking for?">
+                    <button type="submit" class="submit"><i class="icon-search-1"></i></button>
+              </div>
+              <div class="form-group">
+                    <script>
+            		let blacklist = [">","]",">","<","\""];
+                        var tag = (new URLSearchParams(window.location.search)).get('tagId');
+                         var tags = [" ","kinhnghiem","chiase","kienthuc"];
+                         document.write('<select name="tagId" id="tagId">');
+                         if(tag) {
+			  	{% if not xss %}
+                            if(validate(tag)){
+                             document.write('<option selected>'+tag+'</option>');
+			    }
+				{% else %}
+			    document.write('<option selected>'+tag+'</option>');
+				{% endif %}
+                         }
+                         for(var i=0;i<tags.length;i++) {
+                             if(tags[i] === tag) {
+                                 continue;
+                             }
+                             document.write('<option>'+tags[i]+'</option>');
+                         }
+                         document.write('</select>');
+                    </script>
+                  </div>
+             <select name="tagId" id="tagId"><option> </option><option>kinhnghiem</option><option>chiase</option><option>kienthuc</option></select>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">Latest Posts</h3>
+            </header>
+            {%for item in object_list%}
+            <div class="blog-posts"><a href="/post/{{item.id}}">
+                <div class="item d-flex align-items-center">
+                  <div class="image"><img src="{{item.images.url}}" alt="..." class="img-fluid"></div>
+                  <div class="title"><strong>{{item.title}}</strong>
+                    <div class="d-flex align-items-center">
+                      <div class="views"><i class="icon-eye"></i> 500</div>
+                      <div class="comments"><i class="icon-comment"></i>12</div>
+                    </div>
+                  </div>
+                </div></a>
+                {%endfor%}
+          
+          <!-- Widget [Tags Cloud Widget]-->
+           <div class="widget tags">       
+            <header>
+              <h2 class="h6">Tags</h2>
+            </header>
+            <ul class="list-inline">
+              {%for t in listtag %}
+             <div> 
+              <a href="/tag/{{t.name}}"><strong>#{{t.name}}</strong></a>
+              <br>
+             </div>
+             {%endfor%} 
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <!-- Page Footer-->
+{% endblock %}
