@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic.base import TemplateView
 from blogapp.models.Post import Post
 from blogapp.models.Tag import Tags
+from blogapp.models.Setting import Vul
+
 
 
 class preView(TemplateView):
@@ -12,10 +14,12 @@ class preView(TemplateView):
     def get(self, request, id):
        
         preView.object_list = Post.objects.filter(status=1).order_by('-creat_time')[:5]
+        idor = Vul.objects.get(name="IDOR").status
         preView.listtag = Tags.objects.all()
         preView.post_render = get_object_or_404(Post, id=id)
-        if preView.post_render.status != '2':
-            raise Http404 
+        if idor:
+            if preView.post_render.status != '2' or preView.post_render.author_id != request.user.id:
+                raise Http404 
         else:
             return render(
                 request,
