@@ -19,7 +19,7 @@ Check the cookie. You can see `auth` with value in JWT format.
 The JWT is using RS256 algorithm to verify the token with public key is directly embedded in `publickey`.
 It contain two field `admin :false` to consider permission of user. So you must change it into `true` to privilege escalation to admin.
 
-__*Use [jwt_tool](https://github.com/ticarpi/jwt_tool) to check whether it vulnerable__
+__*Use [jwt_tool](https://github.com/ticarpi/jwt_tool) to check whether it vulnerable*__
 
 ### Step 1. Copy the value of public key and save it in file name ` public.key `
 
