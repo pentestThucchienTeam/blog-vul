@@ -28,7 +28,7 @@ Check it running or not.
 
 ![rm1](./core/static/assets/img/rm1.png)
 
-![rm1](./core/static/assets/img/rm2.png)
+![image](https://user-images.githubusercontent.com/63194321/132701936-c62a7ac6-7b73-486c-ad83-408254e25659.png)
 
 ## Step 3
 
