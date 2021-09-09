@@ -11,5 +11,5 @@ class get_key():
     
     def weak():
         with open("text/key.txt","r") as file:
-            weak_key =  secrets.choice(file.readlines())
+            weak_key =  secrets.choice(file.readlines()).strip()
         return weak_key
