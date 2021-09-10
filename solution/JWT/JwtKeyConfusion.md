@@ -2,7 +2,7 @@
 
 ## Solution
 
-Resgister an account and access the [Setting Page](https://blog-vul.herokuapp.com/setting/). Then carry out submit the form below, I receive an notification.
+Resgister an account and access the [Setting Page](https://blog-vul.herokuapp.com/setting/). Then carry out submit the form below, you will receive an notification.
 
 ` You don't have permission`
 
