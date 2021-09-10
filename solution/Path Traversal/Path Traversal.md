@@ -1,12 +1,12 @@
 # Path traversal
 
-Observing the URL of the avatar image in the Profile folder, we see that this image is displayed by calling the name of the image directly in the folder. Because of this, I think of a possible vulnerability that is Path Traversal
+Looking at the URL of the profile picture in the Profile folder, we see that this image is displayed by calling the image name directly in the folder. So think of a possible loophole that is Path Traversal
 ![image](https://user-images.githubusercontent.com/63194321/132466602-3bee35bd-62d8-4ab1-b019-ec828afa44f3.png)
 
 
 ### Solution
 
-I will use Burp Suite to make the job easy
+Use Burp Suite to make work easy
 
 B1. We use Burp Suite to intercept the request to get the avatar image in the Profile section and send it to the Burp Repeater.  
 ![image](https://user-images.githubusercontent.com/63194321/132466638-cdd3d4df-b4a4-475a-b9a1-0f884eab281e.png)
