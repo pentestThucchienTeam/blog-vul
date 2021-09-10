@@ -2,8 +2,8 @@
 
 ## SQLI in Search bar
 
-At first I found that the search variable would return exactly what I just entered so I tried a simple payload to test SQLi `1 or 1=1--`
-Surprisingly, the results returned all the articles in the data table of the application
+It might seem at first that the search variable will return exactly what was entered so insert a simple payload to check for SQLi `1or1=1-`
+Surprisingly, the results returned all the articles in the application's data table
 
 ![image](https://user-images.githubusercontent.com/63194321/132503809-073c0af0-404a-4ea9-81b4-b16028215cdb.png)
 
