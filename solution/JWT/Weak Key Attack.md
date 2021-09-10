@@ -6,7 +6,7 @@ Log in with any user account. View cookies of the website, here we see the web a
 And here we have a "Settings" page that needs admin rights to be able to change everything.
 ![image](https://user-images.githubusercontent.com/63194321/132480298-0eb24f61-6abf-4320-9b45-5261255af4bd.png)
 
-I then take this JWT code to decode and read the contents inside it. We see alg:HS256 and of course I don't have the secret key. We will proceed to crack the Key if the developer set the key is not strong enough
+Then get this JWT code to decode and read the contents inside it. Noticed the `alg:HS256` and of course no secret key. We will proceed to crack the Key if the developer sets the key is not strong enough
 ![image](https://user-images.githubusercontent.com/63194321/132480432-00f13ddc-2e19-46b1-bfab-a7ec492fb86c.png)
 ### Solution
 Our essential tool is `jwt_tool` (Install: https://github.com/ticarpi/jwt_tool)
