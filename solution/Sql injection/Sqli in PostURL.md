@@ -2,7 +2,7 @@
 
 ## SQLi in PostURL
 
-Looking at the URL value of the Post site it could be vulnerable so I tried entering a payload `1 or 1=1` and the site returned all posts in databases.
+Look at the URL value of the Post page, it could be vulnerable so try entering the payload `1 or 1=1` and the site returns all the posts in the database.
 
 ![image](https://user-images.githubusercontent.com/63194321/132512881-bafa5801-e011-4d2b-9d93-554ab310152b.png)
 
