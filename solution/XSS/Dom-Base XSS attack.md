@@ -1,9 +1,9 @@
 # Dom-Base XSS attack
-In the search bar i see a `select` box that selects the `tagID` index and when nothing is selected the tagID will be blank this is a perfect place to insert payloads.
+In the search bar, there is a `select` box select the `tagID` index and when nothing is selected the tagID will be empty which is a perfect place to insert the payload.
 
 ![image](https://user-images.githubusercontent.com/63194321/132681760-8801a214-2ea3-405f-8a3e-298c3b7327ff.png)
 
-I would insert in the payload `<option><script>alert(document.cookie)</script></option>`.
+If insert special payload `<option><script>alert(document.cookie)</script></option>`.
 
 ![image](https://user-images.githubusercontent.com/63194321/132683773-e0ae4b0d-0bc6-4d3f-be0b-f457d2792000.png)
 
