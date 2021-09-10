@@ -7,7 +7,7 @@ And here we have a "Settings" page that needs admin rights to be able to change 
 ![image](https://user-images.githubusercontent.com/63194321/132474580-2add05e1-f9d7-4983-a9dd-22b0063e8ffa.png)
 
 
-Then take this JWT code to decode and read the contents inside it. We see `alg:HS256` and of course I don't have the secret key. So think of one possibility that is `none`attack.
+Then take this JWT code to decode and read the contents inside it. We see `alg:HS256` and of course we don't have the secret key. So think of one possibility that is `none`attack.
 
 ![image](https://user-images.githubusercontent.com/63194321/132473084-64c2f766-cf71-490c-9c34-6c70b36bfdd1.png)
 
