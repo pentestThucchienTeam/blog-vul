@@ -7,8 +7,11 @@ And here we have a "Settings" page that needs admin rights to be able to change 
 ![image](https://user-images.githubusercontent.com/63194321/132480298-0eb24f61-6abf-4320-9b45-5261255af4bd.png)
 
 Then get this JWT code to decode and read the contents inside it. Noticed the `alg:HS256` and of course no secret key. We will proceed to crack the Key if the developer sets the key is not strong enough
+
 ![image](https://user-images.githubusercontent.com/63194321/132480432-00f13ddc-2e19-46b1-bfab-a7ec492fb86c.png)
+
 ### Solution
+
 Our essential tool is `jwt_tool` (Install: https://github.com/ticarpi/jwt_tool)
 
 B1. We will copy the JWT in the website cookie and open the downloaded jwt_tool and run it with the command:
