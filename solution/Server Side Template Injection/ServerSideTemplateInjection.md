@@ -1,12 +1,12 @@
 # Server Side Template Injection
 
-Observe the setting page [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see that username is a dynamic content and displayed __Hi, Username__. So I try to test SSTI here.
+Observe the setting page [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see that username is a dynamic content and displayed __Hi, Username__.
 
 ![Web page display username](https://user-images.githubusercontent.com/83699106/132437761-05b5e2dc-98e0-4c50-8cb2-7e9e0c9c33b1.png)
 
 ## Solution
 
-When I try to register an account. I realized it didn't control the username format and this web use Django framwork. So I can register an account with an special username.
+Register an account. It didn't control the username format and this web use Django framwork. So you can register an account with an special username.
 
 ### B1. Identify the underlying engine.
 Python has some template engine such as Tornaldo, Jinja, Django. Now , sign up an account with username is a formula evaluation. 
