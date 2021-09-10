@@ -1,5 +1,5 @@
 # Stored XSS attack
-While I was commenting on a post with a special comment `<hr>Hello`, I discovered that it is possible to embed HTML tags in the comment section of the post.
+When commenting on a post with the special `<hr> Hello` caption, we discovered that it's possible to embed HTML tags in a post's comments.
 
 ![image](https://user-images.githubusercontent.com/63194321/132675357-de9e730a-6ad0-4345-a3a2-99007fe3d9ca.png)
 
