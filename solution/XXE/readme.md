@@ -1,3 +1,4 @@
+# XML external entỉty
 ## Detect    
 The function creates post by upload xml file at `requestpost`  
     
