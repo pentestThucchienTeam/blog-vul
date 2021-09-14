@@ -1,15 +1,17 @@
 # None Attack
 
-Log in with any user account. View cookies of the website, here we see the web authenticated by JWT.
+After you log in with your account go to the `settings` page where you can edit anything then submit the form. You will receive a message `You don't have permits`.
+
+![image](https://user-images.githubusercontent.com/63194321/133215758-de2cf0c3-f2f2-4f01-9886-90212714dbdb.png)
+
+Check the cookies you will see `auth` with a value of 1 code `jwt`
+
 ![image](https://user-images.githubusercontent.com/63194321/132473506-9f92487f-0f79-4c5d-9ce4-73d8edb3ec47.png)
 
-And here we have a "Settings" page that needs admin rights to be able to change everything.
-![image](https://user-images.githubusercontent.com/63194321/132474580-2add05e1-f9d7-4983-a9dd-22b0063e8ffa.png)
-
-
-Then take this JWT code to decode and read the contents inside it. We see `alg:HS256` and of course we don't have the secret key. So think of one possibility that is `none`attack.
-
+#### Decode the `jwt` values.
 ![image](https://user-images.githubusercontent.com/63194321/132473084-64c2f766-cf71-490c-9c34-6c70b36bfdd1.png)
+
+The JWT uses the `HS256` algorithm with the payload having the `admin:false` field to verify the user's permissions. Somehow change to `true` to elevate to admin
 
 ### Solution
  B1. First, after we have the content, we will proceed to edit the algorithm to `alg:none`.Next, change your job title to `admin`
