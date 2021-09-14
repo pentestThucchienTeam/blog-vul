@@ -1,3 +1,4 @@
+# Server-side request forgery
 ## Detect  
 The blog has 2 functions that allow user to create the new post at page `/requestpost`. One of them crawls the post content of the url that user submit on. Like this:  
   
