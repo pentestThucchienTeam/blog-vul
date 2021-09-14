@@ -1,26 +1,30 @@
 # Server Side Template Injection
 
-Observe the setting page [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see that username is a dynamic content and displayed __Hi, Username__.
+Observe the [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see that username is a dynamic content and displayed __Hi, Username__.
 
 ![Web page display username](https://user-images.githubusercontent.com/83699106/132437761-05b5e2dc-98e0-4c50-8cb2-7e9e0c9c33b1.png)
 
 ## Solution
 
-Register an account. It didn't control the username format and this web use Django framwork. So you can register an account with an special username.
+Register an account.You will be realized that it control the username format and this web use Django framwork. So you can register an account with an special username.
+
 
 ### B1. Identify the underlying engine.
-Python has some template engine such as Tornaldo, Jinja, Django. Now , sign up an account with username is a formula evaluation. 
+
+Python has some template engine such as Tornaldo, Jinja, Django, ... . Now , sign up an account with username is a formula evaluation. 
 
 `{{ 7 * 7 }}`
 
 But it doesn't work. 
 ![image](https://user-images.githubusercontent.com/83699106/132441238-1b673cff-9fd0-4fd6-b0c1-d11cb83bec05.png)
 
+
 Maybe it use Django template because DJT do not allow formula evaluation by default. Trying another payload.
 
 `{% debug %}`
 
 ![image](https://user-images.githubusercontent.com/83699106/132442170-d95e57e5-9147-4592-bc53-ef614f8ca80d.png)
+
 
 __Successfully__, It displayed debug content in username. 
 
