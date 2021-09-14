@@ -1,14 +1,18 @@
 # Weak Key Attack
 
-Log in with any user account. View cookies of the website, here we see the web authenticated by JWT.
+After you log in with your account go to the `settings` page where you can edit anything then submit the form. You will receive a message `You don't have permits`.
+
+![image](https://user-images.githubusercontent.com/63194321/133216016-5ddb08c8-6180-436d-8161-541659293121.png)
+
+Check the cookie. You can see `auth` with value in JWT format.
+
 ![image](https://user-images.githubusercontent.com/63194321/132486535-0431fdc5-4791-4b69-b16d-0e7a24f653ae.png)
 
-And here we have a "Settings" page that needs admin rights to be able to change everything.
-![image](https://user-images.githubusercontent.com/63194321/132480298-0eb24f61-6abf-4320-9b45-5261255af4bd.png)
-
-Then get this JWT code to decode and read the contents inside it. Noticed the `alg:HS256` and of course no secret key. We will proceed to crack the Key if the developer sets the key is not strong enough
+#### Decode `JWT` values
 
 ![image](https://user-images.githubusercontent.com/63194321/132480432-00f13ddc-2e19-46b1-bfab-a7ec492fb86c.png)
+
+The JWT uses the `HS256` algorithm with the payload having the `admin:false` field to verify the user's permissions. Somehow change to `true` to elevate to admin
 
 ### Solution
 
