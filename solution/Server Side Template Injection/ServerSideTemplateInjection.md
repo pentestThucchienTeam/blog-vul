@@ -6,7 +6,7 @@ Observe the [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see
 
 ## Solution
 
-Register an account.You will be realized that it control the username format and this web use Django framwork. So you can register an account with an special username.
+Register an account.You will be realized that it don't control the username format and this web use Django framwork. So you can register an account with an special username.
 
 
 ### B1. Identify the underlying engine.
@@ -30,7 +30,7 @@ __Successfully__, It displayed debug content in username.
 
 ### B2. Exploit
 
-After indentify the template engine that it's using is DJT. We can exploit futher.
+After indentify the template engine that it's using is DJT. We can exploit futher. The impact of this attack in DJT is not serious than other template languages and these are some payload you can use to exploit.
 
 __Cross-site scripting__
 ```
