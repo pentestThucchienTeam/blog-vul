@@ -1,9 +1,17 @@
-## Overview  
-BLog có chức năng upload file để tạo post cho phép ta upload một file xml để tạo ra một bài post tại đường dẫn `/requestpost`  
-  
-![image](https://user-images.githubusercontent.com/22276823/132802693-a174ebd2-ce9a-41d3-b225-d649dc98ec88.png)  
-  
-Nội dụng file xml  
+## Detect    
+The function creates post by upload xml file at `requestpost`  
+    
+![image](https://user-images.githubusercontent.com/22276823/133217003-7ec7f9a8-16bc-4ba0-bcce-117156798eea.png)
+
+After upload, we can see the post is listed in list pending post  
+
+![image](https://user-images.githubusercontent.com/22276823/133217127-f580acc1-6d3e-42cf-8715-04c4bb284f2d.png)
+
+We can see the post by click to the post's title  
+
+![image](https://user-images.githubusercontent.com/22276823/133217615-473f3810-35ee-4473-8775-a58dd38f5792.png)
+ 
+ The content of xml file  
   
 ![image](https://user-images.githubusercontent.com/22276823/132802761-e9e1263f-d921-4fbe-8311-7e106d202982.png)  
   
