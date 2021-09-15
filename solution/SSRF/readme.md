@@ -1,6 +1,6 @@
 # Server-side request forgery
 
-## Detect  
+## 1. Detect  
 
 The blog has 2 functions that allow user to create the new post at page `/requestpost`. One of them crawls the post content of the url that user submit on. Like this:  
   
@@ -21,7 +21,7 @@ Although, The web admin notify the user just allow to submit the url in list. Bu
 (like changepassword) to send request beacause it doesn't need to know the content of response. The another attack vector is port scanning.   
 
 
-## Exploit  
+## 2. Exploit  
 
 __1. Send request with `localhost` and port `80`__  
    
