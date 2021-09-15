@@ -6,7 +6,7 @@ Observe the search page, the website allows users to search for articles through
 
 Notice that the site responds completely to what the user has just typed. So we will enter a piece of code to see if the code runs. If the code runs, the site is already vulnerable to XSS.
 
-![image](https://user-images.githubusercontent.com/63194321/133415780-267ba1d5-78e2-42fd-818a-456f92c5ae2f.png)
+![image](https://user-images.githubusercontent.com/63194321/133427309-356a7428-3a73-488e-b3b2-59edd0fad942.png)
 
 The code we entered is already running, so this site has been XSS.
 
