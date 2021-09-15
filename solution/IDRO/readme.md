@@ -1,5 +1,5 @@
 # Insecure direct object reference
-## Detect    
+## 1. Detect    
 At the `/preview` page. We can see the pending post. When admin approves, the post's status changes to `active` and it is removed in the request list  
 
 ![image](https://user-images.githubusercontent.com/22276823/133434553-a5037591-8a14-4c76-a00a-d0d3f94c6789.png)
@@ -12,7 +12,7 @@ Let attend to column ID. It's a list of sequence number. We can check by changin
 
 The blog returns not found. Because this post status is `active`. So we can't show it in the `preview` page  
 
-## Exploit  
+## 2. Exploit  
 
 We know the post ID is sequence number. We can list all the posts have status `active` and our requested post. If the ID not show in that list, it has 2 case. 
 1. The post is disabled or deleted  
