@@ -14,17 +14,24 @@ First, we will test by appending a quote character `'` after the parameter
 
 The return result is an error message. So pretty sure there's an SQLi vulnerability here.
 
-![image](https://user-images.githubusercontent.com/63194321/133371030-37f8fde2-60b3-494e-a859-f70d885e71a9.png)
+![image](https://user-images.githubusercontent.com/63194321/133391406-72020e06-d044-4b9a-a2c9-48aae1e99cff.png)
 
 To be more sure, we will send a more complex payload `1 or 1=1`.
 
-The result returns all the articles in the database. So this is definitely an `In-band SQLi` vulnerability
+The result returns all the articles in the database. So this is definitely an `SQli vulnerability`
 
+On the other hand, to determine which type of SQLi it is, we will need to check a few more payloads.
+
+If we add the payload `1 AND true=true`, the website results are still normal. This is a `boolean-base blind` which is a form of `blind SQLi`.
+
+![image](https://user-images.githubusercontent.com/63194321/133391554-96cd5a80-a965-44da-b279-c4191f8ebe10.png)
+
+We have identified the type and location of vulnerabilities, then we will exploit them next.
 
 
 ### Solution
 
-Because we have identified the web has been `In-band SQLi`, we can use sqlmap to attack to get data.
+Now we will use a tool called `SQl map` to exploit the vulnerability.
 
 **B1.** Start Sqlmap and enter command to scan for `sqli` vulnerabilities:
 
