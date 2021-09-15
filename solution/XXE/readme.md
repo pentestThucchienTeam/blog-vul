@@ -1,5 +1,5 @@
 # XML external entỉty
-## Detect    
+## 1. Detect    
 The function creates post by upload xml file at `requestpost`  
     
 ![image](https://user-images.githubusercontent.com/22276823/133217003-7ec7f9a8-16bc-4ba0-bcce-117156798eea.png)
@@ -32,7 +32,7 @@ Try to esacpe character
 
 ![image](https://user-images.githubusercontent.com/22276823/133221517-0a406583-9505-4917-9ade-1a550f6da983.png)  
 
-## Exploit  
+## 2. Exploit  
 Upload the file with DTD declaration  
 
 ![image](https://user-images.githubusercontent.com/22276823/133221841-695f7640-51b0-442e-a009-cd72c2a41530.png)  
