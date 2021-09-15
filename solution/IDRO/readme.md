@@ -1,34 +1,23 @@
-# Insecure direct object reference
-## 1. Detect    
-At the `/preview` page. We can see the pending post. When admin approves, the post's status changes to `active` and it is removed in the request list  
+# Insercure Direct Object Reference
 
-![image](https://user-images.githubusercontent.com/22276823/133434553-a5037591-8a14-4c76-a00a-d0d3f94c6789.png)
+## Detect
 
-![image](https://user-images.githubusercontent.com/22276823/133434512-a890c7c4-b1bd-4496-af92-1cc372fce9dc.png)
+__Preview__ function allow you preview your request posts which are pending. Observe the URL, you can be realized that path of posts is its id.
 
-Let attend to column ID. It's a list of sequence number. We can check by changing the number  
   
-![image](https://user-images.githubusercontent.com/22276823/133436104-e5d82e50-f9c5-452f-964a-2bc69a1763d5.png)
-
-The blog returns not found. Because this post status is `active`. So we can't show it in the `preview` page  
-
-## 2. Exploit  
-
-We know the post ID is sequence number. We can list all the posts have status `active` and our requested post. If the ID not show in that list, it has 2 case. 
-1. The post is disabled or deleted  
-2. The post is belong to another people and it's pending  
-
-After checking we found some ID `15, 17, 21,..`. Let check  
-
-The post ID `15`  
-
-![image](https://user-images.githubusercontent.com/22276823/133437304-a3f0b872-3b9b-45d8-a1b7-c33775c7749c.png)
-
-The post ID `17` 
-
-![image](https://user-images.githubusercontent.com/22276823/133437458-062d27bd-de58-482c-9005-768f1bb1037a.png)
-
-You can check by logging out current account (I'm logging in `admin` account) and log in another account (`abc1` in my case) 
-
-![image](https://user-images.githubusercontent.com/22276823/133438805-3fefc362-3bf1-4a0f-9e8c-cb196fcb22f0.png)
+![image](https://user-images.githubusercontent.com/22276823/132520737-fd6e1ff4-fa08-4b16-a805-cf84641aabcf.png)  
   
+My post has id = 16 and the url = `prview/16`
+
+![image](https://user-images.githubusercontent.com/22276823/132520877-54336061-6882-4613-bbf0-89babaa8cb76.png)  
+
+Try changing the id by other id which isn't in your list of requestposts. For example: 15  
+  
+![image](https://user-images.githubusercontent.com/22276823/132521004-f2747701-52a0-4366-bfe0-314b04c7c40b.png)  
+
+The result, it displayed a post of a other user with `id = 15`.
+
+IDOR vulnerability allow you can see and modify arbitrary post of other users from active to pending.
+
+
+
