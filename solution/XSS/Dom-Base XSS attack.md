@@ -1,17 +1,25 @@
 # Dom-Base XSS attack
-In the search bar, there is a `select` box select the `tagID` index and when nothing is selected the tagID will be empty which is a perfect place to insert the payload.
 
-![image](https://user-images.githubusercontent.com/63194321/132681760-8801a214-2ea3-405f-8a3e-298c3b7327ff.png)
+In the Search page, if you don't select anything, the `tagID` field will be left blank on the URL.
 
-If insert special payload `<option><script>alert(document.cookie)</script></option>`.
+![image](https://user-images.githubusercontent.com/63194321/133432102-740893fd-7755-41ce-8f49-feae26fc6060.png)
 
-![image](https://user-images.githubusercontent.com/63194321/132683773-e0ae4b0d-0bc6-4d3f-be0b-f457d2792000.png)
+Now we enter anything as the value of tagID on the URL, it will also be written into the HTML of the web page.
 
-After the victim clicks on the URL, the server will execute the script and temporarily save it in the DOM of the web page.
+![image](https://user-images.githubusercontent.com/63194321/133432522-2ea5dcac-73b1-4e92-8faf-bf51e135bc59.png)
 
-![image](https://user-images.githubusercontent.com/63194321/132684175-7d888150-09e2-4237-b45f-1eaea29171d9.png)
+![image](https://user-images.githubusercontent.com/63194321/133432578-9bc38616-fe4d-4dd4-8042-c29d80acd4ec.png)
 
-The browser then renders the results page and executes the attacker's script
+This occurs because the value of the tagID parameter is written directly to the Document Object Model without going through the processor. So here it is easy to add malicious objects.
+
+![image](https://user-images.githubusercontent.com/63194321/133430466-e1acaee1-8f2d-4d59-8373-d55c8e032333.png)
+
+### Exploid
+**B1.** We will send the URL containing a malicious code to the victim.
+
+![image](https://user-images.githubusercontent.com/63194321/133433722-81efea99-da71-4aa0-8642-edb046bbca63.png)
+
+**B2.** After the victim clicks on the link, the browser will browse to `https://blog-vul.herokuapp.com` and start building the DOM of the page based on the static HTML. After building the DOM, the browser will execute the code contained in the DOM with the malicious payload.
 
 ![image](https://user-images.githubusercontent.com/63194321/132684271-2c9e0555-8718-401f-902e-61fa38896af5.png)
 
