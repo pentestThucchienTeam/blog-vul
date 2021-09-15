@@ -1,3 +1,4 @@
+# Insecure direct object reference
 ## Detect    
 At the `/preview` page. We can see the pending post. When admin approves, the post's status changes to `active` and it is removed in the request list  
 
