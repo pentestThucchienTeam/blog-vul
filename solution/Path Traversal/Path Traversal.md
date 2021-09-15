@@ -6,17 +6,21 @@ Looking at the URL of the profile picture in the Profile folder, we see that thi
 
 ### Solution
 
-Use Burp Suite to make work easy
+__Use Burp Suite to make work easy__
 
-B1. We use Burp Suite to intercept the request to get the avatar image in the Profile section and send it to the Burp Repeater.  
+
+__B1. We use Burp Suite to intercept the request to get the avatar image in the Profile section and send it to the Burp Repeater.__
+
 ![image](https://user-images.githubusercontent.com/63194321/132466638-cdd3d4df-b4a4-475a-b9a1-0f884eab281e.png)
 
-B2. We will change the value of the variable "images" instead of returning the name of an image, we can return an arbitrary path. (Depending on how the directory is arranged, the directory path may be different.) 
+
+__B2. We will change the value of the variable "images" instead of returning the name of an image, we can return an arbitrary path. (Depending on how the directory is arranged, the directory path may be different.) __
+
  ![image](https://user-images.githubusercontent.com/63194321/132466676-c4475297-48d7-4491-b214-c8be26e99ec0.png)
 
 Observe that the returned result is not an image file anymore, but instead will be a result of the etc/passwd file.
 
-Exploit
+### Exploit
 
 Once we have identified this as a Path Traversal vulnerability, we can use payloads depending on the backend to deploy appropriately. We can access and read the data depending on the operating system as follows.
 
