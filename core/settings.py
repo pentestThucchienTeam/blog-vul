@@ -140,10 +140,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_URL = "/static/"
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfile")
+STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+STATICFILES_DIRS = (os.path.join(CORE_DIR, "core/static"),)
