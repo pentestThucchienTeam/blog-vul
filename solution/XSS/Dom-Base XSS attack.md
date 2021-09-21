@@ -1,5 +1,6 @@
 # Dom-Base XSS attack
 
+## 1. Detect 
 In the Search page, if you don't select anything, the `tagID` field will be left blank on the URL.
 
 ![image](https://user-images.githubusercontent.com/63194321/133432102-740893fd-7755-41ce-8f49-feae26fc6060.png)
@@ -14,7 +15,7 @@ This occurs because the value of the tagID parameter is written directly to the 
 
 ![image](https://user-images.githubusercontent.com/63194321/133430466-e1acaee1-8f2d-4d59-8373-d55c8e032333.png)
 
-### Exploid
+## 2. Exploid
 **B1.** We will send the URL containing a malicious code to the victim.
 
 ![image](https://user-images.githubusercontent.com/63194321/133433722-81efea99-da71-4aa0-8642-edb046bbca63.png)
