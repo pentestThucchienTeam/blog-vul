@@ -9,7 +9,7 @@ At the `/preview` page. We can see the pending post. When admin approves, the po
 ![image](https://user-images.githubusercontent.com/22276823/133434553-a5037591-8a14-4c76-a00a-d0d3f94c6789.png)
 
 
-@@ -12,7 +12,7 @@ Let attend to column ID. It's a list of sequence number. We can check by changin
+Let attend to column ID. It's a list of sequence number. We can check by changin
 
 
 The blog returns not found. Because this post status is `active`. So we can't show it in the `preview` page  
