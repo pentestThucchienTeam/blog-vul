@@ -1,6 +1,8 @@
 # Sql injection 
 
-## SQLI in Search bar
+# SQLI in Search bar
+
+## 1. Detect 
 
 In the search form field when the user searches for anything, the things the user just entered will go directly through the database and return the results to the user. So this is the vulnerable point
 
@@ -16,7 +18,7 @@ Now here we are pretty sure there will be an `SQLi` error. To be more sure, we w
 
 The result returns `all` posts in the database. So this is definitely an `In-band SQLi` vulnerability
 
-### Solution
+## 2. Exploit
 After determining that there is `In-band SQLi` at this address, we will use sqlmap to scan and attack
 
 **B1.** Start Sqlmap and enter command to scan for `sqli` vulnerabilities:
