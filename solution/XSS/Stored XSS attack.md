@@ -1,4 +1,5 @@
 # Stored XSS attack
+## 1. Detect 
 In the Comment section of the article with each user's comment, the system will save it in the database and post it later.
 
 ![image](https://user-images.githubusercontent.com/63194321/133422051-2ad55ffd-13f1-4b3e-9be4-09023f044c35.png)
@@ -17,7 +18,7 @@ Now we will write in a script, if this script works, the site has XSS.
 
 The `script` is already running so here is XSS
 
-## Exploit 
+## 2. Exploit 
 
 **B1.** Comment a malicious payload `<script>alert(document.cookie)</script>` on a certain post.
 
