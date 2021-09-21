@@ -1,10 +1,12 @@
 # Path traversal
 
+## 1. Detect 
+
 Looking at the URL of the profile picture in the Profile folder, we see that this image is displayed by calling the image name directly in the folder. So think of a possible loophole that is Path Traversal
 ![image](https://user-images.githubusercontent.com/63194321/132466602-3bee35bd-62d8-4ab1-b019-ec828afa44f3.png)
 
 
-### Solution
+## 2. Exploit
 
 __Use Burp Suite to make work easy__
 
