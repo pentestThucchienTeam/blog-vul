@@ -2,7 +2,8 @@
 
 ## Solution
 
-#### 1. Detect
+## 1. Detection
+
 Resgister an account and access the [Setting Page](https://blog-vul.herokuapp.com/setting/). Then carry out submit the form below, you will receive an notification.
 
 ` You don't have permission`
@@ -16,7 +17,7 @@ Check the cookie. You can see `auth` with value in JWT format.
 ![image](https://user-images.githubusercontent.com/83699106/132470786-35fbd491-bdd8-4b66-8a0c-f1c9f9f62fd4.png)
 
 
-#### 2. Exploit
+
 
 ### Decode the auth's value 
 
@@ -25,6 +26,8 @@ Check the cookie. You can see `auth` with value in JWT format.
 
 The JWT is using RS256 algorithm to verify the token with public key is directly embedded in `publickey`.
 It contain two field `admin :false` to consider permission of user. So you must change it into `true` to privilege escalation to admin.
+
+## 2. Exploitation
 
 __*Use [jwt_tool](https://github.com/ticarpi/jwt_tool) to check whether it vulnerable*__
 
