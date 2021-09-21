@@ -1,13 +1,15 @@
+import jwt
+import time
 from core.lib.jwt_vul.get_key import get_key
 from django.shortcuts import render, redirect
 from .login_form import LoginForm
 from blogapp.models.Setting import Vul
 from django.contrib.auth import authenticate, login
-import time
 from django.utils.http import http_date
-import jwt
 from decouple import config
 from django.views.generic import TemplateView
+from .validate import validate
+from django.http.response import Http404
 
 
 def create_cookie(user, request):
@@ -54,9 +56,16 @@ class loginView(TemplateView):
 
     def post(self, request):
         form = LoginForm(request.POST)
-
         msg = None
+        if self.request.GET.get("next"):
+            safe_redirect = self.request.GET.get("next")
+            openRedirect = Vul.objects.get(name="Open Redirect").status
+            if not openRedirect:
+                if not validate.safe_url(safe_redirect):
+                    raise Http404
+       
 
+        
         if form.is_valid():
             username = form["username"].value()
             password = form["password"].value()
@@ -70,7 +79,7 @@ class loginView(TemplateView):
                     max_age = self.request.session.get_expiry_age()
                     expires_time = time.time() + max_age
                     expires = http_date(expires_time)
-                    response = redirect(self.request.GET["next"])
+                    response = redirect(safe_redirect)
                     response.set_cookie("auth", cookie_name, max_age=max_age, expires=expires)
                     return response
                 except:

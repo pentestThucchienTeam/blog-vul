@@ -1,8 +1,11 @@
+from core.settings import ALLOWED_HOSTS
 from django import forms
 import re
 from django.contrib.auth.models import User
+from decouple import config
 
 class validate:
+    
     def clean_password2(self):
         if 'password1' in self.cleaned_data:
             password1 = self.cleaned_data['password1']
@@ -21,3 +24,15 @@ class validate:
         except User.DoesNotExist:
             return username
         raise forms.ValidationError("Tài khoản đã tồn tại")
+
+    def safe_url(url):
+        ALLOWED_HOSTS = config("ALLOWED_HOSTS")
+        pattern = re.compile(r"(^[^:]+://)([^\.]+\.[^\.]+)")
+        matched = re.match(pattern, url)
+        if matched:
+            if matched.group(2) in ALLOWED_HOSTS:
+                return True
+            else:
+                 return False
+        else:
+            return True
