@@ -1,5 +1,6 @@
 # Reflected XSS
 
+## 1. Detect
 Observe the search page, the website allows users to search for articles through the title, the system will pass the search parameter through the GET method on the URL. If no results are found, the site will return the following:
 
 ![image](https://user-images.githubusercontent.com/63194321/133408527-b759068d-1b96-4176-b997-df7569f95754.png)
@@ -10,7 +11,7 @@ Notice that the site responds completely to what the user has just typed. So we 
 
 The code we entered is already running, so this site has been XSS.
 
-### Exploit
+## 2. Exploit
 
 **B1.** Now we enter a malicious payload `<script>alert(document.cookie)</script>` and the application will respond to the payload and execute it.
 
