@@ -1,6 +1,8 @@
 # SQL injection 
 
-## SQLi in PostURL
+# SQLi in PostURL
+
+## 1. Detect
 
 After watching the post and saw the parameter on the URL varies by post, should see the post can be from the database query according to `id` out.
 
@@ -29,7 +31,7 @@ If we add the payload `1 AND true=true`, the website results are still normal. T
 We have identified the type and location of vulnerabilities, then we will exploit them next.
 
 
-### Solution
+## 2. Exploit 
 
 Now we will use a tool called `SQl map` to exploit the vulnerability.
 
