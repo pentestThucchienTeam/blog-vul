@@ -4,12 +4,12 @@ Observe the [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see
 
 ![Web page display username](https://user-images.githubusercontent.com/83699106/132437761-05b5e2dc-98e0-4c50-8cb2-7e9e0c9c33b1.png)
 
-## Solution
+### 1. Detect
 
 Register an account.You will be realized that it don't control the username format and this web use Django framwork. So you can register an account with an special username.
 
 
-### B1. Identify the underlying engine.
+#### Identify the underlying engine.
 
 Python has some template engine such as Tornaldo, Jinja, Django, ... . Now , sign up an account with username is a formula evaluation. 
 
@@ -28,7 +28,7 @@ Maybe it use Django template because DJT do not allow formula evaluation by defa
 
 __Successfully__, It displayed debug content in username. 
 
-### B2. Exploit
+### 2. Exploit
 
 After indentify the template engine that it's using is DJT. We can exploit futher. The impact of this attack in DJT is not serious than other template languages and these are some payload you can use to exploit.
 
