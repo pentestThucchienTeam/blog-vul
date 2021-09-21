@@ -1,12 +1,18 @@
 # Server Side Template Injection
 
+### 1. Detection
+
+
 Observe the [Setting Page](https://blog-vul.herokuapp.com/setting/), you can see that username is a dynamic content and displayed __Hi, Username__.
 
 ![Web page display username](https://user-images.githubusercontent.com/83699106/132437761-05b5e2dc-98e0-4c50-8cb2-7e9e0c9c33b1.png)
 
-### 1. Detect
+
 
 Register an account.You will be realized that it don't control the username format and this web use Django framwork. So you can register an account with an special username.
+
+
+### 2. Exploitation
 
 
 #### Identify the underlying engine.
@@ -28,7 +34,7 @@ Maybe it use Django template because DJT do not allow formula evaluation by defa
 
 __Successfully__, It displayed debug content in username. 
 
-### 2. Exploit
+
 
 After indentify the template engine that it's using is DJT. We can exploit futher. The impact of this attack in DJT is not serious than other template languages and these are some payload you can use to exploit.
 
