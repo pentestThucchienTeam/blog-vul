@@ -3,23 +3,23 @@ from django.utils.crypto import get_random_string
 from django.utils.module_loading import import_string
 import string
 from blogapp.models.Setting import Vul
+import random
+import jwt
 
 VALID_KEY_CHARS = string.ascii_lowercase + string.digits
 
 
 class SessionStore(OriginalSessionStore):
-    jwts = Vul.objects.filter(name="JWT").values()[0]["status"]
 
+    
     def create_jwt(self):
-        if self.jwts:
-            from .lib import jwt_vul
-
-            pas = "password"
-            key = get_random_string(10, VALID_KEY_CHARS)
-            return jwt_vul.encode({"key": key}, pas, algorithm="HS256").decode()
+        broken = Vul.objects.filter(name="Broken Authencation").values()[0]["status"]
+        if broken :
+      
+            key = "session" + str(random.randint(9999, 999999))
+            return key
 
         else:
-            import jwt
 
             pas = "iloveyou"
             key = get_random_string(10, VALID_KEY_CHARS)
