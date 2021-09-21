@@ -29,7 +29,7 @@ insert into blogapp_vul (id,name,status) values (9,'Deserialize',False) ON CONFL
 insert into blogapp_vul (id,name,status) values (10,'Path travesal',False) ON CONFLICT DO NOTHING;
 insert into blogapp_vul (id,name,status) values (11,'JWT_Key_Confusion',False) ON CONFLICT DO NOTHING;
 insert into blogapp_vul (id,name,status) values (12,'IDOR',False) ON CONFLICT DO NOTHING;
-insert into blogapp_vul (id,name,status) values (12,'Open Redirect',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (13,'Open Redirect',False) ON CONFLICT DO NOTHING;
 SELECT pg_catalog.setval(pg_get_serial_sequence('auth_user', 'id'), (SELECT MAX(id) FROM auth_user));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_role', 'id'), (SELECT MAX(id) FROM blogapp_role));
 SELECT pg_catalog.setval(pg_get_serial_sequence('blogapp_tags', 'id'), (SELECT MAX(id) FROM blogapp_tags));

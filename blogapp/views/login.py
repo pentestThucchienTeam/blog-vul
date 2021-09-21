@@ -57,12 +57,12 @@ class loginView(TemplateView):
     def post(self, request):
         form = LoginForm(request.POST)
         msg = None
-         
-        safe_redirect = self.request.GET.get("next")
-        openRedirect = Vul.objects.get(name="Open Redirect").status
-        if not openRedirect:
-            if not validate.safe_url(safe_redirect):
-                raise Http404
+        if self.request.GET.get("next"):
+            safe_redirect = self.request.GET.get("next")
+            openRedirect = Vul.objects.get(name="Open Redirect").status
+            if not openRedirect:
+                if not validate.safe_url(safe_redirect):
+                    raise Http404
        
 
         
