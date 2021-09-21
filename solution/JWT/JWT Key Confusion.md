@@ -2,6 +2,7 @@
 
 ## Solution
 
+#### 1. Detect
 Resgister an account and access the [Setting Page](https://blog-vul.herokuapp.com/setting/). Then carry out submit the form below, you will receive an notification.
 
 ` You don't have permission`
@@ -15,6 +16,7 @@ Check the cookie. You can see `auth` with value in JWT format.
 ![image](https://user-images.githubusercontent.com/83699106/132470786-35fbd491-bdd8-4b66-8a0c-f1c9f9f62fd4.png)
 
 
+#### 2. Exploit
 
 ### Decode the auth's value 
 
