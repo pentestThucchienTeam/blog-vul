@@ -1,5 +1,7 @@
 # None Attack
 
+## 1. Detect
+
 After you log in with your account go to the `settings` page where you can edit anything then submit the form. You will receive a message `You don't have permits`.
 
 ![image](https://user-images.githubusercontent.com/63194321/133215758-de2cf0c3-f2f2-4f01-9886-90212714dbdb.png)
@@ -13,7 +15,8 @@ Check the cookies you will see `auth` with a value of 1 code `jwt`
 
 The JWT uses the `HS256` algorithm with the payload having the `admin:false` field to verify the user's permissions. Somehow change to `true` to elevate to admin
 
-### Solution
+
+## 2. Exploit
  B1. First, after we have the content, we will proceed to edit the algorithm to `alg:none`.Next, change your job title to `admin`
  
  ![image](https://user-images.githubusercontent.com/63194321/132475306-72bb43bc-266b-48aa-9e70-e6a33d436ffd.png)
