@@ -1,9 +1,6 @@
 # Insecure direct object reference
 
 
-## Detect    
-
-
 ## 1. Detect    
 
 
@@ -17,8 +14,6 @@ At the `/preview` page. We can see the pending post. When admin approves, the po
 
 The blog returns not found. Because this post status is `active`. So we can't show it in the `preview` page  
 
-
-## Exploit  
 
 ## 2. Exploit  
 
