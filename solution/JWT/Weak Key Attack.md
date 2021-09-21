@@ -1,5 +1,7 @@
 # Weak Key Attack
 
+## 1. Detect
+
 After you log in with your account go to the `settings` page where you can edit anything then submit the form. You will receive a message `You don't have permits`.
 
 ![image](https://user-images.githubusercontent.com/63194321/133216016-5ddb08c8-6180-436d-8161-541659293121.png)
@@ -14,7 +16,7 @@ Check the cookie. You can see `auth` with value in JWT format.
 
 The JWT uses the `HS256` algorithm with the payload having the `admin:false` field to verify the user's permissions. Somehow change to `true` to elevate to admin
 
-### Solution
+## 2. Exploit
 
 Our essential tool is `jwt_tool` (Install: https://github.com/ticarpi/jwt_tool)
 
