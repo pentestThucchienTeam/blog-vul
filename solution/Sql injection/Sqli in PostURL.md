@@ -14,7 +14,7 @@ First, we will test by appending a quote character `'` after the parameter
 
 ![image](https://user-images.githubusercontent.com/63194321/133370885-897e59e2-d252-4d6b-a149-1edb82826ca4.png)
 
-The return result is an error message. So pretty sure there's an SQLi vulnerability here.
+The return result is an error message. So there could be a blind SQLi hole here.
 
 ![image](https://user-images.githubusercontent.com/63194321/133391406-72020e06-d044-4b9a-a2c9-48aae1e99cff.png)
 
