@@ -15,7 +15,7 @@ Register an account.You will be realized that it don't control the username form
 ### 2. Exploitation
 
 
-#### Identify the underlying engine.
+#### Step 1.  Identify the underlying engine.
 
 Python has some template engine such as Tornaldo, Jinja, Django, ... . Now , sign up an account with username is a formula evaluation. 
 
