@@ -14,7 +14,7 @@ First, we will search  `'`  on the search form. Result returned error
 
 ![image](https://user-images.githubusercontent.com/63194321/133388364-77edc108-4f68-4f64-ac21-bcd30f66c4db.png)
 
-Now here we are pretty sure there will be an `SQLi` error. To be more sure, we will search with a payload `1' or 1=1 --`.
+Now here there will probably be an `SQLi` error. To be more sure, we'll search with a payload of `1' or 1 = 1 --`.
 
 The result returns `all` posts in the database. So this is definitely an `In-band SQLi` vulnerability
 
