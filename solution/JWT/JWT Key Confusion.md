@@ -69,7 +69,7 @@ change the `admin`*
 
 
 
-### Change your permission into admin and generate new token again.
+### Step 3. Change your permission into admin and generate new token again.
 
 Change `admin` to True.
 
@@ -81,7 +81,7 @@ Replace old payload section.
 ![image](https://user-images.githubusercontent.com/83699106/132479268-9b3b1c9d-6d7b-41d3-9a32-bc22b307ac67.png)
 
 
-Replace old JWT with new own JWTand submit
+### Step 4. Replace old JWT with new own JWTand submit
 
 ![image](https://user-images.githubusercontent.com/83699106/132479179-d79ab5fc-8888-4cd9-930c-d3535b8e48a0.png)
 
