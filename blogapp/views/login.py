@@ -3,9 +3,8 @@ from django.shortcuts import render, redirect
 from .login_form import LoginForm
 from blogapp.models.Setting import Vul
 from django.contrib.auth import authenticate, login
-import time
 from django.utils.http import http_date
-import jwt
+import pickle, base64, jwt, time, json
 from decouple import config
 from django.views.generic import TemplateView
 
@@ -44,6 +43,10 @@ def create_cookie(user, request):
 
         return jwt.encode(payload, key, algorithm="HS256")
 
+class usr:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
 class loginView(TemplateView):
     template_name = "login.html"
@@ -56,22 +59,39 @@ class loginView(TemplateView):
         form = LoginForm(request.POST)
 
         msg = None
+        dese = Vul.objects.filter(name="Deserialize").values()[0]["status"]
 
         if form.is_valid():
             username = form["username"].value()
             password = form["password"].value()
+            rememberMe = form["rememberMe"].value()
             user = authenticate(username=username, password=password)
+            if dese:
+                if request.COOKIES.get("rememberMe"):
+                    b64 = request.COOKIES.get("rememberMe")
+                    info = pickle.loads(base64.b64decode(b64))
+                    user = authenticate(username=info.username, password=info.password)
+            else:
+                pass
 
             if user:
                 login(self.request, user)
 
                 cookie_name = create_cookie(user, self.request)
+                if rememberMe:
+                    data = usr(username, password)
+                    ser = pickle.dumps(data)
+                    rememberMe_cookie = base64.b64encode(ser).decode()                    
                 try:
                     max_age = self.request.session.get_expiry_age()
                     expires_time = time.time() + max_age
                     expires = http_date(expires_time)
                     response = redirect(self.request.GET["next"])
                     response.set_cookie("auth", cookie_name, max_age=max_age, expires=expires)
+                    if dese:
+                        if rememberMe:
+                            response.set_cookie("rememberMe", rememberMe_cookie, max_age=max_age*5, expires=expires)
+                    else: pass
                     return response
                 except:
                     max_age = self.request.session.get_expiry_age()
@@ -79,6 +99,10 @@ class loginView(TemplateView):
                     expires = http_date(expires_time)
                     response = redirect("/")
                     response.set_cookie("auth", cookie_name, max_age=max_age, expires=expires)
+                    if dese:
+                        if rememberMe:
+                            response.set_cookie("rememberMe", rememberMe_cookie, max_age=max_age*5, expires=expires)
+                    else: pass
                     return response
 
             else:
