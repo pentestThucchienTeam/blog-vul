@@ -17,7 +17,7 @@ class preView(TemplateView):
         idor = Vul.objects.get(name="IDOR").status
         preView.listtag = Tags.objects.all()
         preView.post_render = get_object_or_404(Post, id=id)
-        if idor:
+        if not idor:
             if preView.post_render.status != '2' or preView.post_render.author_id.get().get_username() != request.user.username:
                 raise Http404
         return render(
