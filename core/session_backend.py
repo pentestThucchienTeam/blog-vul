@@ -5,6 +5,7 @@ import string
 from blogapp.models.Setting import Vul
 import random
 import jwt
+from decouple import config
 
 VALID_KEY_CHARS = string.ascii_lowercase + string.digits
 
@@ -21,7 +22,7 @@ class SessionStore(OriginalSessionStore):
 
         else:
 
-            pas = "iloveyou"
+            pas = config("KEY")
             key = get_random_string(10, VALID_KEY_CHARS)
             q = jwt.encode({"key": key}, pas, algorithm="HS256")
             return q
