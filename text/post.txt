@@ -24,9 +24,9 @@ insert into blogapp_vul (id,name,status) values (4,'SQLI',False) ON CONFLICT DO 
 insert into blogapp_vul (id,name,status) values (5,'SSTI',False) ON CONFLICT DO NOTHING;
 insert into blogapp_vul (id,name,status) values (6,'XXE',False) ON CONFLICT DO NOTHING;
 insert into blogapp_vul (id,name,status) values (7,'JWT',False) ON CONFLICT DO NOTHING;
-insert into blogapp_vul (id,name,status) values (8,'Broken Aut',False) ON CONFLICT DO NOTHING;
-insert into blogapp_vul (id,name,status) values (9,'Deserialize',False) ON CONFLICT DO NOTHING;
-insert into blogapp_vul (id,name,status) values (10,'Path travesal',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (8,'Broken Authencation',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (9,'Insecure Deserialize',False) ON CONFLICT DO NOTHING;
+insert into blogapp_vul (id,name,status) values (10,'Path Travesal',False) ON CONFLICT DO NOTHING;
 insert into blogapp_vul (id,name,status) values (11,'JWT_Key_Confusion',False) ON CONFLICT DO NOTHING;
 insert into blogapp_vul (id,name,status) values (12,'IDOR',False) ON CONFLICT DO NOTHING;
 SELECT pg_catalog.setval(pg_get_serial_sequence('auth_user', 'id'), (SELECT MAX(id) FROM auth_user));
