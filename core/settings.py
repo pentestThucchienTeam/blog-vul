@@ -52,7 +52,6 @@ SESSION_ENGINE = "core.session_backend"
 
 
 def get_cache():
-    import os
 
     try:
         servers = os.environ["MEMCACHIER_SERVERS"]
@@ -77,7 +76,7 @@ def get_cache():
 
 
 CACHES = get_cache()
-
+SESSION_COOKIE_AGE = 5 * 60
 
 ROOT_URLCONF = "core.urls"
 LOGIN_URL = "/login"
