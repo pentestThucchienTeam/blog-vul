@@ -25,3 +25,4 @@ requests
 bs4
 html5lib
 defusedxml
+netcat-openbsd
