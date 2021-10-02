@@ -5,7 +5,7 @@ After entering the login page, there is a `Remember Me` section to remember your
 
 ![image](https://user-images.githubusercontent.com/63194321/135709238-cf1d62d7-a944-4aad-9485-9ac6a2d098f5.png)
 
-If you log in with the `Remember Me` option, there will be a new value in the cookie named `memoryMe` with the encoded value `base64`
+If you log in with the `Remember Me` option, there will be a new value in the cookie named `rememberMe` with the encoded value `base64`
 
 ![image](https://user-images.githubusercontent.com/63194321/135709316-adeaa86a-ff81-40c4-b787-76b0405d39aa.png)
 
