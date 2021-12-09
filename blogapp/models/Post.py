@@ -17,7 +17,7 @@ class Post(models.Model):
     content = RichTextUploadingField(blank=True)
     creat_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
-    author_id = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_id")
     images = models.ImageField(
         upload_to="uploads/%Y/%m/%d", height_field=None, width_field=None, max_length=255,blank=True
     )
