@@ -29,8 +29,8 @@
               </div>
               <h1>{{x.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
                 <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
-                  <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{x.id}}</span></div></a>
+                  <div class="avatar"><img src="/media/{{user_avater.avatar}}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{user_avater.user}}</span></div></a>
                     <div class="d-flex align-items-center flex-wrap">       
                     <div class="date"><i class="icon-clock"></i> {{x.creat_time}}</div>
 		    <div class="comments meta-last"><i class="icon-comment"></i>{{x.comment.count}}</div>
@@ -57,7 +57,7 @@
                   <div class="comment">
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
-                        <div class="image"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="image"><img src="/media/{{user_comment.avatar}}" alt="..." class="img-fluid rounded-circle"></div>
                         <div class="title"><strong>{{comment.author_id}}</strong><span class="date">{{comment.create_time}}</span></div>
                       </div>
                     </div>
@@ -98,8 +98,12 @@
                 </div>
                 <h1>{{post_render.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
                 <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{post_render.id}}</span></div></a>
+                  {% if user_avater.avatar == null %}
+                  <div class="avatar"><img src="{% static 'blogapp/img/avatar.png' %}" alt="..." class="img-fluid"></div>
+                  {% else %}  
+                  <div class="avatar"><img src="/media/{{user_avater.avatar}}" alt="..." class="img-fluid"></div>
+                  {% endif %} 
+                    <div class="title"><span>{{user_avater.user}}</span></div></a>
                   <div class="d-flex align-items-center flex-wrap">       
                     <div class="date"><i class="icon-clock"></i> {{post_render.creat_time}}</div>
                      <div class="comments meta-last"><i class="icon-comment"></i>{{post_render.comment.count}}</div>
@@ -126,7 +130,7 @@
                   <div class="comment">
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
-                        <div class="image"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="image"><img src="/media/{{user_comment.avatar}}" alt="..." class="img-fluid rounded-circle"></div>
                         <div class="title"><strong>{{comment.author_id}}</strong><span class="date">{{comment.create_time}}</span></div>
                       </div>
                     </div>

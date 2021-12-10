@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.9
 ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install nano && apt-get install memcached 
 WORKDIR /code

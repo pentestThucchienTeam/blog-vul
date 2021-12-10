@@ -3,6 +3,7 @@ from django.shortcuts import render
 from blogapp.models.Post import Post
 from blogapp.models.Setting import Vul
 from blogapp.models.Tag import Tags
+from blogapp.models.Userprofile import Userprofile
 from django.core.paginator import Paginator
 
 

@@ -20,11 +20,6 @@
                   </div><a href="/post/{{item.id}}">
                     <h3 class="h4">{{item.title}}</h3></a>
                   <p class="text-muted">{{item.admin_content| truncatechars:200}}</p>
-                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="{% static 'blogapp/img/avatar-ok.jpg' %}" alt="..." class="img-fluid"></div>
-                      <!-- <div class="title"><span>John Doe</span></div></a> -->
-                    <div class="comments meta-last"><i class="icon-comment"></i>12</div>
-                  </footer>
                 </div>
               </div>
               {% endfor %}

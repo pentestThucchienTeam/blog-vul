@@ -38,7 +38,7 @@
                 </header>
                 {{ item.admin_content|truncatewords:50 }}
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
+                    <div class="avatar"><img src="/media/{{item.avatar}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
                   <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
                 </footer>
@@ -55,7 +55,7 @@
                 </header>
                 {{ item.admin_content|truncatewords:50 }}
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
+                    <div class="avatar"><img src="/media/{{item.avatar}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
                   <div class="date"><i class="icon-clock"></i>{{ item.creat_time }}</div>
                 </footer>
@@ -103,28 +103,6 @@
         </div>
       </div>
     </section>
-    <!-- Newsletter Section-->
-    <section class="newsletter no-padding-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h2>Subscribe to Newsletter</h2>
-            <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div class="col-md-8">
-            <div class="form-holder">
-              <form action="#">
-                <div class="form-group">
-                  <input type="email" name="email" id="email" placeholder="Type your email address">
-                  <button type="submit" class="submit">Subscribe</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Gallery Section-->
     <section class="gallery no-padding">
       <div class="row">
         <div class="mix col-lg-3 col-md-3 col-sm-6">

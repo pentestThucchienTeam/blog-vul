@@ -12,3 +12,4 @@ from blogapp.views.contributor import contributorView
 from blogapp.views.requestpost import requestpostView
 from blogapp.views.previewpost import preView
 from blogapp.views.avatars import avatarView
+from blogapp.views.contact import contact
