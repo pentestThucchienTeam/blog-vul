@@ -57,8 +57,14 @@
                   <div class="comment">
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
-                        <div class="image"><img src="/media/{{user_comment.avatar}}" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="title"><strong>{{comment.author_id}}</strong><span class="date">{{comment.create_time}}</span></div>
+                        <div class="image">
+                          {% if objectProfile.avatar %}
+                          <a href="{% url 'uploads' %}?image={{imageName}}"><img src="{% url 'uploads' %}?image={{imageName}}" class="rounded-circle img-thumbnail" alt="avatar"></a>
+                          {% else %}
+                          <img src="{% static 'blogapp/img/avatar.png' %}" class="rounded-circle img-thumbnail" alt="avatar">
+                          {% endif %}
+                        </div>
+                        <div class="title"><strong>{{comment.author_id.user}}</strong><span class="date">{{comment.create_time}}</span></div>
                       </div>
                     </div>
                     <div class="comment-body" >
@@ -130,8 +136,14 @@
                   <div class="comment">
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
-                        <div class="image"><img src="/media/{{user_comment.avatar}}" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="title"><strong>{{comment.author_id}}</strong><span class="date">{{comment.create_time}}</span></div>
+                        <div class="image">
+                          {% if objectProfile.avatar %}
+                          <a href="{% url 'uploads' %}?image={{imageName}}"><img src="{% url 'uploads' %}?image={{imageName}}" class="rounded-circle img-thumbnail" alt="avatar"></a>
+                          {% else %}
+                          <img src="{% static 'blogapp/img/avatar.png' %}" class="rounded-circle img-thumbnail" alt="avatar">
+                          {% endif %}
+                        </div>
+                        <div class="title"><strong>{{comment.author_id.user}}</strong><span class="date">{{comment.create_time}}</span></div>
                       </div>
                     </div>
                     <div class="comment-body" >

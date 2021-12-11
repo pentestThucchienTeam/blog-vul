@@ -1,6 +1,6 @@
 from django.db import models
 from blogapp.models.Post import Post
-from django.contrib.auth.models import User
+from blogapp.models.Userprofile import Userprofile
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
 from django.conf import settings
@@ -8,11 +8,11 @@ from django.conf import settings
 
 class Comment(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comment")
-    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_id")
+    author_id = models.ForeignKey(Userprofile, on_delete=models.CASCADE, related_name="author_name")
     content = RichTextUploadingField(default="")
     status = models.BooleanField(default=True)
     create_time = models.DateTimeField(auto_now_add=True)
-    email = models.ForeignKey(User, on_delete=models.CASCADE, related_name="email_id")
+    email = models.ForeignKey(Userprofile, on_delete=models.CASCADE, related_name="author_email")
     image = models.ImageField(
         upload_to="uploads/%Y/%m/%d", height_field=None, width_field=None, max_length=100, blank=True
     )
