@@ -58,8 +58,8 @@
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
                         <div class="image">
-                          {% if objectProfile.avatar %}
-                          <a href="{% url 'uploads' %}?image={{imageName}}"><img src="{% url 'uploads' %}?image={{imageName}}" class="rounded-circle img-thumbnail" alt="avatar"></a>
+                          {% if comment.author_id.avatar %}
+                          <a href="/media/{{comment.author_id.avatar}}"><img src="/media/{{comment.author_id.avatar}}" class="rounded-circle img-thumbnail" alt="avatar"></a>
                           {% else %}
                           <img src="{% static 'blogapp/img/avatar.png' %}" class="rounded-circle img-thumbnail" alt="avatar">
                           {% endif %}
@@ -137,8 +137,8 @@
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
                         <div class="image">
-                          {% if objectProfile.avatar %}
-                          <a href="{% url 'uploads' %}?image={{imageName}}"><img src="{% url 'uploads' %}?image={{imageName}}" class="rounded-circle img-thumbnail" alt="avatar"></a>
+                          {% if comment.author_id.avatar %}
+                          <a href="/media/{{comment.author_id.avatar}}"><img src="/media/{{comment.author_id.avatar}}" class="rounded-circle img-thumbnail" alt="avatar"></a>
                           {% else %}
                           <img src="{% static 'blogapp/img/avatar.png' %}" class="rounded-circle img-thumbnail" alt="avatar">
                           {% endif %}
