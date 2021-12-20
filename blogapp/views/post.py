@@ -110,8 +110,8 @@ class postView(TemplateView):
                 break
           
                     
-           
-        form = CommentForm(data=request.POST, author_id=request.user, post_id=self.post_render, email=request.user)
+        author = Userprofile.objects.get(user=request.user)   
+        form = CommentForm(data=request.POST, author_id=author, post_id=self.post_render, email=author)
         if form.is_valid():
             form.save()
 
