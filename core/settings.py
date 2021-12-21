@@ -48,7 +48,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 SESSION_ENGINE = "core.session_backend"
-SESSION_COOKIE_AGE = 5 * 60
+SESSION_COOKIE_AGE = 5 * 60 * 60
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",

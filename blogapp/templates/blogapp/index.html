@@ -27,7 +27,7 @@
         <!-- Post-->
         {% for item in object_list %}
         <div class="row d-flex align-items-stretch">
-	{% if item.id|divisibleby:2 %}
+	{% if forloop.counter|divisibleby:2 %}
           <div class="image col-lg-5"><img src="/media/{{ item.images }}" alt="..."></div>
           <div class="text col-lg-7">
             <div class="text-inner d-flex align-items-center">
@@ -89,13 +89,11 @@
         <div class="row">
           {% for item in latest %}
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="#"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail"><img src="/media/{{ item.images }}" alt="..." class="img-fluid"></div>
             <div class="post-details">
-              <div class="post-meta d-flex justify-content-between">
-                <div class="date">{{ item.creat_date }}</div>
-                <div class="category"><a href="#">Business</a></div>
-              </div><a href="/post/{{item.id}}">
-                <h3 class="h4">{{ item.title }}</h3></a>
+              <!-- <div class="post-meta d-flex justify-content-between"> -->
+                <div class="date post-meta d-flex justify-content-between">{{ item.creat_date }}</div>
+               <a href="/post/{{item.id}}"><h3 class="h4">{{ item.title }}</h3></a>
               <p class="text-muted">{{ item.admin_content|truncatewords:20 }}</p>
             </div>
           </div>

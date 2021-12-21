@@ -7,7 +7,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 from django.conf import settings
-
+from PIL import Image
 
 class Post(models.Model):
 
@@ -21,6 +21,15 @@ class Post(models.Model):
     images = models.ImageField(
         upload_to="uploads/%Y/%m/%d", height_field=None, width_field=None, max_length=255,blank=True
     )
+     
+    def save(self):
+        super().save()
+        if self.images:
+            img = Image.open(self.images.path)
+            if img.height > 400 or img.width > 600:
+                size = (600, 400)
+                img.thumbnail(size)
+                img.save(self.images.path)
 
     def __str__(self):
         return f"{self.title}"
