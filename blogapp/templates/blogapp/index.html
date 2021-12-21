@@ -36,7 +36,7 @@
                   <div class="category"><a href="#">Business</a><a href="#">Technology</a></div>
 		  <a href="/post/{{item.id}}"><h2 class="h4">{{ item.title }}</h2></a>
                 </header>
-                {{ item.admin_content|truncatewords:50 }}
+                
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="/media/{{item.avatar}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
@@ -53,7 +53,7 @@
                   <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="/post/{{item.id}}">
                     <h2 class="h4">{{ item.title }}</h2></a>
                 </header>
-                {{ item.admin_content|truncatewords:50 }}
+                
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="/media/{{item.avatar}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
@@ -94,7 +94,7 @@
               <!-- <div class="post-meta d-flex justify-content-between"> -->
                 <div class="date post-meta d-flex justify-content-between">{{ item.creat_date }}</div>
                <a href="/post/{{item.id}}"><h3 class="h4">{{ item.title }}</h3></a>
-              <p class="text-muted">{{ item.admin_content|truncatewords:20 }}</p>
+              
             </div>
           </div>
           {% endfor %}

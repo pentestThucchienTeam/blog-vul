@@ -10,10 +10,10 @@ class indexView(TemplateView):
     def get(self, request, *args, **kwargs):
         xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         object_list = Post.objects.raw(
-            "select p.id, p.title, p.content, p.creat_time, p.images, a.avatar,u.username from blogapp_post as p join blogapp_post_author_id as a1 on p.id = a1.post_id join auth_user as u on a1.user_id = u.id join blogapp_userprofile as a on a1.user_id=a.user_id order by p.creat_time desc limit 4;"
+            "select p.id, p.title, p.content, p.creat_time, p.images, a.avatar,u.username from blogapp_post as p join blogapp_post_author_id as a1 on p.id = a1.post_id join auth_user as u on a1.user_id = u.id join blogapp_userprofile as a on a1.user_id=a.user_id where p.status = '1' order by p.creat_time desc limit 4;"
         )
         latest  = Post.objects.raw(
-            "select p.id, p.title, p.content, p.creat_time, p.images, a.username from blogapp_post as p left join blogapp_post_author_id as a1 on p.id = a1.post_id left join auth_user as a on a1.user_id = a.id order by p.creat_time desc limit 3;"
+            "select p.id, p.title, p.content, p.creat_time, p.images, a.username from blogapp_post as p left join blogapp_post_author_id as a1 on p.id = a1.post_id left join auth_user as a on a1.user_id = a.id where p.status = '1' order by p.creat_time desc limit 3;"
         )
         print(object_list)
         return render(

@@ -19,12 +19,12 @@ done
 
 echo "Django docker is fully configured successfully."
 
-echo "Insert record"
+#echo "Insert record"
 
-while ! python script/insert.py 2>&1; do
-     echo "Insert is in progress status"
-     sleep 3
-done
+#while ! python script/insert.py 2>&1; do
+#     echo "Insert is in progress status"
+#     sleep 3
+#done
 
 echo "Start server"
 
