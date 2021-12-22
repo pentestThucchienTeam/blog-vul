@@ -36,7 +36,7 @@
                   <div class="category"><a href="#">Business</a><a href="#">Technology</a></div>
 		  <a href="/post/{{item.id}}"><h2 class="h4">{{ item.title }}</h2></a>
                 </header>
-                
+                {{ item.admin_content|truncatewords:20 }}
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="/media/{{item.avatar}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
@@ -53,7 +53,7 @@
                   <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="/post/{{item.id}}">
                     <h2 class="h4">{{ item.title }}</h2></a>
                 </header>
-                
+                {{ item.admin_content|truncatewords:20 }}
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="/media/{{item.avatar}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ item.username }}</span></div></a>
@@ -84,7 +84,6 @@
       <div class="container">
         <header>
           <h2>Latest from the blog</h2>
-          <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </header>
         <div class="row">
           {% for item in latest %}
