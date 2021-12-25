@@ -12,6 +12,8 @@ services:
     command: ./script/entrypoint.sh
     volumes:
       - .:/code
+      - ../media/:/code/core/media/
+      - ../staticfiles/:/code/core/staticfiles/
     ports:
       - "8000:8000"
     depends_on:
