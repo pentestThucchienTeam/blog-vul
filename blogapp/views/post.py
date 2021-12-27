@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from .comment_form import CommentForm
@@ -19,22 +20,24 @@ class postView(TemplateView):
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]["status"]
-      
+        postView.listPost = list(Post.objects.values_list('id', flat=True))
         
-        try:
-            id1 = int(id) - 1 
-            postView.pre_post = get_object_or_404(Post, id=id1)
-        except:
-           
-            postView.pre_post = get_object_or_404(Post, id=1)
-        try:
-            id1 = int(id) + 1 
-            postView.next_post = get_object_or_404(Post, id=id1)
-        except:
-            id1 = 1
-            postView.next_post = get_object_or_404(Post, id=1)
+        previousPost = postView.listPost.index(int(id)) - 1
+        if previousPost < 0:
+            postView.pre_post = get_object_or_404(Post, id=postView.listPost[0])
+        else:
+            postView.pre_post = get_object_or_404(Post, id=postView.listPost[previousPost])
+
+        nextPost = postView.listPost.index(int(id)) + 1
+        if nextPost >= len(postView.listPost):
+            postView.next_post = get_object_or_404(Post, id=postView.listPost[-1])
+        else:
+            postView.next_post = get_object_or_404(Post, id=postView.listPost[nextPost])
+
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" %id)
+            if postView.post_render.status != '1':
+                raise Http404
             for x in  Post.objects.raw("SELECT * FROM blogapp_post_author_id WHERE post_id = %s" %id) :
                 for y in Userprofile.objects.raw("SELECT * FROM blogapp_userprofile WHERE user_id = %s" %x.user_id):
                    postView.user_avater = y
@@ -45,13 +48,14 @@ class postView(TemplateView):
                     
         else:
             postView.post_render = get_object_or_404(Post, id=id)
+            if postView.post_render.status != '1':
+                raise Http404
             for x in  Post.objects.raw("SELECT * FROM blogapp_post_author_id WHERE post_id = %s",[id]) :
                 for y in Userprofile.objects.raw("SELECT * FROM blogapp_userprofile WHERE user_id = %s",  [x.user_id]):
                     postView.user_avater = y
                     break
             for u in Comment.objects.raw("SELECT p.id, p.content, p.author_id_id, p.create_time, a.avatar from blogapp_comment as p join blogapp_userprofile as a on p.author_id_id = a.user_id where p.post_id_id = %s" %id):
                 postView.user_comment = u
-                print(u.author_id_id)
                 break
           
 
@@ -77,20 +81,24 @@ class postView(TemplateView):
         postView.listtag = Tags.objects.all()
         postView.xss = Vul.objects.filter(name="XSS").values()[0]["status"]
         postView.sql = Vul.objects.filter(name="SQLI").values()[0]["status"]
-        try:
-            id1 = int(id) - 1 
-            postView.pre_post = get_object_or_404(Post, id=id1)
-        except:
-            
-            postView.pre_post = get_object_or_404(Post, id=1)
-        try: 
-            id1 = int(id) + 1 
-            postView.next_post = get_object_or_404(Post, id=id1)
-        except:
-            id1 = 1
-            postView.next_post = get_object_or_404(Post, id=1)
+        postView.listPost = list(Post.objects.values_list('id', flat=True))
+
+        previousPost = postView.listPost.index(int(id)) - 1
+        if previousPost < 0:
+            postView.pre_post = get_object_or_404(Post, id=postView.listPost[0])
+        else:
+            postView.pre_post = get_object_or_404(Post, id=postView.listPost[previousPost])
+
+        nextPost = postView.listPost.index(int(id)) + 1
+        if nextPost >= len(postView.listPost):
+            postView.next_post = get_object_or_404(Post, id=postView.listPost[-1])
+        else:
+            postView.next_post = get_object_or_404(Post, id=postView.listPost[nextPost])
+
         if self.sql:
             postView.post_render = Post.objects.raw("SELECT * FROM blogapp_post WHERE id = %s" % id)
+            if postView.post_render.status != '1':
+                raise Http404
             for x in  Post.objects.raw("SELECT * FROM blogapp_post_author_id WHERE post_id = %s" %id):
                 for y in Userprofile.objects.raw("SELECT * FROM blogapp_userprofile WHERE user_id = %s" %x.user_id):
                    postView.user_avater = y
@@ -101,7 +109,9 @@ class postView(TemplateView):
                 break
         else:
             postView.post_render = get_object_or_404(Post, id=id)
-            for x in  Post.objects.raw("SELECT * FROM blogapp_post_author_id WHERE post_id = %s",[id]) :
+            if postView.post_render.status != '1':
+                raise Http404
+            for x in  Post.objects.raw("SELECT * FROM blogapp_post_author_id WHERE post_id = %s",[id]):
                 for y in Userprofile.objects.raw("SELECT * FROM blogapp_userprofile WHERE user_id = %s",  [x.user_id]):
                     postView.user_avater = y
             for u in Comment.objects.raw("SELECT p.id, p.content, p.author_id_id, p.create_time, a.avatar from blogapp_comment as p join blogapp_userprofile as a on p.author_id_id = a.user_id where p.post_id_id = %s" %id):
