@@ -7,6 +7,8 @@ password = config("DATABASE_PASSWORD")
 host = config("DATABASE_HOST")
 port = config("DATABASE_PORT")
 
+print(user)
+print(password)
 conn = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
 
 conn.autocommit = True
