@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "crispy_forms",
+    "crispy-bootstrap4",
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
